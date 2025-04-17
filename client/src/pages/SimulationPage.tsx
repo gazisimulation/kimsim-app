@@ -14,6 +14,7 @@ import { Loader2, Clock, ArrowLeft, FlaskRound, Beaker, BookOpen, HelpCircle, At
 import AcidBaseTitrationSimulator from '@/components/simulations/AcidBaseTitrationSimulator';
 import QuantumAtomModelSimulator from '@/components/simulations/QuantumAtomModelSimulator';
 import ChemicalBondsSimulator from '@/components/simulations/ChemicalBondsSimulator';
+import StateChangeSimulator from '@/components/simulations/StateChangeSimulator';
 import type { Simulation } from '@/types';
 
 const SimulationPage = () => {
@@ -61,6 +62,8 @@ const SimulationPage = () => {
         return <QuantumAtomModelSimulator />;
       case 'chemical-bonds':
         return <ChemicalBondsSimulator />;
+      case 'state-change':
+        return <StateChangeSimulator />;
       default:
         return (
           <div className="p-8 text-center">
@@ -216,6 +219,26 @@ const SimulationPage = () => {
                         </ol>
                         <p>Take time to read the descriptions for each bond type to understand their properties and significance in chemistry.</p>
                       </>
+                    ) : simulation.slug === 'state-change' ? (
+                      <>
+                        <p>This simulation allows you to explore phase transitions of different substances with customizable parameters. Follow these steps to use the simulation:</p>
+                        <ol>
+                          <li>Select a <strong>substance</strong> from the dropdown menu (Water, Iron, or Nitrogen).</li>
+                          <li>Adjust the <strong>mass</strong> of the substance (in grams) to see how it affects the energy required for phase changes.</li>
+                          <li>Modify the <strong>heating/cooling rate</strong> to control how quickly energy is added or removed from the system.</li>
+                          <li>Use the <strong>simulation speed</strong> slider to adjust how fast the simulation runs.</li>
+                          <li>Click the <strong>Heat</strong> button to add thermal energy to the substance and observe phase transitions as temperature increases.</li>
+                          <li>Click the <strong>Cool</strong> button to remove thermal energy and watch the substance transition to lower energy states.</li>
+                          <li>Use the <strong>Stop</strong> button to pause the heating or cooling process.</li>
+                          <li>Observe how the substance changes between solid, liquid, and gas phases:</li>
+                          <ul>
+                            <li>During <strong>melting</strong> and <strong>boiling</strong>, notice how the temperature remains constant while energy is still being added (latent heat).</li>
+                            <li>Note the different heat capacities for each phase of the substance.</li>
+                            <li>Compare the different melting and boiling points of the three substances.</li>
+                          </ul>
+                        </ol>
+                        <p>The right side of the simulation shows detailed data about the current state, temperature, and energy of the substance, as well as substance-specific properties like heat capacity and latent heat values.</p>
+                      </>
                     ) : (
                       <p>Instructions for this simulation will be available soon.</p>
                     )}
@@ -313,6 +336,58 @@ const SimulationPage = () => {
                           <li>Variable solubility depending on polarity</li>
                         </ul>
                       </>
+                    ) : simulation.slug === 'state-change' ? (
+                      <>
+                        <h4>States of Matter</h4>
+                        <p>Matter can exist in various states, primarily solid, liquid, and gas. Each state has distinct properties based on the arrangement and movement of particles:</p>
+                        <ul>
+                          <li><strong>Solid:</strong> Particles are tightly packed in a regular pattern with strong intermolecular forces, giving solids a fixed shape and volume.</li>
+                          <li><strong>Liquid:</strong> Particles are close together but can move past each other, allowing liquids to flow and take the shape of their container while maintaining a fixed volume.</li>
+                          <li><strong>Gas:</strong> Particles are widely separated with minimal intermolecular forces, allowing gases to expand to fill their container.</li>
+                        </ul>
+                        
+                        <h4>Phase Transitions</h4>
+                        <p>When substances change from one state to another, they undergo phase transitions. The major phase transitions are:</p>
+                        <ul>
+                          <li><strong>Melting (fusion):</strong> Solid → Liquid</li>
+                          <li><strong>Freezing:</strong> Liquid → Solid</li>
+                          <li><strong>Vaporization (boiling):</strong> Liquid → Gas</li>
+                          <li><strong>Condensation:</strong> Gas → Liquid</li>
+                          <li><strong>Sublimation:</strong> Solid → Gas</li>
+                          <li><strong>Deposition:</strong> Gas → Solid</li>
+                        </ul>
+                        
+                        <h4>Heat and Temperature</h4>
+                        <p>Temperature is a measure of the average kinetic energy of particles in a substance. Heat is the total energy that flows between substances due to temperature differences.</p>
+                        <p>When heat is added to or removed from a substance, one of two things happens:</p>
+                        <ol>
+                          <li>The temperature changes if the substance remains in the same phase</li>
+                          <li>A phase change occurs at constant temperature if the substance is at its melting or boiling point</li>
+                        </ol>
+                        
+                        <h4>Heat Capacity</h4>
+                        <p>Heat capacity (c) is the amount of heat needed to raise the temperature of a substance by one degree. It varies between phases of the same substance:</p>
+                        <p>The energy required to change the temperature is calculated using: Q = mc∆T where:</p>
+                        <ul>
+                          <li>Q = energy (heat) in joules</li>
+                          <li>m = mass in grams</li>
+                          <li>c = specific heat capacity in J/g·°C</li>
+                          <li>∆T = temperature change in °C</li>
+                        </ul>
+                        
+                        <h4>Latent Heat</h4>
+                        <p>Latent heat is the energy required to change the phase of a substance without changing its temperature:</p>
+                        <ul>
+                          <li><strong>Latent heat of fusion:</strong> Energy required to convert a solid to a liquid at its melting point</li>
+                          <li><strong>Latent heat of vaporization:</strong> Energy required to convert a liquid to a gas at its boiling point</li>
+                        </ul>
+                        <p>The energy required for a phase change is calculated using: Q = mL where:</p>
+                        <ul>
+                          <li>Q = energy (heat) in joules</li>
+                          <li>m = mass in grams</li>
+                          <li>L = latent heat in J/g</li>
+                        </ul>
+                      </>
                     ) : (
                       <p>Theoretical background for this simulation will be available soon.</p>
                     )}
@@ -335,6 +410,19 @@ const SimulationPage = () => {
                           <li>What is the purpose of using an indicator in a titration?</li>
                           <li>How would you select an appropriate indicator for an acid-base titration?</li>
                           <li>Calculate the pH when 24.5 mL of 0.1 M NaOH has been added to 50 mL of 0.1 M HCl.</li>
+                        </ol>
+                      </>
+                    ) : simulation.slug === 'state-change' ? (
+                      <>
+                        <ol>
+                          <li>How much energy is required to convert 100g of ice at -10°C to water at 20°C? (Use water's heat capacity for solid = 2.108 J/g°C, latent heat of fusion = 333.55 J/g, heat capacity for liquid = 4.18 J/g°C)</li>
+                          <li>Explain why the temperature remains constant during the melting and boiling processes, even though heat is continuously being added to the system.</li>
+                          <li>Why does water have a higher specific heat capacity in its liquid state compared to its solid state?</li>
+                          <li>Compare the melting and boiling points of water, iron, and nitrogen. Explain the differences in terms of intermolecular forces.</li>
+                          <li>Calculate the total energy needed to convert 50g of water at 25°C to steam at 110°C.</li>
+                          <li>If 500 J of heat is added to 20g of ice at 0°C, how much ice will melt? Will all of it melt?</li>
+                          <li>Why does the density of most substances decrease as they transition from solid to liquid to gas? Why is water unusual in this regard?</li>
+                          <li>How would increasing the mass of the substance affect the time needed to complete a phase change at a constant heating rate?</li>
                         </ol>
                       </>
                     ) : (
