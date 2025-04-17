@@ -15,6 +15,7 @@ import AcidBaseTitrationSimulator from '@/components/simulations/AcidBaseTitrati
 import QuantumAtomModelSimulator from '@/components/simulations/QuantumAtomModelSimulator';
 import ChemicalBondsSimulator from '@/components/simulations/ChemicalBondsSimulator';
 import StateChangeSimulator from '@/components/simulations/StateChangeSimulator';
+import GasLawsSimulator from '@/components/simulations/GasLawsSimulator';
 import type { Simulation } from '@/types';
 
 const SimulationPage = () => {
@@ -64,6 +65,8 @@ const SimulationPage = () => {
         return <ChemicalBondsSimulator />;
       case 'state-change':
         return <StateChangeSimulator />;
+      case 'gas-laws':
+        return <GasLawsSimulator />;
       default:
         return (
           <div className="p-8 text-center">
@@ -239,6 +242,60 @@ const SimulationPage = () => {
                         </ol>
                         <p>The right side of the simulation shows detailed data about the current state, temperature, and energy of the substance, as well as substance-specific properties like heat capacity and latent heat values.</p>
                       </>
+                    ) : simulation.slug === 'gas-laws' ? (
+                      <>
+                        <p>This simulation allows you to explore gas behavior and the relationships between pressure, volume, temperature, and moles of gas. Follow these steps to use the simulation:</p>
+                        <ol>
+                          <li>Navigate between four tabs to explore different aspects of gas behavior:
+                            <ul>
+                              <li><strong>Ideal Gas Law</strong>: Explore relationships between gas parameters (P, V, T, n)</li>
+                              <li><strong>Kinetic Theory</strong>: Visualize molecular motion and speed distribution</li>
+                              <li><strong>Gas Mixtures</strong>: Explore Dalton's Law of Partial Pressures</li>
+                              <li><strong>Real Gases</strong>: Compare ideal and non-ideal (Van der Waals) gas behaviors</li>
+                            </ul>
+                          </li>
+                          <li>For each tab:
+                            <ul>
+                              <li>Select different <strong>gas types</strong> from the dropdown menu to compare properties</li>
+                              <li>Adjust parameters using the <strong>sliders</strong>:
+                                <ul>
+                                  <li>Moles of gas (n)</li>
+                                  <li>Temperature (T) in Kelvin</li>
+                                  <li>Pressure (P) in atmospheres</li>
+                                  <li>Volume (V) in liters (in some tabs)</li>
+                                </ul>
+                              </li>
+                            </ul>
+                          </li>
+                          <li>In the <strong>Ideal Gas Law</strong> tab:
+                            <ul>
+                              <li>Select the gas law model (Ideal or Van der Waals)</li>
+                              <li>Choose different chart types (pressure-volume, pressure-temperature, etc.)</li>
+                              <li>Observe how changing parameters affects the graphs</li>
+                            </ul>
+                          </li>
+                          <li>In the <strong>Kinetic Theory</strong> tab:
+                            <ul>
+                              <li>Watch the particle simulation to see how molecular motion changes with temperature</li>
+                              <li>Toggle the speed distribution histogram to visualize the Maxwell-Boltzmann distribution</li>
+                            </ul>
+                          </li>
+                          <li>In the <strong>Gas Mixtures</strong> tab:
+                            <ul>
+                              <li>Select two different gases and adjust their proportions</li>
+                              <li>Observe how the partial pressures change based on Dalton's Law</li>
+                            </ul>
+                          </li>
+                          <li>In the <strong>Real Gases</strong> tab:
+                            <ul>
+                              <li>Compare ideal and real gas behaviors at various pressures and temperatures</li>
+                              <li>See the deviation percentage between the models</li>
+                              <li>Learn about the Van der Waals parameters for different gases</li>
+                            </ul>
+                          </li>
+                        </ol>
+                        <p>All charts and visualizations update in real-time as you adjust the parameters, allowing you to observe the relationships between gas variables dynamically.</p>
+                      </>
                     ) : (
                       <p>Instructions for this simulation will be available soon.</p>
                     )}
@@ -388,6 +445,71 @@ const SimulationPage = () => {
                           <li>L = latent heat in J/g</li>
                         </ul>
                       </>
+                    ) : simulation.slug === 'gas-laws' ? (
+                      <>
+                        <h4>Properties of Gases</h4>
+                        <p>Gases have several unique properties that distinguish them from solids and liquids:</p>
+                        <ul>
+                          <li>They have no definite shape or volume and expand to fill their container</li>
+                          <li>They are easily compressible compared to liquids and solids</li>
+                          <li>They have lower density than liquids and solids</li>
+                          <li>Gas particles move randomly with high kinetic energy</li>
+                          <li>Gas particles have negligible interactions except during collisions</li>
+                        </ul>
+                        
+                        <h4>Ideal Gas Law</h4>
+                        <p>The Ideal Gas Law is a fundamental equation that relates the four macroscopic properties of gases:</p>
+                        <p className="text-center font-medium my-2">PV = nRT</p>
+                        <p>Where:</p>
+                        <ul>
+                          <li><strong>P</strong> = pressure (atm, Pa, or other pressure units)</li>
+                          <li><strong>V</strong> = volume (L, m³, or other volume units)</li>
+                          <li><strong>n</strong> = number of moles of gas</li>
+                          <li><strong>R</strong> = gas constant (0.08206 L·atm/mol·K)</li>
+                          <li><strong>T</strong> = absolute temperature (K)</li>
+                        </ul>
+                        <p>This equation is derived from the combination of Boyle's Law (P ∝ 1/V), Charles's Law (V ∝ T), and Avogadro's Law (V ∝ n).</p>
+                        
+                        <h4>Kinetic Theory of Gases</h4>
+                        <p>The Kinetic Molecular Theory explains the behavior of gases at the molecular level:</p>
+                        <ul>
+                          <li>Gas particles are in constant, random motion</li>
+                          <li>Collisions between gas particles and with container walls are perfectly elastic</li>
+                          <li>The average kinetic energy of gas particles is proportional to absolute temperature</li>
+                          <li>Gas particles have negligible volume compared to the container</li>
+                          <li>There are no attractive or repulsive forces between particles</li>
+                        </ul>
+                        
+                        <h4>Maxwell-Boltzmann Distribution</h4>
+                        <p>This distribution describes the range of molecular speeds in a gas at a given temperature:</p>
+                        <ul>
+                          <li><strong>Most probable speed (v<sub>mp</sub>):</strong> The speed at which most molecules are moving</li>
+                          <li><strong>Average speed (v<sub>avg</sub>):</strong> The arithmetic mean of all molecular speeds</li>
+                          <li><strong>Root mean square speed (v<sub>rms</sub>):</strong> √(3RT/M) where M is molar mass in kg/mol</li>
+                        </ul>
+                        <p>At higher temperatures, the distribution shifts toward higher speeds, and lighter gases have higher average speeds at the same temperature.</p>
+                        
+                        <h4>Gas Mixtures and Dalton's Law</h4>
+                        <p>Dalton's Law of Partial Pressures states that in a mixture of non-reacting gases, the total pressure is the sum of the partial pressures of each individual gas:</p>
+                        <p className="text-center font-medium my-2">P<sub>total</sub> = P<sub>1</sub> + P<sub>2</sub> + ... + P<sub>n</sub></p>
+                        <p>The partial pressure of each gas is proportional to its mole fraction in the mixture:</p>
+                        <p className="text-center font-medium my-2">P<sub>i</sub> = x<sub>i</sub> × P<sub>total</sub></p>
+                        <p>where x<sub>i</sub> is the mole fraction (n<sub>i</sub>/n<sub>total</sub>).</p>
+                        
+                        <h4>Real Gases and Van der Waals Equation</h4>
+                        <p>Real gases deviate from ideal behavior, especially at high pressures and low temperatures. The Van der Waals equation accounts for:</p>
+                        <ul>
+                          <li>The actual volume of gas molecules (b term)</li>
+                          <li>Attractive forces between molecules (a term)</li>
+                        </ul>
+                        <p className="text-center font-medium my-2">(P + a(n/V)²)(V - nb) = nRT</p>
+                        <p>Where a and b are gas-specific constants:</p>
+                        <ul>
+                          <li>a accounts for attractive forces between molecules</li>
+                          <li>b accounts for the finite volume of gas molecules</li>
+                        </ul>
+                        <p>At low pressures and high temperatures, the Van der Waals equation approaches the ideal gas law.</p>
+                      </>
                     ) : (
                       <p>Theoretical background for this simulation will be available soon.</p>
                     )}
@@ -423,6 +545,27 @@ const SimulationPage = () => {
                           <li>If 500 J of heat is added to 20g of ice at 0°C, how much ice will melt? Will all of it melt?</li>
                           <li>Why does the density of most substances decrease as they transition from solid to liquid to gas? Why is water unusual in this regard?</li>
                           <li>How would increasing the mass of the substance affect the time needed to complete a phase change at a constant heating rate?</li>
+                        </ol>
+                      </>
+                    ) : simulation.slug === 'gas-laws' ? (
+                      <>
+                        <ol>
+                          <li>A gas occupies 2.5 L at 1.2 atm and 298 K. What will be its volume at 0.8 atm and 320 K?</li>
+                          <li>If 1.5 moles of an ideal gas occupies 36.0 L at 300 K, what is the pressure in atmospheres?</li>
+                          <li>What is the root mean square speed of oxygen (O<sub>2</sub>) molecules at 25°C? (Molar mass of O<sub>2</sub> = 32.0 g/mol)</li>
+                          <li>Explain why gases deviate from ideal behavior at high pressures and low temperatures.</li>
+                          <li>A gas mixture contains 0.25 mol of oxygen, 0.50 mol of nitrogen, and 0.15 mol of carbon dioxide. If the total pressure is 1.5 atm, what is the partial pressure of nitrogen?</li>
+                          <li>Using the Van der Waals equation, calculate the volume of 1.0 mol of methane at 300 K and 5.0 atm. (For methane, a = 2.283 L²·atm/mol², b = 0.04278 L/mol)</li>
+                          <li>Why do lighter gases diffuse faster than heavier gases at the same temperature?</li>
+                          <li>Compare the molecular speeds of helium and nitrogen at 300 K. Which has the higher average kinetic energy?</li>
+                          <li>If the temperature of a gas doubles (in Kelvin), how does it affect:
+                            <ol type="a">
+                              <li>The average kinetic energy of the molecules</li>
+                              <li>The average speed of the molecules</li>
+                              <li>The pressure (if volume is constant)</li>
+                            </ol>
+                          </li>
+                          <li>Calculate the pressure exerted by 2.5 g of oxygen gas in a 1.5 L container at 25°C using both the ideal gas law and Van der Waals equation. Compare the results.</li>
                         </ol>
                       </>
                     ) : (
