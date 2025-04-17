@@ -1,0 +1,261 @@
+<title>İdeal Gazlar</title><link href=/assets/chemsim.css rel=stylesheet><script src=/assets/big.js></script><h1>PV = nRT</h1><p><select id=calc><option>PV çarpımı<option>Basınç<option>Hacim<option>Mol sayısı<option>Sıcaklık</select> P <input id=p min=0 type=number value=1> V <input id=v min=0 type=number value=22.4> = n <input id=n min=0 type=number value=1> R <select id=r><option value=0>22.4/273<option value=0.082>0.082</select> T <input id=t min=0 type=number value=273><p>Sonuç:<span id=result></span></p><script>let calc = document.getElementById("calc");
+    let p = document.getElementById("p");
+    let v = document.getElementById("v");
+    let n = document.getElementById("n");
+    let r = document.getElementById("r");
+    let t = document.getElementById("t");
+    let result = document.getElementById("result");
+    calc.addEventListener('change', calculate);
+    p.addEventListener('change', calculate);
+    v.addEventListener('change', calculate);
+    n.addEventListener('change', calculate);
+    r.addEventListener('change', calculate);
+    t.addEventListener('change', calculate);
+    calculate();
+    function calculate() {
+      p.style.display = "";
+      v.style.display = "";
+      n.style.display = "";
+      r.style.display = "";
+      t.style.display = "";
+      let pValue = Big(p.value);
+      let vValue = Big(v.value);
+      let nValue = Big(n.value);
+      let rValue = Big(r.value);
+      let tValue = Big(t.value);
+      if (Number(r.value) === 0) {
+        rValue = Big("22.4").div("273");
+      }
+      switch (calc.value) {
+        case "PV çarpımı":
+          result.textContent = nValue.times(rValue).times(tValue).toFixed(3)*1;
+          document.getElementById("p").style.display = "none";
+          document.getElementById("v").style.display = "none";
+          break;
+        case "Basınç":
+          result.textContent = (nValue.times(rValue).times(tValue)).div(vValue).toFixed(3)*1;
+          document.getElementById("p").style.display = "none";
+          break;
+        case "Hacim":
+          result.textContent = (nValue.times(rValue).times(tValue)).div(pValue).toFixed(3)*1;
+          document.getElementById("v").style.display = "none";
+          break;
+        case "Mol sayısı":
+          result.textContent = (pValue.times(vValue)).div(rValue.times(tValue)).toFixed(3)*1;
+          document.getElementById("n").style.display = "none";
+          break;
+        case "Sıcaklık":
+          result.textContent = (pValue.times(vValue)).div(nValue.times(rValue)).toFixed(3)*1;
+          document.getElementById("t").style.display = "none";
+          break;
+      }
+    }</script><title>Ortalama Atom Kütlesi Hesaplama</title><script src=/assets/big.js></script><link href=/assets/chemsim.css rel=stylesheet><h1>Ortalama Atom Kütlesi Hesaplama</h1><p>( a1 <input id=a1 min=0 type=number value=1> y1 <input id=y1 min=0 type=number value=1> + a2 <input id=a2 min=0 type=number value=1> y2 <input id=y2 min=0 type=number value=1> ) /100<p>Sonuç:<span id=result></span></p><script>let a1 = document.getElementById("a1");
+  let y1 = document.getElementById("y1");
+  let a2 = document.getElementById("a2");
+  let y2 = document.getElementById("y2");
+  let result = document.getElementById("result");
+  setInterval(calculate, 100);
+  function calculate() {
+    let a1Value = Big(a1.value);
+    let y1Value = Big(y1.value);
+    let a2Value = Big(a2.value);
+    let y2Value = Big(y2.value);
+    result.textContent = a1Value.times(y1Value).plus(a2Value.times(y2Value)).div(new Big(100));
+  }</script><title>Avogadroya Çarpma/Bölme Hesaplaması</title><link href=/assets/chemsim.css rel=stylesheet><script src=/assets/big.js></script><h1>Avogadroya Çarpma/Bölme Hesaplaması</h1><p>Avogadro Sayısına Çarpılacak/Bölünecek Sayı <input id=M type=number value=1 min=0><p><input id=multiply type=radio value=multiply name=operation checked><label for=multiply>Çarp</label><input id=divide type=radio value=divide name=operation><label for=divide>Böl</label><p>Sonuç:<span id=result></span></p><script>const M = document.getElementById("M");
+    const avogadro = 602000000000000000000000;
+    const result = document.getElementById("result");
+    const multiply = document.getElementById("multiply");
+    const divide = document.getElementById("divide");
+    setInterval(calculate, 100);
+    function calculate() {
+        const MValue = Number(M.value);
+        const avogadroBig = Big(avogadro);
+        const MValueBig = Big(MValue);
+        let resultBig;
+        if (multiply.checked) {
+            resultBig = MValueBig.mul(avogadroBig);
+        } else {
+            resultBig = MValueBig.div(avogadroBig);
+        }
+        result.textContent = resultBig*1;
+    }</script><title>pH Hesaplama</title><link href=/assets/chemsim.css rel=stylesheet><h1>pH Hesaplama</h1><p>pH Değeri <input id=pH max=14 min=0 type=number value=7><p>Sonuç:<span id=result></span></p><script>let pH = document.getElementById("pH");
+  let result = document.getElementById("result");
+  setInterval(checkpH, 100);
+function checkpH() {
+  let pHValue = Number(pH.value);
+  let closenessTo7 = Math.abs(pHValue - 7);
+  if (pHValue < 0 || pHValue > 14) {
+    result.textContent = "Lütfen 0 ile 14 arasında bir değer girin";
+  } else if (closenessTo7 >= 3) {
+    result.textContent = `İnsan vücuduna zararlı olabilir. pH farkı: ${closenessTo7}`;
+  } else {
+    result.textContent = `pH derecesi yönünden güvenli. pH farkı: ${closenessTo7}`;
+  }
+}</script><title>Yüzde Verim Hesaplama</title><link href=/assets/chemsim.css rel=stylesheet><h1>Yüzde Verim Hesaplama</h1><p>Gerçek Verim <input id=actual min=0 type=number value=100><p>Kuramsal Verim <input id=expected min=0 type=number value=100><p>Yüzde Verim:<span id=result></span></p><script>let expected = document.getElementById("expected");
+  let actual = document.getElementById("actual");
+  let result = document.getElementById("result");
+  setInterval(calculatePercentageYield, 100);
+function calculatePercentageYield() {
+  let expectedValue = Number(expected.value);
+  let actualValue = Number(actual.value);
+  if (expectedValue < 0 || actualValue < 0) {
+result.textContent = "Lütfen kuramsal ve gerçek verim için negatif/sıfır olmayan değerler girin";
+  } else {
+    let percentageYield = (actualValue / expectedValue) * 100;
+    result.textContent = `${percentageYield}%`;
+  }
+}</script><title>Kuantum Sayıları</title><link href=/assets/chemsim.css rel=stylesheet><h1>Kuantum Sayıları</h1><p>Baş Kuantum Sayısı (n) <input id=n min=1 type=number value=1> ve Açısal Momentum Kuantum Sayısı (l) <input id=l min=0 type=number value=0> ve Manyetik Kuantum Sayısı (ml) <input id=ml min=-999999 type=number value=0><p><select id=calc><option value=n>n'yi Hesapla<option value=l>l'yi Hesapla (ml ile)<option value=l2>l'yi Hesapla (n ile)<option value=ml>ml'yi Hesapla<option value=nl>n + l'yi Hesapla</select><p>Sonuç:<span id=result></span></p><script>const n = document.getElementById("n"); const l = document.getElementById("l"); const ml = document.getElementById("ml"); const calc = document.getElementById("calc"); const result = document.getElementById("result"); function calculate() {let nValue = Number(n.value); let lValue = Number(l.value); let mlValue = Number(ml.value); switch (calc.value) {case "n": result.textContent = Math.max(Math.abs(mlValue), lValue) + 1; n.style.display = "none"; ml.style.display = "none"; break; case "l": result.textContent = Math.abs(mlValue); n.style.display = "none"; l.style.display = "none"; break; case "l2": result.textContent = nValue - 1; ml.style.display = "none"; l.style.display = "none"; break; case "ml": result.textContent = -lValue + " ile " + lValue + " arası"; n.style.display = "none"; ml.style.display = "none"; break; case "nl": result.textContent = nValue + lValue; ml.style.display = "none"; break;}} function showInputs() {n.style.display = ""; l.style.display = ""; ml.style.display = "";} setInterval(calculate, 100); calc.onchange = showInputs;</script><title>İdeal Gazlar</title><link href=/assets/chemsim.css rel=stylesheet><script src=/assets/big.js></script><h1>PMa = dRT</h1><p><select id=calc><option>P Ma çarpımı<option>Basınç<option>Mol Kütlesi<option>Özkütle<option>Sıcaklık</select>P <input id=p min=0 type=number value=1> Ma <input id=v min=0 type=number value=22.4> = d <input id=n min=0 type=number value=1> R<select id=r><option value=0>22.4/273<option value=0.082>0.082</select>T <input id=t min=0 type=number value=273><p>Sonuç:<span id=result></span></p><script>let calc = document.getElementById("calc");
+    let p = document.getElementById("p");
+    let v = document.getElementById("v");
+    let n = document.getElementById("n");
+    let r = document.getElementById("r");
+    let t = document.getElementById("t");
+    let result = document.getElementById("result");
+    calc.addEventListener('change', calculate);
+    p.addEventListener('change', calculate);
+    v.addEventListener('change', calculate);
+    n.addEventListener('change', calculate);
+    r.addEventListener('change', calculate);
+    t.addEventListener('change', calculate);
+    calculate();
+    function calculate() {
+      p.style.display = "";
+      v.style.display = "";
+      n.style.display = "";
+      r.style.display = "";
+      t.style.display = "";
+      let pValue = Big(p.value);
+      let vValue = Big(v.value);
+      let nValue = Big(n.value);
+      let rValue = Big(r.value);
+      let tValue = Big(t.value);
+      if (Number(r.value) === 0) {
+        rValue = Big("22.4").div("273");
+      }
+      switch (calc.value) {
+        case "P Ma çarpımı":
+          result.textContent = nValue.times(rValue).times(tValue).toFixed(3)*1;
+          document.getElementById("p").style.display = "none";
+          document.getElementById("v").style.display = "none";
+          break;
+        case "Basınç":
+          result.textContent = (nValue.times(rValue).times(tValue)).div(vValue).toFixed(3)*1;
+          document.getElementById("p").style.display = "none";
+          break;
+        case "Mol Kütlesi":
+          result.textContent = (nValue.times(rValue).times(tValue)).div(pValue).toFixed(3)*1;
+          document.getElementById("v").style.display = "none";
+          break;
+        case "Özkütle":
+          result.textContent = (pValue.times(vValue)).div(rValue.times(tValue)).toFixed(3)*1;
+          document.getElementById("n").style.display = "none";
+          break;
+        case "Sıcaklık":
+          result.textContent = (pValue.times(vValue)).div(nValue.times(rValue)).toFixed(3)*1;
+          document.getElementById("t").style.display = "none";
+          break;
+      }
+    }</script><title>Molarite/Molalite Bulma</title><link href=/assets/chemsim.css rel=stylesheet><script src=/assets/big.js></script><h1>M = n/V veya M = n/çözücü kütlesi</h1><p><select id=calc><option>M değeri<option>Mol Sayısı<option>Hacim ya da Kütle</select><p>M <input id=m min=0 type=number value=0> = n <input id=n min=0 type=number value=1> / V <input id=v min=0 type=number value=22.4><p>Sonuç:<span id=result></span></p><script>let calc = document.getElementById("calc");
+    let m = document.getElementById("m");
+    let n = document.getElementById("n");
+    let v = document.getElementById("v");
+    let result = document.getElementById("result");
+
+    calculate();
+
+    function calculate() {
+      let mValue = Big(m.value);
+      let nValue = Big(n.value);
+      let vValue = Big(v.value);
+
+      switch (calc.value) {
+        case "M değeri":
+          result.textContent = nValue.div(vValue).toFixed(2)*1;
+          m.style.display = "none";
+          n.style.display = "";
+          v.style.display = "";
+          break;
+        case "Mol Sayısı":
+          result.textContent = mValue.times(vValue).toFixed(2)*1;
+          n.style.display = "none";
+          m.style.display = "";
+          v.style.display = "";
+          break;
+        case "Hacim ya da Kütle":
+          result.textContent = nValue.div(mValue).toFixed(2)*1;
+          v.style.display = "none";
+          m.style.display = "";
+          n.style.display = "";
+          break;
+      }
+    }
+
+    calc.addEventListener('change', calculate);
+    m.addEventListener('change', calculate);
+    v.addEventListener('change', calculate);
+    n.addEventListener('change', calculate);</script><title>Molarite</title><script src=/assets/big.js></script><link href=/assets/chemsim.css rel=stylesheet><h1>M = d % 10 / Ma</h1><p><select id=calc><option>M'yi Bul<option>% derişim bul<option>Özkütle bul<option>Ma'yı bul</select> M <input id=m min=0 type=number value=1 /> = d <input id=d min=0 type=number value=1 /> % <input id=y min=0 type=number value=0 /> 10 / Ma <input id=ma min=0 type=number value=1 /><p>Sonuç:<span id=result></span></p><script>let calc = document.getElementById("calc");
+  let m = document.getElementById("m");
+  let ma = document.getElementById("ma");
+  let d = document.getElementById("d");
+  let y = document.getElementById("y");
+  let result = document.getElementById("result");
+  calc.addEventListener('change', calculate);
+  m.addEventListener('change', calculate);
+  ma.addEventListener('change', calculate);
+  d.addEventListener('change', calculate);
+  y.addEventListener('change', calculate);
+  calculate();
+  function calculate() {
+    m.style.display = "";
+    ma.style.display = "";
+    d.style.display = "";
+    y.style.display = "";
+    let mValue = Big(m.value);
+    let maValue = Big(ma.value);
+    let dValue = Big(d.value);
+    let yValue = Big(y.value);
+    switch (calc.value) {
+      case "M'yi Bul":
+        result.textContent = Big(dValue)
+          .times(yValue)
+          .times(10)
+          .div(maValue)
+          .toFixed(2)*1;
+        document.getElementById("m").style.display = "none";
+        break;
+      case "% derişim bul":
+        result.textContent = Big(mValue)
+          .times(maValue)
+          .div(Big(dValue).times(10))
+          .toFixed(2)*1;
+        document.getElementById("y").style.display = "none";
+        break;
+      case "Özkütle bul":
+        result.textContent = Big(mValue)
+          .times(maValue)
+          .div(Big(yValue).times(10))
+          .toFixed(2)*1;
+        document.getElementById("d").style.display = "none";
+        break;
+      case "Ma'yı bul":
+        result.textContent = Big(dValue)
+          .times(yValue)
+          .times(10)
+          .div(mValue)
+          .toFixed(2)*1;
+        document.getElementById("ma").style.display = "none";
+        break;
+    }
+  }</script><title>Raoult Yasası</title><h1>Raoult Yasası</h1><link href=/assets/chemsim.css rel=stylesheet><p>( P0 çözücü <input id=a1 min=0 type=number value=1> X çözücü <input id=y1 min=0 type=number value=1> + P0 ikinci çözücü <input id=a2 min=0 type=number value=1> X ikinci çözücü <input id=y2 min=0 type=number value=1> )<p>Sonuç:<span id=result></span></p><script>let a1 = document.getElementById("a1");
+let y1 = document.getElementById("y1");
+let a2 = document.getElementById("a2");
+let y2 = document.getElementById("y2");
+let result = document.getElementById("result");
+setInterval(calculate, 100);
+function calculate() {
+  let a1Value = Number(a1.value);
+  let y1Value = Number(y1.value);
+  let a2Value = Number(a2.value);
+  let y2Value = Number(y2.value);
+  result.textContent = (a1Value * y1Value + a2Value * y2Value);
+}</script>⏎

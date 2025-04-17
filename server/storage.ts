@@ -219,6 +219,21 @@ export class MemStorage implements IStorage {
       path: "/simulations/battery-simulator"
     };
     
+    // Chemistry Calculators
+    const chemistryCalculators: InsertSimulation = {
+      title: "Chemistry Calculators",
+      description: "Collection of essential chemistry calculators including Ideal Gas Law, pH, Molarity, Quantum Numbers, and more",
+      slug: "chemistry-calculators",
+      category: "analytical",
+      imageUrl: "https://images.unsplash.com/photo-1603126857599-f6e157fa2fe6?q=80&w=2070&auto=format&fit=crop",
+      duration: "15 min",
+      difficulty: "Beginner",
+      isFeatured: true,
+      isNew: true,
+      isPopular: true,
+      path: "/simulations/chemistry-calculators"
+    };
+    
     this.createSimulation(acidBaseTitration);
     this.createSimulation(quantumAtomModel);
     this.createSimulation(chemicalBonds);
@@ -228,6 +243,7 @@ export class MemStorage implements IStorage {
     this.createSimulation(stateChange);
     this.createSimulation(gasLaws);
     this.createSimulation(batterySimulator);
+    this.createSimulation(chemistryCalculators);
   }
 
   async getUser(id: number): Promise<User | undefined> {
