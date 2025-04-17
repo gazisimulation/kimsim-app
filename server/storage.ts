@@ -166,12 +166,28 @@ export class MemStorage implements IStorage {
       path: "/simulations/spectroscopy"
     };
     
+    // State Change Simulation
+    const stateChange: InsertSimulation = {
+      title: "Phase Transitions",
+      description: "Explore state changes of matter with adjustable parameters",
+      slug: "state-change",
+      category: "physical",
+      imageUrl: "https://images.unsplash.com/photo-1506755594592-349d12a7c52a?q=80&w=2070&auto=format&fit=crop",
+      duration: "25 min",
+      difficulty: "Beginner",
+      isFeatured: true,
+      isNew: true,
+      isPopular: false,
+      path: "/simulations/state-change"
+    };
+    
     this.createSimulation(acidBaseTitration);
     this.createSimulation(quantumAtomModel);
     this.createSimulation(chemicalBonds);
     this.createSimulation(redoxReactions);
     this.createSimulation(molecularOrbital);
     this.createSimulation(spectroscopy);
+    this.createSimulation(stateChange);
   }
 
   async getUser(id: number): Promise<User | undefined> {

@@ -1,0 +1,397 @@
+import React, { useState, useEffect, useRef } from 'react';
+
+// Constants for Water (default), Iron, Nitrogen
+const substancesData = {
+  Water: {
+    meltingPoint: 0, // C
+    boilingPoint: 100, // C
+    heatCapacitySolid: 2.108, // J/gC (ice)
+    heatCapacityLiquid: 4.18, // J/gC (water)
+    heatCapacityGas: 2.0, // J/gC (steam approx)
+    latentHeatFusion: 333.55, // J/g
+    latentHeatVaporization: 2257, // J/g
+    molarMass: 18.01528, // g/mol
+    densitySolid: 0.9167, // g/cm3
+    densityLiquid: 1.0, // g/cm3
+    densityGas: 0.0006, // g/cm3 approx at 100C
+  },
+  Iron: {
+    meltingPoint: 1538,
+    boilingPoint: 2862,
+    heatCapacitySolid: 0.449, // J/gC
+    heatCapacityLiquid: 0.82, // J/gC
+    heatCapacityGas: 0.9, // J/gC approx
+    latentHeatFusion: 247, // J/g
+    latentHeatVaporization: 6090, // J/g
+    molarMass: 55.845,
+    densitySolid: 7.874,
+    densityLiquid: 6.98,
+    densityGas: 0.005, // approx
+  },
+  Nitrogen: {
+    meltingPoint: -210,
+    boilingPoint: -196,
+    heatCapacitySolid: 1.04, // J/gC
+    heatCapacityLiquid: 2.04, // J/gC
+    heatCapacityGas: 1.04, // J/gC
+    latentHeatFusion: 25.7, // J/g
+    latentHeatVaporization: 199, // J/g
+    molarMass: 28.0134,
+    densitySolid: 1.026, // g/cm3
+    densityLiquid: 0.808, // g/cm3
+    densityGas: 0.00125, // g/cm3
+  },
+};
+
+// Simulation parameters
+const mass = 100; // grams of substance
+const heatingRate = 500; // Joules per second added or removed (increased for faster simulation)
+const intervalMs = 50; // update interval in ms (decreased for faster updates)
+
+export default function StateChangeSimulation() {
+  const [substance, setSubstance] = useState('Water');
+  const [temperature, setTemperature] = useState(20); // C
+  const [state, setState] = useState('liquid');
+  const [energy, setEnergy] = useState(0); // total energy in Joules
+  const [heating, setHeating] = useState(0); // +1 heating, -1 cooling, 0 steady
+  const energyRef = useRef(0);
+  const heatingRef = useRef(0);
+  const temperatureRef = useRef(temperature);
+  const stateRef = useRef(state);
+  const substanceRef = useRef(substance);
+
+  // Initialize substance data
+  const data = substancesData[substance];
+
+  // Calculate energy for a given temperature and state
+  // Energy reference: 0 J at 0C solid phase
+  function energyAtTemperature(temp: number): number {
+    if (temp <= data.meltingPoint) {
+      // Solid phase
+      return mass * data.heatCapacitySolid * (temp - data.meltingPoint);
+    } else if (temp < data.boilingPoint) {
+      // Liquid phase
+      // Energy = energy at melting point solid + fusion + heat capacity liquid
+      return (
+        mass * data.heatCapacitySolid * 0 + // zero at melting point solid
+        mass * data.latentHeatFusion +
+        mass * data.heatCapacityLiquid * (temp - data.meltingPoint)
+      );
+    } else {
+      // Gas phase
+      return (
+        mass * data.heatCapacitySolid * 0 +
+        mass * data.latentHeatFusion +
+        mass * data.heatCapacityLiquid * (data.boilingPoint - data.meltingPoint) +
+        mass * data.latentHeatVaporization +
+        mass * data.heatCapacityGas * (temp - data.boilingPoint)
+      );
+    }
+  }
+
+  // Calculate temperature from energy
+  function temperatureAtEnergy(energy: number): number {
+    const fusionEnergy = mass * data.latentHeatFusion;
+    const vaporEnergy = mass * data.latentHeatVaporization;
+    const solidEnergy = mass * data.heatCapacitySolid * (data.meltingPoint - data.meltingPoint); // 0
+    const liquidEnergyRange = mass * data.heatCapacityLiquid * (data.boilingPoint - data.meltingPoint);
+
+    if (energy < 0) {
+      // Below melting point solid
+      return data.meltingPoint + energy / (mass * data.heatCapacitySolid);
+    } else if (energy < fusionEnergy) {
+      // Phase change solid to liquid (melting)
+      return data.meltingPoint;
+    } else if (energy < fusionEnergy + liquidEnergyRange) {
+      // Liquid phase
+      return data.meltingPoint + (energy - fusionEnergy) / (mass * data.heatCapacityLiquid);
+    } else if (energy < fusionEnergy + liquidEnergyRange + vaporEnergy) {
+      // Phase change liquid to gas (boiling)
+      return data.boilingPoint;
+    } else {
+      // Gas phase
+      return (
+        data.boilingPoint +
+        (energy - fusionEnergy - liquidEnergyRange - vaporEnergy) / (mass * data.heatCapacityGas)
+      );
+    }
+  }
+
+  // Determine state from temperature and energy
+  function determineState(temp: number, energy: number): string {
+    const fusionEnergy = mass * data.latentHeatFusion;
+    const vaporEnergy = mass * data.latentHeatVaporization;
+    const liquidEnergyRange = mass * data.heatCapacityLiquid * (data.boilingPoint - data.meltingPoint);
+
+    if (energy < 0) {
+      return 'solid';
+    } else if (energy >= 0 && energy < fusionEnergy) {
+      return 'melting';
+    } else if (energy >= fusionEnergy && energy < fusionEnergy + liquidEnergyRange) {
+      return 'liquid';
+    } else if (energy >= fusionEnergy + liquidEnergyRange && energy < fusionEnergy + liquidEnergyRange + vaporEnergy) {
+      return 'boiling';
+    } else {
+      return 'gas';
+    }
+  }
+
+  // On substance change, reset temperature and energy
+  useEffect(() => {
+    setTemperature(20);
+    setEnergy(energyAtTemperature(20));
+    setState(determineState(20, energyAtTemperature(20)));
+    heatingRef.current = 0;
+    setHeating(0);
+    temperatureRef.current = 20;
+    stateRef.current = determineState(20, energyAtTemperature(20));
+    substanceRef.current = substance;
+  }, [substance]);
+
+  // Handle heating and cooling
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (heatingRef.current === 0) return;
+
+      let newEnergy = energyRef.current + heatingRef.current * heatingRate * (intervalMs / 1000);
+
+      // Limit energy to reasonable bounds
+      const minEnergy = mass * data.heatCapacitySolid * (data.meltingPoint - 100); // arbitrary low
+      const maxEnergy = mass * data.heatCapacityGas * (data.boilingPoint + 500); // arbitrary high
+      if (newEnergy < minEnergy) newEnergy = minEnergy;
+      if (newEnergy > maxEnergy) newEnergy = maxEnergy;
+
+      energyRef.current = newEnergy;
+      setEnergy(newEnergy);
+
+      const newTemp = temperatureAtEnergy(newEnergy);
+      temperatureRef.current = newTemp;
+      setTemperature(parseFloat(newTemp.toFixed(2)));
+
+      const newState = determineState(newTemp, newEnergy);
+      stateRef.current = newState;
+      setState(newState);
+    }, intervalMs);
+
+    return () => clearInterval(interval);
+  }, [data]);
+
+  const startHeating = () => {
+    heatingRef.current = 1;
+    setHeating(1);
+  };
+
+  const startCooling = () => {
+    heatingRef.current = -1;
+    setHeating(-1);
+  };
+
+  const stopHeatingCooling = () => {
+    heatingRef.current = 0;
+    setHeating(0);
+  };
+
+  // Format energy for display
+  function formatEnergy(joules: number): string {
+    if (joules > 1000) return (joules / 1000).toFixed(2) + ' kJ';
+    return joules.toFixed(2) + ' J';
+  }
+
+  return (
+    <div className="min-h-screen bg-gray-100 flex justify-center items-center p-4">
+      <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-lg">
+        <h1 className="text-2xl font-bold text-center mb-6 text-gray-800">Realistic State Change Simulation</h1>
+
+        <div className="mb-4">
+          <label htmlFor="substance" className="block text-gray-700 text-sm font-bold mb-2">
+            Substance:
+          </label>
+          <select
+            id="substance"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            value={substance}
+            onChange={(e) => setSubstance(e.target.value)}
+          >
+            <option value="Water">Water (H8O)</option>
+            <option value="Iron">Iron (Fe)</option>
+            <option value="Nitrogen">Nitrogen (N2)</option>
+          </select>
+        </div>
+
+        <div className="mb-6">
+          <div className="flex justify-between items-center mb-2">
+            <label className="block text-gray-700 text-sm font-bold">Temperature (C):</label>
+            <span className="text-gray-600 text-sm">{temperature.toFixed(2)}C</span>
+          </div>
+          <div className="flex space-x-2">
+            <button
+              onClick={startCooling}
+              disabled={heating === -1}
+              className={`font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ${heating === -1 ? 'bg-red-700 text-white cursor-not-allowed' : 'bg-red-500 hover:bg-red-700 text-white'}`}
+            >
+              - Cool
+            </button>
+            <button
+              onClick={stopHeatingCooling}
+              disabled={heating === 0}
+              className={`font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ${heating === 0 ? 'bg-gray-400 text-gray-700 cursor-not-allowed' : 'bg-gray-600 hover:bg-gray-800 text-white'}`}
+            >
+              Stop
+            </button>
+            <button
+              onClick={startHeating}
+              disabled={heating === 1}
+              className={`font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ${heating === 1 ? 'bg-green-700 text-white cursor-not-allowed' : 'bg-green-500 hover:bg-green-700 text-white'}`}
+            >
+              + Heat
+            </button>
+          </div>
+        </div>
+
+        <div className="mb-8">
+          <h2 className="text-xl font-semibold text-gray-800 mb-3">Current State</h2>
+          <div className="relative h-24 w-full rounded-xl border-2 border-gray-300 overflow-hidden">
+            {(state === 'solid' || state === 'melting') && (
+              <div className="absolute inset-0 bg-blue-100 flex flex-col justify-center items-center text-blue-700 text-xl font-bold">
+                <div>{state === 'solid' ? 'Solid' : 'Melting'} ({substance === 'Water' ? 'Ice' : substance})</div>
+                {state === 'melting' && <div className="text-sm mt-1">Phase change in progress...</div>}
+                <div className="absolute inset-0 bg-blue-200 opacity-30 animate-pulse-faster"></div>
+              </div>
+            )}
+            {(state === 'liquid' || state === 'boiling') && (
+              <div className="absolute inset-0 bg-blue-300 flex flex-col justify-center items-center text-blue-700 text-xl font-bold overflow-hidden">
+                <div>{state === 'liquid' ? 'Liquid' : 'Boiling'} ({substance === 'Water' ? 'Water' : substance})</div>
+                {state === 'boiling' && <div className="text-sm mt-1">Phase change in progress...</div>}
+                <div className="absolute inset-0 bg-blue-400 opacity-40 animate-wave-faster"></div>
+              </div>
+            )}
+            {state === 'gas' && (
+              <div className="absolute inset-0 bg-blue-50 flex justify-center items-center text-blue-700 text-xl font-bold">
+                Gas ({substance === 'Water' ? 'Steam' : substance})
+                <div className="absolute inset-0 bg-blue-100 opacity-10 animate-fade-out-faster"></div>
+                <div className="absolute inset-0 bg-blue-50 opacity-5 animate-fade-out-faster delay-500"></div>
+              </div>
+            )}
+            <div className="absolute inset-0 border-2 border-blue-500 rounded-xl pointer-events-none"></div>
+          </div>
+        </div>
+
+        <div className="mb-6">
+          <h2 className="text-xl font-semibold text-gray-800 mb-3">Energy and Temperature Data</h2>
+          <table className="min-w-full border-collapse border border-gray-300">
+            <thead>
+              <tr>
+                <th className="border border-gray-300 px-4 py-2">Property</th>
+                <th className="border border-gray-300 px-4 py-2">Value</th>
+                <th className="border border-gray-300 px-4 py-2">Units</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="border border-gray-300 px-4 py-2">Mass</td>
+                <td className="border border-gray-300 px-4 py-2 text-center">{mass}</td>
+                <td className="border border-gray-300 px-4 py-2 text-center">g</td>
+              </tr>
+              <tr>
+                <td className="border border-gray-300 px-4 py-2">Temperature</td>
+                <td className="border border-gray-300 px-4 py-2 text-center">{temperature.toFixed(2)}</td>
+                <td className="border border-gray-300 px-4 py-2 text-center">C</td>
+              </tr>
+              <tr>
+                <td className="border border-gray-300 px-4 py-2">Total Energy</td>
+                <td className="border border-gray-300 px-4 py-2 text-center">{formatEnergy(energy)}</td>
+                <td className="border border-gray-300 px-4 py-2 text-center">J</td>
+              </tr>
+              <tr>
+                <td className="border border-gray-300 px-4 py-2">State</td>
+                <td className="border border-gray-300 px-4 py-2 text-center capitalize">{state}</td>
+                <td className="border border-gray-300 px-4 py-2 text-center">-</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div>
+          <h2 className="text-xl font-semibold text-gray-800 mb-3">State Change Table</h2>
+          <table className="min-w-full border-collapse border border-gray-300">
+            <thead>
+              <tr>
+                <th className="border border-gray-300 px-4 py-2">State</th>
+                <th className="border border-gray-300 px-4 py-2">Temperature Range (C)</th>
+                <th className="border border-gray-300 px-4 py-2">Heat Capacity (J/gC)</th>
+                <th className="border border-gray-300 px-4 py-2">Latent Heat (J/g)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="border border-gray-300 px-4 py-2 text-center">Solid</td>
+                <td className="border border-gray-300 px-4 py-2 text-center">Less than or equal to {data.meltingPoint}C</td>
+                <td className="border border-gray-300 px-4 py-2 text-center">{data.heatCapacitySolid}</td>
+                <td className="border border-gray-300 px-4 py-2 text-center">-</td>
+              </tr>
+              <tr>
+                <td className="border border-gray-300 px-4 py-2 text-center">Melting</td>
+                <td className="border border-gray-300 px-4 py-2 text-center">At {data.meltingPoint}C</td>
+                <td className="border border-gray-300 px-4 py-2 text-center">-</td>
+                <td className="border border-gray-300 px-4 py-2 text-center">{data.latentHeatFusion}</td>
+              </tr>
+              <tr>
+                <td className="border border-gray-300 px-4 py-2 text-center">Liquid</td>
+                <td className="border border-gray-300 px-4 py-2 text-center">Between {data.meltingPoint}C and {data.boilingPoint}C</td>
+                <td className="border border-gray-300 px-4 py-2 text-center">{data.heatCapacityLiquid}</td>
+                <td className="border border-gray-300 px-4 py-2 text-center">-</td>
+              </tr>
+              <tr>
+                <td className="border border-gray-300 px-4 py-2 text-center">Boiling</td>
+                <td className="border border-gray-300 px-4 py-2 text-center">At {data.boilingPoint}C</td>
+                <td className="border border-gray-300 px-4 py-2 text-center">-</td>
+                <td className="border border-gray-300 px-4 py-2 text-center">{data.latentHeatVaporization}</td>
+              </tr>
+              <tr>
+                <td className="border border-gray-300 px-4 py-2 text-center">Gas</td>
+                <td className="border border-gray-300 px-4 py-2 text-center">Greater than or equal to {data.boilingPoint}C</td>
+                <td className="border border-gray-300 px-4 py-2 text-center">{data.heatCapacityGas}</td>
+                <td className="border border-gray-300 px-4 py-2 text-center">-</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <style jsx>{`
+        @keyframes pulse-faster {
+          0%, 100% { opacity: 0.3; }
+          50% { opacity: 0.6; }
+        }
+        .animate-pulse-faster {
+          animation: pulse-faster 1s infinite; /* Faster pulse */
+        }
+        @keyframes wave-faster {
+          0% { background-position: 0 0; }
+          100% { background-position: 100% 0; }
+        }
+        .animate-wave-faster {
+          background: repeating-linear-gradient(
+            45deg,
+            rgba(59, 130, 246, 0.4),
+            rgba(59, 130, 246, 0.4) 10px,
+            rgba(37, 99, 235, 0.4) 10px,
+            rgba(37, 99, 235, 0.4) 20px
+          );
+          background-size: 200% 100%;
+          animation: wave-faster 2s linear infinite; /* Faster wave */
+        }
+        @keyframes fadeOut-faster {
+          from { opacity: 0.1; }
+          to { opacity: 0; }
+        }
+        .animate-fade-out-faster {
+          animation: fadeOut-faster 1.5s forwards; /* Faster fade out */
+        }
+        .animate-fade-out-faster.delay-500 {
+          animation-delay: 0.25s; /* Faster delay */
+        }
+      `}</style>
+    </div>
+  );
+}

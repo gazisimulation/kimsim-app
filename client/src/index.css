@@ -11,3 +11,14 @@
     @apply font-sans antialiased bg-background text-foreground;
   }
 }
+
+/* Animation keyframes for the state change simulator */
+@keyframes wave {
+  0% { background-position: 0% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes fadeOut {
+  from { opacity: 0.1; }
+  to { opacity: 0; }
+}
