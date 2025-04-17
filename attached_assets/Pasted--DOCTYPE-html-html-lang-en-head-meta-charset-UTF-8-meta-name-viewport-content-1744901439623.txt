@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chemical Bonds 3D Simulation</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+        #container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+        }
+        #info {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            max-width: 300px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        #controls {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            margin-bottom: 5px;
+            padding: 8px;
+            background: #444;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #666;
+        }
+        button.active {
+            background: #0066cc;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="info">
+            <h2>Chemical Bonds Simulation</h2>
+            <p>Select a bonding type from the panel on the right to view the simulation.</p>
+            <div id="description"></div>
+        </div>
+        <div id="controls">
+            <h3>Bond Types</h3>
+            <button id="metallicBtn">Metallic Bond</button>
+            <button id="ionicBtn">Ionic Bond</button>
+            <button id="covalentBtn">Covalent Bond</button>
+            <button id="lewisBtn">Lewis Dot Structure</button>
+            <button id="polarityBtn">Molecular Polarity</button>
+            <button id="nomenclatureBtn">Nomenclature</button>
+        </div>
+    </div>
+
+    <!-- Import Three.js from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
+
+    <script>
+        // Main simulation code
+        let scene, camera, renderer, controls;
+        let currentSimulation = null;
+        let activeButton = null;
+
+        // Initialize the 3D scene
+        function init() {
+            // Create scene
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x111111);
+
+            // Create camera
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 15;
+
+            // Create renderer
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.getElementById('container').appendChild(renderer.domElement);
+
+            // Add orbit controls
+            controls = new THREE.OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.05;
+
+            // Add ambient light
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+            scene.add(ambientLight);
+
+            // Add directional light
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            directionalLight.position.set(1, 1, 1);
+            scene.add(directionalLight);
+
+            // Event listeners for buttons
+            document.getElementById('metallicBtn').addEventListener('click', () => loadSimulation('metallic'));
+            document.getElementById('ionicBtn').addEventListener('click', () => loadSimulation('ionic'));
+            document.getElementById('covalentBtn').addEventListener('click', () => loadSimulation('covalent'));
+            document.getElementById('lewisBtn').addEventListener('click', () => loadSimulation('lewis'));
+            document.getElementById('polarityBtn').addEventListener('click', () => loadSimulation('polarity'));
+            document.getElementById('nomenclatureBtn').addEventListener('click', () => loadSimulation('nomenclature'));
+
+            // Handle window resize
+            window.addEventListener('resize', onWindowResize, false);
+
+            // Start with metallic bond simulation
+            loadSimulation('metallic');
+
+            // Start animation loop
+            animate();
+        }
+
+        // Handle window resize
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+            controls.update();
+            
+            // Update current simulation if there is any animation
+            if (currentSimulation && currentSimulation.update) {
+                currentSimulation.update();
+            }
+            
+            renderer.render(scene, camera);
+        }
+
+        // Load the selected simulation
+        function loadSimulation(type) {
+            // Clear previous simulation
+            clearSimulation();
+            
+            // Update active button
+            if (activeButton) {
+                activeButton.classList.remove('active');
+            }
+            activeButton = document.getElementById(type + 'Btn');
+            activeButton.classList.add('active');
+
+            // Load the requested simulation
+            switch (type) {
+                case 'metallic':
+                    currentSimulation = createMetallicBondSimulation();
+                    break;
+                case 'ionic':
+                    currentSimulation = createIonicBondSimulation();
+                    break;
+                case 'covalent':
+                    currentSimulation = createCovalentBondSimulation();
+                    break;
+                case 'lewis':
+                    currentSimulation = createLewisDotStructureSimulation();
+                    break;
+                case 'polarity':
+                    currentSimulation = createMolecularPolaritySimulation();
+                    break;
+                case 'nomenclature':
+                    currentSimulation = createNomenclatureSimulation();
+                    break;
+            }
+            
+            // Update description
+            document.getElementById('description').innerHTML = currentSimulation.description;
+        }
+
+        // Clear the current simulation
+        function clearSimulation() {
+            while(scene.children.length > 0) { 
+                const object = scene.children[0];
+                if (object.geometry) object.geometry.dispose();
+                if (object.material) {
+                    if (object.material.length) {
+                        for (let i = 0; i < object.material.length; ++i) {
+                            object.material[i].dispose();
+                        }
+                    } else {
+                        object.material.dispose();
+                    }
+                }
+                scene.remove(object); 
+            }
+            
+            // Add lights back
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+            scene.add(ambientLight);
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            directionalLight.position.set(1, 1, 1);
+            scene.add(directionalLight);
+        }
+
+        // Create Metallic Bond Simulation
+        function createMetallicBondSimulation() {
+            const metalGroup = new THREE.Group();
+            scene.add(metalGroup);
+            
+            // Create a lattice of metal atoms
+            const atoms = [];
+            const latticeSize = 3;
+            const spacing = 3;
+            
+            // Create metal ions in lattice
+            for (let x = -latticeSize; x <= latticeSize; x++) {
+                for (let y = -latticeSize; y <= latticeSize; y++) {
+                    for (let z = -latticeSize; z <= latticeSize; z++) {
+                        if (Math.abs(x) === latticeSize || Math.abs(y) === latticeSize || Math.abs(z) === latticeSize) {
+                            const geometry = new THREE.SphereGeometry(0.5, 32, 32);
+                            const material = new THREE.MeshPhongMaterial({ color: 0xcccccc });
+                            const atom = new THREE.Mesh(geometry, material);
+                            atom.position.set(x * spacing, y * spacing, z * spacing);
+                            metalGroup.add(atom);
+                            atoms.push(atom);
+                        }
+                    }
+                }
+            }
+            
+            // Create electron cloud (particles representing free electrons)
+            const electrons = [];
+            const electronCount = 100;
+            
+            for (let i = 0; i < electronCount; i++) {
+                const geometry = new THREE.SphereGeometry(0.1, 16, 16);
+                const material = new THREE.MeshBasicMaterial({ color: 0x0099ff });
+                const electron = new THREE.Mesh(geometry, material);
+                
+                // Random position within the lattice bounds
+                const size = latticeSize * spacing;
+                electron.position.set(
+                    (Math.random() - 0.5) * size * 1.8,
+                    (Math.random() - 0.5) * size * 1.8,
+                    (Math.random() - 0.5) * size * 1.8
+                );
+                
+                // Random velocity
+                electron.velocity = new THREE.Vector3(
+                    (Math.random() - 0.5) * 0.1,
+                    (Math.random() - 0.5) * 0.1,
+                    (Math.random() - 0.5) * 0.1
+                );
+                
+                metalGroup.add(electron);
+                electrons.push(electron);
+            }
+            
+            // Scale the entire group
+            metalGroup.scale.set(0.5, 0.5, 0.5);
+            
+            // Adjust camera
+            camera.position.set(0, 0, 15);
+            controls.update();
+            
+            // Update function for animation
+            function update() {
+                // Move electrons
+                electrons.forEach(electron => {
+                    electron.position.add(electron.velocity);
+                    
+                    // Bounce off boundaries
+                    const boundSize = latticeSize * spacing * 0.9;
+                    ['x', 'y', 'z'].forEach(axis => {
+                        if (Math.abs(electron.position[axis]) > boundSize) {
+                            electron.velocity[axis] *= -1;
+                        }
+                    });
+                });
+                
+                // Rotate the entire lattice slowly
+                metalGroup.rotation.y += 0.002;
+                metalGroup.rotation.x += 0.001;
+            }
+            
+            // Description text
+            const description = `
+                <h3>Metallic Bond</h3>
+                <p>Metallic bonding occurs in metals where the atoms form a lattice structure. The valence electrons become delocalized, forming a "sea of electrons" that moves freely between the positive metal ions.</p>
+                <p>This electron mobility explains many properties of metals:</p>
+                <ul>
+                    <li>High electrical conductivity</li>
+                    <li>Thermal conductivity</li>
+                    <li>Malleability and ductility</li>
+                    <li>Metallic luster</li>
+                </ul>
+                <p>In this simulation, the silver spheres represent metal atoms arranged in a lattice, while the small blue spheres represent the mobile valence electrons that move freely throughout the structure.</p>
+            `;
+            
+            return { update, description };
+        }
+
+        // Create Ionic Bond Simulation
+        function createIonicBondSimulation() {
+            const ionicGroup = new THREE.Group();
+            scene.add(ionicGroup);
+            
+            // Create a sodium chloride (NaCl) crystal structure
+            const latticeSize = 2;
+            const spacing = 2.5;
+            
+            // Create sodium (Na+) and chloride (Cl-) ions in alternating positions
+            for (let x = -latticeSize; x <= latticeSize; x++) {
+                for (let y = -latticeSize; y <= latticeSize; y++) {
+                    for (let z = -latticeSize; z <= latticeSize; z++) {
+                        // Determine if this should be Na+ or Cl- based on position sum parity
+                        const isSodium = (x + y + z) % 2 === 0;
+                        
+                        const geometry = new THREE.SphereGeometry(
+                            isSodium ? 0.6 : 0.9, // Chloride ions are larger
+                            32, 32
+                        );
+                        
+                        const material = new THREE.MeshPhongMaterial({ 
+                            color: isSodium ? 0xc0c0c0 : 0x00ff00,  // Silver for Na+, Green for Cl-
+                            transparent: true,
+                            opacity: 0.8
+                        });
+                        
+                        const ion = new THREE.Mesh(geometry, material);
+                        ion.position.set(x * spacing, y * spacing, z * spacing);
+                        ionicGroup.add(ion);
+                        
+                        // Add charge indicator text
+                        const chargeCanvas = document.createElement('canvas');
+                        chargeCanvas.width = 64;
+                        chargeCanvas.height = 64;
+                        const chargeCtx = chargeCanvas.getContext('2d');
+                        chargeCtx.fillStyle = 'white';
+                        chargeCtx.font = 'Bold 40px Arial';
+                        chargeCtx.textAlign = 'center';
+                        chargeCtx.textBaseline = 'middle';
+                        chargeCtx.fillText(isSodium ? '+' : '-', 32, 32);
+                        
+                        const chargeTexture = new THREE.CanvasTexture(chargeCanvas);
+                        const chargeMaterial = new THREE.SpriteMaterial({ map: chargeTexture });
+                        const chargeSprite = new THREE.Sprite(chargeMaterial);
+                        chargeSprite.position.set(
+                            ion.position.x + 0.7,
+                            ion.position.y + 0.7,
+                            ion.position.z
+                        );
+                        chargeSprite.scale.set(0.5, 0.5, 1);
+                        ionicGroup.add(chargeSprite);
+                    }
+                }
+            }
+            
+            // Add visual representation of electron transfer
+            // Find a sodium and chlorine pair
+            const sodiumPosition = new THREE.Vector3(-spacing, -spacing, -spacing);
+            const chlorinePosition = new THREE.Vector3(0, 0, 0);
+            
+            // Create electron
+            const electronGeometry = new THREE.SphereGeometry(0.2, 16, 16);
+            const electronMaterial = new THREE.MeshBasicMaterial({ color: 0x0099ff });
+            const electron = new THREE.Mesh(electronGeometry, electronMaterial);
+            
+            // Start at sodium
+            electron.position.copy(sodiumPosition);
+            ionicGroup.add(electron);
+            
+            // Animation parameters
+            let animationProgress = 0;
+            let animationDirection = 1; // 1 = moving to chlorine, -1 = moving to sodium
+            
+            // Adjust camera
+            camera.position.set(0, 0, 15);
+            controls.update();
+            
+            // Update function for animation
+            function update() {
+                // Rotate the entire lattice slowly
+                ionicGroup.rotation.y += 0.005;
+                
+                // Update electron transfer animation
+                animationProgress += 0.01 * animationDirection;
+                
+                // Reverse direction at endpoints
+                if (animationProgress >= 1) {
+                    animationProgress = 1;
+                    animationDirection = -1;
+                } else if (animationProgress <= 0) {
+                    animationProgress = 0;
+                    animationDirection = 1;
+                }
+                
+                // Move electron
+                electron.position.lerpVectors(sodiumPosition, chlorinePosition, animationProgress);
+            }
+            
+            // Description text
+            const description = `
+                <h3>Ionic Bond</h3>
+                <p>Ionic bonds form between a metal and a non-metal through the complete transfer of electrons. The metal atom loses electrons to become a positively charged ion (cation), while the non-metal atom gains electrons to become a negatively charged ion (anion).</p>
+                <p>This simulation shows sodium chloride (NaCl):</p>
+                <ul>
+                    <li>Sodium (Na) atoms lose one electron to become Na+ ions (silver)</li>
+                    <li>Chlorine (Cl) atoms gain one electron to become Cl- ions (green)</li>
+                    <li>The oppositely charged ions form a crystal lattice structure</li>
+                    <li>The blue sphere shows the electron transfer between atoms</li>
+                </ul>
+                <p>Ionic compounds typically have:</p>
+                <ul>
+                    <li>High melting and boiling points</li>
+                    <li>Crystal structure in solid state</li>
+                    <li>Electrical conductivity when molten or dissolved</li>
+                </ul>
+            `;
+            
+            return { update, description };
+        }
+
+        // Create Covalent Bond Simulation
+        function createCovalentBondSimulation() {
+            const covalentGroup = new THREE.Group();
+            scene.add(covalentGroup);
+            
+            // Create water molecule (H2O) as an example of covalent bonding
+            
+            // Create oxygen atom
+            const oxygenGeometry = new THREE.SphereGeometry(0.8, 32, 32);
+            const oxygenMaterial = new THREE.MeshPhongMaterial({ color: 0xff0000 }); // Red for oxygen
+            const oxygen = new THREE.Mesh(oxygenGeometry, oxygenMaterial);
+            covalentGroup.add(oxygen);
+            
+            // Create hydrogen atoms
+            const hydrogenGeometry = new THREE.SphereGeometry(0.4, 32, 32);
+            const hydrogenMaterial = new THREE.MeshPhongMaterial({ color: 0xffffff }); // White for hydrogen
+            
+            const hydrogen1 = new THREE.Mesh(hydrogenGeometry, hydrogenMaterial);
+            hydrogen1.position.set(-0.8, 0.6, 0);
+            covalentGroup.add(hydrogen1);
+            
+            const hydrogen2 = new THREE.Mesh(hydrogenGeometry, hydrogenMaterial);
+            hydrogen2.position.set(0.8, 0.6, 0);
+            covalentGroup.add(hydrogen2);
+            
+            // Create bonds (cylinders connecting atoms)
+            function createBond(start, end) {
+                const direction = new THREE.Vector3().subVectors(end, start);
+                const length = direction.length();
+                
+                const bondGeometry = new THREE.CylinderGeometry(0.1, 0.1, length);
+                const bondMaterial = new THREE.MeshPhongMaterial({ color: 0xcccccc });
+                const bond = new THREE.Mesh(bondGeometry, bondMaterial);
+                
+                // Position and rotate bond
+                const midpoint = new THREE.Vector3().addVectors(start, end).multiplyScalar(0.5);
+                bond.position.copy(midpoint);
+                bond.lookAt(end);
+                bond.rotateX(Math.PI / 2);
+                
+                return bond;
+            }
+            
+            // Add bonds
+            const bond1 = createBond(oxygen.position, hydrogen1.position);
+            covalentGroup.add(bond1);
+            
+            const bond2 = createBond(oxygen.position, hydrogen2.position);
+            covalentGroup.add(bond2);
+            
+            // Add shared electrons
+            function addSharedElectrons(bond, start, end) {
+                const midpoint = new THREE.Vector3().addVectors(start, end).multiplyScalar(0.5);
+                
+                const electron1Geometry = new THREE.SphereGeometry(0.15, 16, 16);
+                const electron1Material = new THREE.MeshBasicMaterial({ color: 0x0099ff });
+                const electron1 = new THREE.Mesh(electron1Geometry, electron1Material);
+                electron1.position.copy(midpoint).add(new THREE.Vector3(0, 0.2, 0));
+                
+                const electron2Geometry = new THREE.SphereGeometry(0.15, 16, 16);
+                const electron2Material = new THREE.MeshBasicMaterial({ color: 0x0099ff });
+                const electron2 = new THREE.Mesh(electron2Geometry, electron2Material);
+                electron2.position.copy(midpoint).add(new THREE.Vector3(0, -0.2, 0));
+                
+                return { electron1, electron2 };
+            }
+            
+            // Add shared electrons to bonds
+            const bondElectrons1 = addSharedElectrons(bond1, oxygen.position, hydrogen1.position);
+            covalentGroup.add(bondElectrons1.electron1);
+            covalentGroup.add(bondElectrons1.electron2);
+            
+            const bondElectrons2 = addSharedElectrons(bond2, oxygen.position, hydrogen2.position);
+            covalentGroup.add(bondElectrons2.electron1);
+            covalentGroup.add(bondElectrons2.electron2);
+            
+            // Add atom labels
+            function createLabel(text, position) {
+                const canvas = document.createElement('canvas');
+                canvas.width = 64;
+                canvas.height = 64;
+                const ctx = canvas.getContext('2d');
+                ctx.fillStyle = 'white';
+                ctx.font = 'Bold 32px Arial';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(text, 32, 32);
+                
+                const texture = new THREE.CanvasTexture(canvas);
+                const material = new THREE.SpriteMaterial({ map: texture });
+                const sprite = new THREE.Sprite(material);
+                sprite.position.copy(position);
+                sprite.scale.set(0.5, 0.5, 1);
+                return sprite;
+            }
+            
+            // Add element labels
+            covalentGroup.add(createLabel("O", oxygen.position.clone().add(new THREE.Vector3(0, -1.2, 0))));
+            covalentGroup.add(createLabel("H", hydrogen1.position.clone().add(new THREE.Vector3(0, 0.7, 0))));
+            covalentGroup.add(createLabel("H", hydrogen2.position.clone().add(new THREE.Vector3(0, 0.7, 0))));
+            
+            // Scale the entire group
+            covalentGroup.scale.set(3, 3, 3);
+            
+            // Adjust camera
+            camera.position.set(0, 0, 10);
+            controls.update();
+            
+            // Update function for animation
+            function update() {
+                // Rotate the molecule slowly
+                covalentGroup.rotation.y += 0.01;
+                
+                // Animate electrons in bonds
+                const time = Date.now() * 0.002;
+                
+                // First bond electrons
+                bondElectrons1.electron1.position.y = hydrogen1.position.y/2 + 0.2 * Math.sin(time);
+                bondElectrons1.electron2.position.y = hydrogen1.position.y/2 - 0.2 * Math.sin(time);
+                
+                // Second bond electrons
+                bondElectrons2.electron1.position.y = hydrogen2.position.y/2 + 0.2 * Math.sin(time + Math.PI);
+                bondElectrons2.electron2.position.y = hydrogen2.position.y/2 - 0.2 * Math.sin(time + Math.PI);
+            }
+            
+            // Description text
+            const description = `
+                <h3>Covalent Bond</h3>
+                <p>Covalent bonds form when atoms share electrons to achieve a stable electron configuration. This simulation shows a water molecule (H<sub>2</sub>O), demonstrating covalent bonding.</p>
+                <p>Key features:</p>
+                <ul>
+                    <li>The oxygen atom (red) shares electrons with two hydrogen atoms (white)</li>
+                    <li>The blue spheres represent shared electrons orbiting between the atoms</li>
+                    <li>Each bond consists of two shared electrons (a single bond)</li>
+                    <li>The water molecule has a bent shape due to the oxygen atom's electron geometry</li>
+                </ul>
+                <p>Covalent compounds typically have:</p>
+                <ul>
+                    <li>Lower melting and boiling points than ionic compounds</li>
+                    <li>Poor electrical conductivity</li>
+                    <li>Molecular structure rather than extended lattices</li>
+                </ul>
+            `;
+            
+            return { update, description };
+        }
+
+        // Create Lewis Dot Structure Simulation
+        function createLewisDotStructureSimulation() {
+            const lewisGroup = new THREE.Group();
+            scene.add(lewisGroup);
+            
+            // Create CO2 molecule for Lewis structure demonstration
+            
+            // Create carbon atom
+            const carbonGeometry = new THREE.SphereGeometry(0.8, 32, 32);
+            const carbonMaterial = new THREE.MeshPhongMaterial({ color: 0x333333 }); // Dark gray for carbon
+            const carbon = new THREE.Mesh(carbonGeometry, carbonMaterial);
+            lewisGroup.add(carbon);
+            
+            // Create oxygen atoms
+            const oxygenGeometry = new THREE.SphereGeometry(0.7, 32, 32);
+            const oxygenMaterial = new THREE.MeshPhongMaterial({ color: 0xff0000 }); // Red for oxygen
+            
+            const oxygen1 = new THREE.Mesh(oxygenGeometry, oxygenMaterial);
+            oxygen1.position.set(-2.5, 0, 0);
+            lewisGroup.add(oxygen1);
+            
+            const oxygen2 = new THREE.Mesh(oxygenGeometry, oxygenMaterial);
+            oxygen2.position.set(2.5, 0, 0);
+            lewisGroup.add(oxygen2);
+            
+            // Create double bonds
+            function createDoubleBond(start, end) {
+                const direction = new THREE.Vector3().subVectors(end, start);
+                const length = direction.length();
+                direction.normalize();
+                
+                // Create perpendicular vector for offset
+                const perpendicular = new THREE.Vector3(0, 1, 0);
+                perpendicular.cross(direction).normalize();
+                
+                // First bond
+                const bond1Geometry = new THREE.CylinderGeometry(0.1, 0.1, length * 0.8);
+                const bond1Material = new THREE.MeshPhongMaterial({ color: 0xffff00 });
+                const bond1 = new THREE.Mesh(bond1Geometry, bond1Material);
+                
+                const midpoint1 = new THREE.Vector3().addVectors(
+                    start.clone().add(perpendicular.clone().multiplyScalar(0.2)),
+                    end.clone().add(perpendicular.clone().multiplyScalar(0.2))
+                ).multiplyScalar(0.5);
+                
+                bond1.position.copy(midpoint1);
+                bond1.lookAt(end.clone().add(perpendicular.clone().multiplyScalar(0.2)));
+                bond1.rotateX(Math.PI / 2);
+                
+                // Second bond
+                const bond2Geometry = new THREE.CylinderGeometry(0.1, 0.1, length * 0.8);
+                const bond2Material = new THREE.MeshPhongMaterial({ color: 0xffff00 });
+                const bond2 = new THREE.Mesh(bond2Geometry, bond2Material);
+                
+                const midpoint2 = new THREE.Vector3().addVectors(
+                    start.clone().add(perpendicular.clone().multiplyScalar(-0.2)),
+                    end.clone().add(perpendicular.clone().multiplyScalar(-0.2))
+                ).multiplyScalar(0.5);
+                
+                bond2.position.copy(midpoint2);
+                bond2.lookAt(end.clone().add(perpendicular.clone().multiplyScalar(-0.2)));
+                bond2.rotateX(Math.PI / 2);
+                
+                return [bond1, bond2];
+            }
+            
+            // Add double bonds
+            const bonds1 = createDoubleBond(carbon.position, oxygen1.position);
+            bonds1.forEach(bond => lewisGroup.add(bond));
+            
+            const bonds2 = createDoubleBond(carbon.position, oxygen2.position);
+            bonds2.forEach(bond => lewisGroup.add(bond));
+            
+            // Add valence electrons as dots
+            function addValenceElectrons(position, count, startAngle = 0) {
+                const electrons = [];
+                const radius = 1.1;
+                
+                for (let i = 0; i < count; i++) {
+                    const angle = startAngle + (i * (2 * Math.PI / count));
+                    const x = position.x + radius * Math.cos(angle);
+                    const y = position.y + radius * Math.sin(angle);
+                    
+                    const electronGeometry = new THREE.SphereGeometry(0.15, 16, 16);
+                    const electronMaterial = new THREE.MeshBasicMaterial({ color: 0x0099ff });
+                    const electron = new THREE.Mesh(electronGeometry, electronMaterial);
+                    electron.position.set(x, y, position.z);
+                    electron.angle = angle;
+                    electrons.push(electron);
+                    lewisGroup.add(electron);
+                }
+                
+                return electrons;
+            }
+            
+            // Add lone pair electrons to each oxygen (6 valence electrons each)
+            const oxygen1Electrons = addValenceElectrons(oxygen1.position, 6, Math.PI/2);
+            const oxygen2Electrons = addValenceElectrons(oxygen2.position, 6, -Math.PI/2);
+            
+            // Add atom labels
+            function createLabel(text, position) {
+                const canvas = document.createElement('canvas');
+                canvas.width = 128;
+                canvas.height = 128;
+                const ctx = canvas.getContext('2d');
+                ctx.fillStyle = 'white';
+                ctx.font = 'Bold 80px Arial';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(text, 64, 64);
+                
+                const texture = new THREE.CanvasTexture(canvas);
+                const material = new THREE.SpriteMaterial({ map: texture });
+                const sprite = new THREE.Sprite(material);
+                sprite.position.copy(position);
+                sprite.scale.set(0.5, 0.5, 1);
+                return sprite;
+            }
+            
+            // Add element labels
+            lewisGroup.add(createLabel("C", carbon.position.clone().add(new THREE.Vector3(0, -1.2, 0))));
+            lewisGroup.add(createLabel("O", oxygen1.position.clone().add(new THREE.Vector3(0, -1.2, 0))));
+            lewisGroup.add(createLabel("O", oxygen2.position.clone().add(new THREE.Vector3(0, -1.2, 0))));
+            
+            // Scale the entire group
+            lewisGroup.scale.set(1.5, 1.5, 1.5);
+            
+            // Update function for animation
+            function update() {
+                // Rotate the molecule slowly
+                lewisGroup.rotation.y += 0.005;
+                
+                // Pulse the valence electrons
+                const time = Date.now() * 0.002;
+                
+                oxygen1Electrons.forEach((electron, i) => {
+                    const scale = 1 + 0.1 * Math.sin(time + i);
+                    electron.scale.set(scale, scale, scale);
+                });
+                
+                oxygen2Electrons.forEach((electron, i) => {
+                    const scale = 1 + 0.1 * Math.sin(time + i + Math.PI);
+                    electron.scale.set(scale, scale, scale);
+                });
+            }
+            
+            // Description text
+            const description = `
+                <h3>Lewis Dot Structure</h3>
+                <p>Lewis dot structures show the valence electrons and bonding between atoms in a molecule. This simulation displays carbon dioxide (CO<sub>2</sub>).</p>
+                <p>Key elements:</p>
+                <ul>
+                    <li>The central carbon atom (C) has 4 valence electrons</li>
+                    <li>Each oxygen atom (O) has 6 valence electrons</li>
+                    <li>Double bonds (two shared pairs) connect carbon to each oxygen</li>
+                    <li>The blue dots around oxygen atoms represent lone pairs (non-bonding electrons)</li>
+                </ul>
+                <p>Lewis structures help predict:</p>
+                <ul>
+                    <li>Molecular shape and geometry</li>
+                    <li>Bond types (single, double, triple)</li>
+                    <li>Formal charges</li>
+                    <li>Resonance structures</li>
+                </ul>
+            `;
+            
+            return { update, description };
+        }
+
+        // Create Molecular Polarity Simulation
+        function createMolecularPolaritySimulation() {
+            const polarityGroup = new THREE.Group();
+            scene.add(polarityGroup);
+            
+            // Create water (polar) and CO2 (non-polar) molecules for comparison
+            
+            // 1. Water molecule (H2O) - Polar
+            const waterGroup = new THREE.Group();
+            waterGroup.position.set(-4, 0, 0);
+            polarityGroup.add(waterGroup);
+            
+            // Create oxygen atom
+            const oxygenGeometry = new THREE.SphereGeometry(0.8, 32, 32);
+            const oxygenMaterial = new THREE.MeshPhongMaterial({ color: 0xff0000 }); // Red for oxygen
+            const oxygen = new THREE.Mesh(oxygenGeometry, oxygenMaterial);
+            waterGroup.add(oxygen);
+            
+            // Create hydrogen atoms
+            const hydrogenGeometry = new THREE.SphereGeometry(0.4, 32, 32);
+            const hydrogenMaterial = new THREE.MeshPhongMaterial({ color: 0xffffff }); // White for hydrogen
+            
+            const hydrogen1 = new THREE.Mesh(hydrogenGeometry, hydrogenMaterial);
+            hydrogen1.position.set(-0.8, 0.6, 0);
+            waterGroup.add(hydrogen1);
+            
+            const hydrogen2 = new THREE.Mesh(hydrogenGeometry, hydrogenMaterial);
+            hydrogen2.position.set(0.8, 0.6, 0);
+            waterGroup.add(hydrogen2);
+            
+            // Create bonds
+            function createBond(start, end) {
+                const direction = new THREE.Vector3().subVectors(end, start);
+                const bondLength = direction.length();
+                
+                const bondGeometry = new THREE.CylinderGeometry(0.1, 0.1, bondLength);
+                const bondMaterial = new THREE.MeshPhongMaterial({ color: 0xcccccc });
+                const bond = new THREE.Mesh(bondGeometry, bondMaterial);
+                
+                // Position and rotate bond
+                const midpoint = new THREE.Vector3().addVectors(start, end).multiplyScalar(0.5);
+                bond.position.copy(midpoint);
+                bond.lookAt(end);
+                bond.rotateX(Math.PI / 2);
+                
+                return bond;
+            }
+            
+            // Add bonds to water
+            const waterBond1 = createBond(oxygen.position, hydrogen1.position);
+            waterGroup.add(waterBond1);
+            
+            const waterBond2 = createBond(oxygen.position, hydrogen2.position);
+            waterGroup.add(waterBond2);
+            
+            // Add dipole arrow to water (showing overall molecular polarity)
+            const waterDipoleDirection = new THREE.Vector3(0, -1, 0);
+            const waterDipoleArrow = new THREE.ArrowHelper(
+                waterDipoleDirection, 
+                oxygen.position, 
+                2, 
+                0xff00ff, // Magenta for dipole
+                0.3, 
+                0.2
+            );
+            waterGroup.add(waterDipoleArrow);
+            
+            // 2. Carbon dioxide (CO2) - Non-polar
+            const co2Group = new THREE.Group();
+            co2Group.position.set(4, 0, 0);
+            polarityGroup.add(co2Group);
+            
+            // Create carbon atom
+            const carbonGeometry = new THREE.SphereGeometry(0.8, 32, 32);
+            const carbonMaterial = new THREE.MeshPhongMaterial({ color: 0x333333 }); // Dark gray for carbon
+            const carbon = new THREE.Mesh(carbonGeometry, carbonMaterial);
+            co2Group.add(carbon);
+            
+            // Create oxygen atoms
+            const co2Oxygen1 = new THREE.Mesh(oxygenGeometry.clone(), oxygenMaterial.clone());
+            co2Oxygen1.position.set(-2, 0, 0);
+            co2Group.add(co2Oxygen1);
+            
+            const co2Oxygen2 = new THREE.Mesh(oxygenGeometry.clone(), oxygenMaterial.clone());
+            co2Oxygen2.position.set(2, 0, 0);
+            co2Group.add(co2Oxygen2);
+            
+            // Add bonds to CO2
+            const co2Bond1 = createBond(carbon.position, co2Oxygen1.position);
+            co2Group.add(co2Bond1);
+            
+            const co2Bond2 = createBond(carbon.position, co2Oxygen2.position);
+            co2Group.add(co2Bond2);
+            
+            // Add bond dipole arrows to CO2 (showing individual bond polarities but no net dipole)
+            const co2Dipole1Direction = new THREE.Vector3(-1, 0, 0);
+            const co2Dipole1Arrow = new THREE.ArrowHelper(
+                co2Dipole1Direction, 
+                new THREE.Vector3().lerpVectors(carbon.position, co2Oxygen1.position, 0.5), 
+                0.8, 
+                0xff00ff, // Magenta for dipole
+                0.2, 
+                0.1
+            );
+            co2Group.add(co2Dipole1Arrow);
+            
+            const co2Dipole2Direction = new THREE.Vector3(1, 0, 0);
+            const co2Dipole2Arrow = new THREE.ArrowHelper(
+                co2Dipole2Direction, 
+                new THREE.Vector3().lerpVectors(carbon.position, co2Oxygen2.position, 0.5), 
+                0.8, 
+                0xff00ff, // Magenta for dipole
+                0.2, 
+                0.1
+            );
+            co2Group.add(co2Dipole2Arrow);
+            
+            // Add labels
+            function createLabel(text, position) {
+                const canvas = document.createElement('canvas');
+                canvas.width = 256;
+                canvas.height = 128;
+                const ctx = canvas.getContext('2d');
+                ctx.fillStyle = 'white';
+                ctx.font = 'Bold 40px Arial';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(text, 128, 64);
+                
+                const texture = new THREE.CanvasTexture(canvas);
+                const material = new THREE.SpriteMaterial({ map: texture });
+                const sprite = new THREE.Sprite(material);
+                sprite.position.copy(position);
+                sprite.scale.set(2, 1, 1);
+                return sprite;
+            }
+            
+            // Add molecule labels
+            polarityGroup.add(createLabel("H₂O (Polar)", new THREE.Vector3(-4, -2, 0)));
+            polarityGroup.add(createLabel("CO₂ (Non-polar)", new THREE.Vector3(4, -2, 0)));
+            
+            // Add partial charges
+            function createChargeLabel(text, position) {
+                const canvas = document.createElement('canvas');
+                canvas.width = 64;
+                canvas.height = 64;
+                const ctx = canvas.getContext('2d');
+                ctx.fillStyle = 'white';
+                ctx.font = 'Bold 48px Arial';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(text, 32, 32);
+                
+                const texture = new THREE.CanvasTexture(canvas);
+                const material = new THREE.SpriteMaterial({ map: texture });
+                const sprite = new THREE.Sprite(material);
+                sprite.position.copy(position);
+                sprite.scale.set(0.5, 0.5, 1);
+                return sprite;
+            }
+            
+            // Add partial charge labels
+            // Water charges
+            waterGroup.add(createChargeLabel("δ-", oxygen.position.clone().add(new THREE.Vector3(0, -1.2, 0))));
+            waterGroup.add(createChargeLabel("δ+", hydrogen1.position.clone().add(new THREE.Vector3(0, 0.7, 0))));
+            waterGroup.add(createChargeLabel("δ+", hydrogen2.position.clone().add(new THREE.Vector3(0, 0.7, 0))));
+            
+            // CO2 charges
+            co2Group.add(createChargeLabel("δ-", co2Oxygen1.position.clone().add(new THREE.Vector3(-0.7, 0.7, 0))));
+            co2Group.add(createChargeLabel("δ-", co2Oxygen2.position.clone().add(new THREE.Vector3(0.7, 0.7, 0))));
+            co2Group.add(createChargeLabel("δ+", carbon.position.clone().add(new THREE.Vector3(0, 0.9, 0))));
+            
+            // Update function for animation
+            function update() {
+                // Rotate the molecules
+                waterGroup.rotation.y += 0.01;
+                co2Group.rotation.y -= 0.01;
+                
+                // Pulse the dipole arrows
+                const time = Date.now() * 0.002;
+                
+                // Water dipole arrow pulsing
+                const waterScale = 1 + 0.2 * Math.sin(time);
+                waterDipoleArrow.scale.set(waterScale, waterScale, waterScale);
+                
+                // CO2 dipole arrows pulsing in sync
+                const co2Scale = 1 + 0.2 * Math.sin(time);
+                co2Dipole1Arrow.scale.set(co2Scale, co2Scale, co2Scale);
+                co2Dipole2Arrow.scale.set(co2Scale, co2Scale, co2Scale);
+            }
+            
+            // Description text
+            const description = `
+                <h3>Molecular Polarity</h3>
+                <p>Molecular polarity depends on both bond polarity and molecular geometry. This simulation compares a polar molecule (water, H<sub>2</sub>O) with a non-polar molecule (carbon dioxide, CO<sub>2</sub>).</p>
+                <p><strong>Water (H<sub>2</sub>O) - Polar:</strong></p>
+                <ul>
+                    <li>Bent molecular geometry due to lone pairs on oxygen</li>
+                    <li>Oxygen has higher electronegativity than hydrogen, creating polar bonds</li>
+                    <li>Bond dipoles do not cancel, resulting in a net molecular dipole (magenta arrow)</li>
+                    <li>Partial negative charge (δ-) on oxygen, partial positive charges (δ+) on hydrogen</li>
+                </ul>
+                <p><strong>Carbon Dioxide (CO<sub>2</sub>) - Non-polar:</strong></p>
+                <ul>
+                    <li>Linear molecular geometry</li>
+                    <li>Oxygen has higher electronegativity than carbon, creating polar bonds</li>
+                    <li>Bond dipoles are equal and opposite, canceling each other</li>
+                    <li>No net molecular dipole despite having polar bonds</li>
+                </ul>
+            `;
+            
+            return { update, description };
+        }
+
+        // Create Nomenclature Simulation
+        function createNomenclatureSimulation() {
+            const nomenclatureGroup = new THREE.Group();
+            scene.add(nomenclatureGroup);
+            
+            // Create examples of different types of compounds
+            
+            // 1. Ionic compound: NaCl (Sodium Chloride)
+            const ionicGroup = new THREE.Group();
+            ionicGroup.position.set(-5, 2, 0);
+            nomenclatureGroup.add(ionicGroup);
+            
+            // Create sodium ion (Na+)
+            const sodiumGeometry = new THREE.SphereGeometry(0.8, 32, 32);
+            const sodiumMaterial = new THREE.MeshPhongMaterial({ color: 0xc0c0c0 }); // Silver for sodium
+            const sodium = new THREE.Mesh(sodiumGeometry, sodiumMaterial);
+            sodium.position.set(-1, 0, 0);
+            ionicGroup.add(sodium);
+            
+            // Create chloride ion (Cl-)
+            const chlorideGeometry = new THREE.SphereGeometry(1.0, 32, 32);
+            const chlorideMaterial = new THREE.MeshPhongMaterial({ color: 0x00ff00 }); // Green for chloride
+            const chloride = new THREE.Mesh(chlorideGeometry, chlorideMaterial);
+            chloride.position.set(1, 0, 0);
+            ionicGroup.add(chloride);
+            
+            // Add ionic bond representation
+            const ionicBondGeometry = new THREE.CylinderGeometry(0.1, 0.1, 2, 32);
+            const ionicBondMaterial = new THREE.MeshPhongMaterial({ color: 0xffff00 });
+            const ionicBond = new THREE.Mesh(ionicBondGeometry, ionicBondMaterial);
+            ionicBond.rotation.z = Math.PI / 2;
+            ionicGroup.add(ionicBond);
+            
+            // 2. Covalent molecular compound: H2O (Water)
+            const waterGroup = new THREE.Group();
+            waterGroup.position.set(5, 2, 0);
+            nomenclatureGroup.add(waterGroup);
+            
+            // Create oxygen atom
+            const oxygenGeometry = new THREE.SphereGeometry(0.8, 32, 32);
+            const oxygenMaterial = new THREE.MeshPhongMaterial({ color: 0xff0000 }); // Red for oxygen
+            const oxygen = new THREE.Mesh(oxygenGeometry, oxygenMaterial);
+            waterGroup.add(oxygen);
+            
+            // Create hydrogen atoms
+            const hydrogenGeometry = new THREE.SphereGeometry(0.4, 32, 32);
+            const hydrogenMaterial = new THREE.MeshPhongMaterial({ color: 0xffffff }); // White for hydrogen
+            
+            const hydrogen1 = new THREE.Mesh(hydrogenGeometry, hydrogenMaterial);
+            hydrogen1.position.set(-0.8, 0.6, 0);
+            waterGroup.add(hydrogen1);
+            
+            const hydrogen2 = new THREE.Mesh(hydrogenGeometry, hydrogenMaterial);
+            hydrogen2.position.set(0.8, 0.6, 0);
+            waterGroup.add(hydrogen2);
+            
+            // Create bonds
+            function createBond(start, end) {
+                const direction = new THREE.Vector3().subVectors(end, start);
+                const bondLength = direction.length();
+                
+                const bondGeometry = new THREE.CylinderGeometry(0.1, 0.1, bondLength);
+                const bondMaterial = new THREE.MeshPhongMaterial({ color: 0xcccccc });
+                const bond = new THREE.Mesh(bondGeometry, bondMaterial);
+                
+                // Position and rotate bond
+                const midpoint = new THREE.Vector3().addVectors(start, end).multiplyScalar(0.5);
+                bond.position.copy(midpoint);
+                bond.lookAt(end);
+                bond.rotateX(Math.PI / 2);
+                
+                return bond;
+            }
+            
+            // Add bonds to water
+            const waterBond1 = createBond(oxygen.position, hydrogen1.position);
+            waterGroup.add(waterBond1);
+            
+            const waterBond2 = createBond(oxygen.position, hydrogen2.position);
+            waterGroup.add(waterBond2);
+            
+            // 3. Acid: HCl (Hydrochloric acid)
+            const acidGroup = new THREE.Group();
+            acidGroup.position.set(-5, -2, 0);
+            nomenclatureGroup.add(acidGroup);
+            
+            // Create hydrogen ion (H+)
+            const hydrogenIon = new THREE.Mesh(hydrogenGeometry.clone(), hydrogenMaterial.clone());
+            hydrogenIon.position.set(-1, 0, 0);
+            acidGroup.add(hydrogenIon);
+            
+            // Create chloride ion (Cl-)
+            const chlorideIon = new THREE.Mesh(chlorideGeometry.clone(), chlorideMaterial.clone());
+            chlorideIon.position.set(1, 0, 0);
+            acidGroup.add(chlorideIon);
+            
+            // Add acid bond
+            const acidBond = createBond(hydrogenIon.position, chlorideIon.position);
+            acidGroup.add(acidBond);
+            
+            // 4. Base: NaOH (Sodium hydroxide)
+            const baseGroup = new THREE.Group();
+            baseGroup.position.set(5, -2, 0);
+            nomenclatureGroup.add(baseGroup);
+            
+            // Create sodium ion (Na+)
+            const sodiumIon = new THREE.Mesh(sodiumGeometry.clone(), sodiumMaterial.clone());
+            sodiumIon.position.set(-1.5, 0, 0);
+            baseGroup.add(sodiumIon);
+            
+            // Create oxygen atom for hydroxide
+            const hydroxideOxygen = new THREE.Mesh(oxygenGeometry.clone(), oxygenMaterial.clone());
+            hydroxideOxygen.position.set(0, 0, 0);
+            baseGroup.add(hydroxideOxygen);
+            
+            // Create hydrogen atom for hydroxide
+            const hydroxideHydrogen = new THREE.Mesh(hydrogenGeometry.clone(), hydrogenMaterial.clone());
+            hydroxideHydrogen.position.set(1, 0.5, 0);
+            baseGroup.add(hydroxideHydrogen);
+            
+            // Add bonds
+            const hydroxideBond = createBond(hydroxideOxygen.position, hydroxideHydrogen.position);
+            baseGroup.add(hydroxideBond);
+            
+            const ionicBondBase = createBond(sodiumIon.position, hydroxideOxygen.position);
+            baseGroup.add(ionicBondBase);
+            
+            // Add labels
+            function createLabel(text, position, scale = 1) {
+                const canvas = document.createElement('canvas');
+                canvas.width = 256;
+                canvas.height = 128;
+                const ctx = canvas.getContext('2d');
+                ctx.fillStyle = 'white';
+                ctx.font = 'Bold 36px Arial';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(text, 128, 64);
+                
+                const texture = new THREE.CanvasTexture(canvas);
+                const material = new THREE.SpriteMaterial({ map: texture });
+                const sprite = new THREE.Sprite(material);
+                sprite.position.copy(position);
+                sprite.scale.set(scale * 2, scale, 1);
+                return sprite;
+            }
+            
+            // Add compound labels
+            nomenclatureGroup.add(createLabel("NaCl\nSodium Chloride\n(Ionic Compound)", new THREE.Vector3(-5, 4, 0)));
+            nomenclatureGroup.add(createLabel("H₂O\nWater\n(Covalent Compound)", new THREE.Vector3(5, 4, 0)));
+            nomenclatureGroup.add(createLabel("HCl\nHydrochloric Acid\n(Acid)", new THREE.Vector3(-5, -4, 0)));
+            nomenclatureGroup.add(createLabel("NaOH\nSodium Hydroxide\n(Base)", new THREE.Vector3(5, -4, 0)));
+            
+            // Add title
+            nomenclatureGroup.add(createLabel("Chemical Nomenclature", new THREE.Vector3(0, 6, 0), 1.5));
+            
+            // Add element labels
+            function createAtomLabel(text, position) {
+                const canvas = document.createElement('canvas');
+                canvas.width = 64;
+                canvas.height = 64;
+                const ctx = canvas.getContext('2d');
+                ctx.fillStyle = 'black';
+                ctx.font = 'Bold 40px Arial';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(text, 32, 32);
+                
+                const texture = new THREE.CanvasTexture(canvas);
+                const material = new THREE.SpriteMaterial({ map: texture });
+                const sprite = new THREE.Sprite(material);
+                sprite.position.copy(position);
+                sprite.scale.set(0.6, 0.6, 1);
+                return sprite;
+            }
+            
+            // Add element symbols to atoms
+            nomenclatureGroup.add(createAtomLabel("Na", new THREE.Vector3(-6, 2, 0)));
+            nomenclatureGroup.add(createAtomLabel("Cl", new THREE.Vector3(-4, 2, 0)));
+            
+            nomenclatureGroup.add(createAtomLabel("O", new THREE.Vector3(5, 2, 0)));
+            nomenclatureGroup.add(createAtomLabel("H", new THREE.Vector3(4.2, 2.6, 0)));
+            nomenclatureGroup.add(createAtomLabel("H", new THREE.Vector3(5.8, 2.6, 0)));
+            
+            nomenclatureGroup.add(createAtomLabel("H", new THREE.Vector3(-6, -2, 0)));
+            nomenclatureGroup.add(createAtomLabel("Cl", new THREE.Vector3(-4, -2, 0)));
+            
+            nomenclatureGroup.add(createAtomLabel("Na", new THREE.Vector3(3.5, -2, 0)));
+            nomenclatureGroup.add(createAtomLabel("O", new THREE.Vector3(5, -2, 0)));
+            nomenclatureGroup.add(createAtomLabel("H", new THREE.Vector3(6, -1.5, 0)));
+            
+            // Scale the entire group
+            nomenclatureGroup.scale.set(0.8, 0.8, 0.8);
+            
+            // Update function for animation
+            function update() {
+                // Rotate the entire display slowly
+                nomenclatureGroup.rotation.y += 0.002;
+                
+                // Rotate each group differently
+                ionicGroup.rotation.y += 0.01;
+                waterGroup.rotation.y -= 0.01;
+                acidGroup.rotation.z += 0.01;
+                baseGroup.rotation.z -= 0.01;
+            }
+            
+            // Description text
+            const description = `
+                <h3>Nomenclature of Chemical Compounds</h3>
+                <p>Chemical nomenclature is the systematic naming of chemical compounds. The simulation shows four common types of compounds and their naming conventions:</p>
+                
+                <h4>1. Ionic Compounds (e.g., NaCl - Sodium Chloride)</h4>
+                <ul>
+                    <li>Named by combining the cation (metal) name followed by the anion (non-metal) name</li>
+                    <li>The anion name typically ends in "-ide"</li>
+                    <li>For transition metals with multiple oxidation states, Roman numerals indicate the charge</li>
+                </ul>
+                
+                <h4>2. Covalent Molecular Compounds (e.g., H<sub>2</sub>O - Water)</h4>
+                <ul>
+                    <li>Use prefixes to indicate the number of atoms (mono-, di-, tri-, tetra-, etc.)</li>
+                    <li>The less electronegative element is written first</li>
+                    <li>Common compounds like water have traditional names</li>
+                </ul>
+                
+                <h4>3. Acids (e.g., HCl - Hydrochloric Acid)</h4>
+                <ul>
+                    <li>Binary acids: "hydro-" + root + "-ic acid" (HCl = hydrochloric acid)</li>
+                    <li>Oxoacids: root + "-ic acid" or root + "-ous acid" depending on oxidation state</li>
+                </ul>
+                
+                <h4>4. Bases (e.g., NaOH - Sodium Hydroxide)</h4>
+                <ul>
+                    <li>Many bases contain the hydroxide (OH<sup>-</sup>) ion</li>
+                    <li>Named like ionic compounds (cation + "hydroxide")</li>
+                </ul>
+            `;
+            
+            return { update, description };
+        }
+
+        // Initialize the simulation
+        init();
+    </script>
+</body>
+</html>

@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Atom Model Simulation</title>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.137.0/build/three.min.js"></script>
+    <style>
+        body { margin: 0; overflow: hidden; }
+        canvas { display: block; }
+        #info {
+            position: absolute;
+            top: 10px;
+            width: 100%;
+            text-align: center;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        .controls {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            color: white;
+            background: rgba(0,0,0,0.5);
+            padding: 10px;
+            border-radius: 5px;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div id="info">
+        <h2>Quantum Atom Model</h2>
+        <p>Visualizing electron probability clouds (orbitals)</p>
+    </div>
+    <div class="controls">
+        <p>Drag to rotate | Scroll to zoom | Arrow keys to change orbital</p>
+        <p>Current orbital: <span id="orbital-type">1s</span></p>
+    </div>
+    <script>
+        // Main Three.js variables
+        let scene, camera, renderer;
+        let atom, nucleus, orbitals = [];
+        let isDragging = false;
+        let previousMousePosition = { x: 0, y: 0 };
+        let currentOrbital = 0;
+        let rotationSpeed = 0.005;
+        
+        // Orbital configurations
+        const orbitalConfigs = [
+            { name: "1s", electrons: 2, color: 0x3498db, type: "s" },
+            { name: "2s", electrons: 2, color: 0x2ecc71, type: "s" },
+            { name: "2p", electrons: 6, color: 0xe74c3c, type: "p" },
+            { name: "3s", electrons: 2, color: 0xf1c40f, type: "s" },
+            { name: "3p", electrons: 6, color: 0x9b59b6, type: "p" },
+            { name: "3d", electrons: 10, color: 0x1abc9c, type: "d" }
+        ];
+
+        // Initialize the scene
+        init();
+        animate();
+
+        function init() {
+            // Create scene
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x000000);
+
+            // Create camera
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 15;
+
+            // Create renderer
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.body.appendChild(renderer.domElement);
+
+            // Add ambient light
+            const ambientLight = new THREE.AmbientLight(0x404040);
+            scene.add(ambientLight);
+
+            // Add directional light
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+            directionalLight.position.set(1, 1, 1);
+            scene.add(directionalLight);
+
+            // Create atom container
+            atom = new THREE.Group();
+            scene.add(atom);
+
+            // Create nucleus
+            createNucleus();
+            
+            // Create initial orbital
+            updateOrbital(currentOrbital);
+
+            // Event listeners
+            window.addEventListener('resize', onWindowResize);
+            document.addEventListener('mousedown', onMouseDown);
+            document.addEventListener('mousemove', onMouseMove);
+            document.addEventListener('mouseup', onMouseUp);
+            document.addEventListener('wheel', onMouseWheel);
+            document.addEventListener('keydown', onKeyDown);
+        }
+
+        function createNucleus() {
+            // Nucleus geometry (protons and neutrons)
+            const nucleusGeometry = new THREE.SphereGeometry(1, 32, 32);
+            
+            // Create proton material (red)
+            const protonMaterial = new THREE.MeshLambertMaterial({ color: 0xff0000 });
+            
+            // Create neutron material (blue)
+            const neutronMaterial = new THREE.MeshLambertMaterial({ color: 0x0000ff });
+            
+            // Nucleus group
+            nucleus = new THREE.Group();
+            
+            // Create 6 protons and 6 neutrons (Carbon atom)
+            for (let i = 0; i < 6; i++) {
+                const proton = new THREE.Mesh(nucleusGeometry, protonMaterial);
+                const neutron = new THREE.Mesh(nucleusGeometry, neutronMaterial);
+                
+                // Position offset
+                const offset = 0.4;
+                proton.position.set(
+                    Math.random() * offset - offset/2,
+                    Math.random() * offset - offset/2,
+                    Math.random() * offset - offset/2
+                );
+                neutron.position.set(
+                    Math.random() * offset - offset/2,
+                    Math.random() * offset - offset/2,
+                    Math.random() * offset - offset/2
+                );
+                
+                proton.scale.set(0.4, 0.4, 0.4);
+                neutron.scale.set(0.4, 0.4, 0.4);
+                
+                nucleus.add(proton);
+                nucleus.add(neutron);
+            }
+            
+            atom.add(nucleus);
+        }
+
+        function createSOrbital(level, color) {
+            // Scale factor based on energy level
+            const scaleFactor = level * 2;
+            
+            // Create spherical electron cloud for s-orbital
+            const cloudGeometry = new THREE.SphereGeometry(scaleFactor, 32, 32);
+            const cloudMaterial = new THREE.MeshPhongMaterial({
+                color: color,
+                transparent: true,
+                opacity: 0.3,
+                side: THREE.DoubleSide
+            });
+            
+            const orbital = new THREE.Mesh(cloudGeometry, cloudMaterial);
+            
+            // Add electron particles inside the cloud
+            const particleCount = 50;
+            const particleGeometry = new THREE.SphereGeometry(0.1, 8, 8);
+            const particleMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
+            
+            const particles = new THREE.Group();
+            for (let i = 0; i < particleCount; i++) {
+                const particle = new THREE.Mesh(particleGeometry, particleMaterial);
+                
+                // Random position within the sphere
+                const radius = scaleFactor * Math.random();
+                const theta = Math.random() * Math.PI * 2;
+                const phi = Math.random() * Math.PI;
+                
+                particle.position.x = radius * Math.sin(phi) * Math.cos(theta);
+                particle.position.y = radius * Math.sin(phi) * Math.sin(theta);
+                particle.position.z = radius * Math.cos(phi);
+                
+                particles.add(particle);
+            }
+            
+            orbital.add(particles);
+            return orbital;
+        }
+
+        function createPOrbital(level, color) {
+            // Scale factor based on energy level
+            const scaleFactor = level * 2;
+            
+            // P orbitals have a dumbbell shape with two lobes
+            const orbital = new THREE.Group();
+            
+            // Create the two lobes
+            const lobeGeometry = new THREE.SphereGeometry(scaleFactor, 32, 32);
+            const lobeMaterial = new THREE.MeshPhongMaterial({
+                color: color,
+                transparent: true,
+                opacity: 0.3
+            });
+            
+            const lobe1 = new THREE.Mesh(lobeGeometry, lobeMaterial);
+            const lobe2 = new THREE.Mesh(lobeGeometry, lobeMaterial);
+            
+            lobe1.position.x = scaleFactor;
+            lobe2.position.x = -scaleFactor;
+            
+            lobe1.scale.set(0.7, 0.5, 0.5);
+            lobe2.scale.set(0.7, 0.5, 0.5);
+            
+            orbital.add(lobe1);
+            orbital.add(lobe2);
+            
+            // Add a nodal plane
+            const planeGeometry = new THREE.PlaneGeometry(scaleFactor * 2.5, scaleFactor * 2.5);
+            const planeMaterial = new THREE.MeshBasicMaterial({ 
+                color: 0xffffff,
+                transparent: true,
+                opacity: 0.1,
+                side: THREE.DoubleSide
+            });
+            
+            const plane = new THREE.Mesh(planeGeometry, planeMaterial);
+            plane.rotation.y = Math.PI / 2;
+            orbital.add(plane);
+            
+            // Add electron particles
+            const particleCount = 50;
+            const particleGeometry = new THREE.SphereGeometry(0.08, 8, 8);
+            const particleMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
+            
+            const particles = new THREE.Group();
+            for (let i = 0; i < particleCount; i++) {
+                const particle = new THREE.Mesh(particleGeometry, particleMaterial);
+                
+                // Choose which lobe
+                const side = Math.random() > 0.5 ? 1 : -1;
+                
+                // Position within the lobe
+                const radius = scaleFactor * 0.7 * Math.random();
+                const theta = Math.random() * Math.PI * 2;
+                const phi = Math.random() * Math.PI;
+                
+                particle.position.x = side * (scaleFactor * 0.5 + radius * Math.sin(phi) * Math.cos(theta) * 0.5);
+                particle.position.y = radius * Math.sin(phi) * Math.sin(theta) * 0.5;
+                particle.position.z = radius * Math.cos(phi) * 0.5;
+                
+                particles.add(particle);
+            }
+            
+            orbital.add(particles);
+            return orbital;
+        }
+
+        function createDOrbital(level, color) {
+            // Scale factor based on energy level
+            const scaleFactor = level * 2;
+            
+            // D orbitals have a complex shape with four lobes
+            const orbital = new THREE.Group();
+            
+            // Create four lobes
+            const lobeGeometry = new THREE.SphereGeometry(scaleFactor * 0.8, 32, 32);
+            const lobeMaterial = new THREE.MeshPhongMaterial({
+                color: color,
+                transparent: true,
+                opacity: 0.3
+            });
+            
+            // Position lobes in a clover-like pattern
+            const positions = [
+                { x: scaleFactor, y: scaleFactor, z: 0 },
+                { x: -scaleFactor, y: scaleFactor, z: 0 },
+                { x: -scaleFactor, y: -scaleFactor, z: 0 },
+                { x: scaleFactor, y: -scaleFactor, z: 0 }
+            ];
+            
+            positions.forEach(pos => {
+                const lobe = new THREE.Mesh(lobeGeometry, lobeMaterial);
+                lobe.position.set(pos.x, pos.y, pos.z);
+                lobe.scale.set(0.6, 0.6, 0.6);
+                orbital.add(lobe);
+            });
+            
+            // Add nodal planes
+            const planeGeometry = new THREE.PlaneGeometry(scaleFactor * 3, scaleFactor * 3);
+            const planeMaterial = new THREE.MeshBasicMaterial({ 
+                color: 0xffffff,
+                transparent: true,
+                opacity: 0.1,
+                side: THREE.DoubleSide
+            });
+            
+            const planeXY = new THREE.Mesh(planeGeometry, planeMaterial);
+            planeXY.rotation.x = Math.PI / 2;
+            orbital.add(planeXY);
+            
+            const planeYZ = new THREE.Mesh(planeGeometry, planeMaterial);
+            planeYZ.rotation.y = Math.PI / 2;
+            orbital.add(planeYZ);
+            
+            // Add electron particles
+            const particleCount = 80;
+            const particleGeometry = new THREE.SphereGeometry(0.08, 8, 8);
+            const particleMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
+            
+            const particles = new THREE.Group();
+            for (let i = 0; i < particleCount; i++) {
+                const particle = new THREE.Mesh(particleGeometry, particleMaterial);
+                
+                // Choose which lobe
+                const lobeIndex = Math.floor(Math.random() * 4);
+                const pos = positions[lobeIndex];
+                
+                // Position within the lobe
+                const radius = scaleFactor * 0.5 * Math.random();
+                const theta = Math.random() * Math.PI * 2;
+                const phi = Math.random() * Math.PI;
+                
+                particle.position.x = pos.x + radius * Math.sin(phi) * Math.cos(theta) * 0.5;
+                particle.position.y = pos.y + radius * Math.sin(phi) * Math.sin(theta) * 0.5;
+                particle.position.z = radius * Math.cos(phi) * 0.5;
+                
+                particles.add(particle);
+            }
+            
+            orbital.add(particles);
+            return orbital;
+        }
+
+        function updateOrbital(index) {
+            // Clear existing orbitals
+            if (orbitals.length > 0) {
+                orbitals.forEach(orbital => {
+                    atom.remove(orbital);
+                });
+                orbitals = [];
+            }
+            
+            // Get current orbital configuration
+            const config = orbitalConfigs[index];
+            let orbital;
+            
+            // Create appropriate orbital based on type
+            switch(config.type) {
+                case "s":
+                    orbital = createSOrbital(parseInt(config.name.charAt(0)), config.color);
+                    break;
+                case "p":
+                    orbital = createPOrbital(parseInt(config.name.charAt(0)), config.color);
+                    break;
+                case "d":
+                    orbital = createDOrbital(parseInt(config.name.charAt(0)), config.color);
+                    break;
+            }
+            
+            atom.add(orbital);
+            orbitals.push(orbital);
+            
+            // Update orbital display
+            document.getElementById('orbital-type').textContent = config.name;
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            // Rotate nucleus
+            nucleus.rotation.x += 0.01;
+            nucleus.rotation.y += 0.01;
+            
+            // Animate orbitals
+            orbitals.forEach(orbital => {
+                orbital.rotation.y += rotationSpeed;
+                if (orbital.children.length > 0) {
+                    orbital.children.forEach(child => {
+                        if (child.isGroup) { // Particle group
+                            child.rotation.z += rotationSpeed * 0.5;
+                        }
+                    });
+                }
+            });
+            
+            renderer.render(scene, camera);
+        }
+
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        function onMouseDown(event) {
+            isDragging = true;
+            previousMousePosition = {
+                x: event.clientX,
+                y: event.clientY
+            };
+        }
+
+        function onMouseMove(event) {
+            if (isDragging) {
+                const deltaMove = {
+                    x: event.clientX - previousMousePosition.x,
+                    y: event.clientY - previousMousePosition.y
+                };
+                
+                // Rotate atom based on mouse movement
+                atom.rotation.y += deltaMove.x * 0.01;
+                atom.rotation.x += deltaMove.y * 0.01;
+                
+                previousMousePosition = {
+                    x: event.clientX,
+                    y: event.clientY
+                };
+            }
+        }
+
+        function onMouseUp() {
+            isDragging = false;
+        }
+
+        function onMouseWheel(event) {
+            // Zoom camera in/out
+            const zoomSpeed = 0.1;
+            if (event.deltaY > 0) {
+                camera.position.z += zoomSpeed;
+            } else {
+                camera.position.z -= zoomSpeed;
+            }
+            
+            // Clamp zoom values
+            camera.position.z = Math.max(5, Math.min(30, camera.position.z));
+        }
+
+        function onKeyDown(event) {
+            // Change orbital with arrow keys
+            if (event.key === 'ArrowRight') {
+                currentOrbital = (currentOrbital + 1) % orbitalConfigs.length;
+                updateOrbital(currentOrbital);
+            } else if (event.key === 'ArrowLeft') {
+                currentOrbital = (currentOrbital - 1 + orbitalConfigs.length) % orbitalConfigs.length;
+                updateOrbital(currentOrbital);
+            }
+        }
+    </script>
+</body>
+</html>

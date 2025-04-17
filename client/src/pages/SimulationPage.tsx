@@ -12,6 +12,8 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { Loader2, Clock, ArrowLeft, FlaskRound, Beaker, BookOpen, HelpCircle, Atom } from 'lucide-react';
 import AcidBaseTitrationSimulator from '@/components/simulations/AcidBaseTitrationSimulator';
+import QuantumAtomModelSimulator from '@/components/simulations/QuantumAtomModelSimulator';
+import ChemicalBondsSimulator from '@/components/simulations/ChemicalBondsSimulator';
 import type { Simulation } from '@/types';
 
 const SimulationPage = () => {
@@ -55,6 +57,10 @@ const SimulationPage = () => {
     switch (slug) {
       case 'acid-base-titration':
         return <AcidBaseTitrationSimulator />;
+      case 'quantum-atom-model':
+        return <QuantumAtomModelSimulator />;
+      case 'chemical-bonds':
+        return <ChemicalBondsSimulator />;
       default:
         return (
           <div className="p-8 text-center">
@@ -172,6 +178,44 @@ const SimulationPage = () => {
                         </ol>
                         <p>You can reset the simulation at any time using the Reset button.</p>
                       </>
+                    ) : simulation.slug === 'quantum-atom-model' ? (
+                      <>
+                        <p>This simulation allows you to visualize different atomic orbitals in a quantum mechanical model of the atom. Follow these steps to interact with the simulation:</p>
+                        <ol>
+                          <li>Use the <strong>Orbital Type</strong> dropdown to select different orbitals (1s, 2s, 2p, 3s, 3p, 3d).</li>
+                          <li><strong>Drag</strong> with your mouse to rotate the 3D visualization and view the orbital from different angles.</li>
+                          <li>Use your mouse <strong>scroll wheel</strong> to zoom in and out.</li>
+                          <li>Observe the different shapes of each orbital type:</li>
+                          <ul>
+                            <li><strong>s orbitals</strong> (1s, 2s, 3s): Spherical shape</li>
+                            <li><strong>p orbitals</strong> (2p, 3p): Dumbbell shape with two lobes</li>
+                            <li><strong>d orbitals</strong> (3d): Complex four-lobed shapes</li>
+                          </ul>
+                          <li>Read the <strong>Orbital Information</strong> section to learn about each orbital's properties.</li>
+                        </ol>
+                        <p>You can reset the view at any time using the Reset View button.</p>
+                      </>
+                    ) : simulation.slug === 'chemical-bonds' ? (
+                      <>
+                        <p>This simulation allows you to explore three fundamental types of chemical bonds in 3D. Follow these steps to use the simulation:</p>
+                        <ol>
+                          <li>Select a bond type using the tabs at the top:</li>
+                          <ul>
+                            <li><strong>Metallic</strong>: Shows a metal lattice with a "sea of electrons"</li>
+                            <li><strong>Ionic</strong>: Displays a sodium chloride (NaCl) crystal structure</li>
+                            <li><strong>Covalent</strong>: Shows a water molecule (H₂O) with shared electron pairs</li>
+                          </ul>
+                          <li><strong>Drag</strong> with your mouse to rotate the 3D visualization and examine the structure from different angles.</li>
+                          <li>Use your mouse <strong>scroll wheel</strong> to zoom in and out.</li>
+                          <li>Observe the behavior and characteristics unique to each bond type:</li>
+                          <ul>
+                            <li>In the <strong>metallic bond</strong>, watch how the electrons (blue spheres) move freely through the metal lattice.</li>
+                            <li>In the <strong>ionic bond</strong>, notice the alternating positive and negative ions and the electrostatic field lines between them.</li>
+                            <li>In the <strong>covalent bond</strong>, observe how electrons are shared between atoms and the resulting molecular polarity.</li>
+                          </ul>
+                        </ol>
+                        <p>Take time to read the descriptions for each bond type to understand their properties and significance in chemistry.</p>
+                      </>
                     ) : (
                       <p>Instructions for this simulation will be available soon.</p>
                     )}
@@ -205,6 +249,69 @@ const SimulationPage = () => {
                         
                         <h4>Indicators</h4>
                         <p>Indicators are substances that change color at specific pH values. Phenolphthalein is commonly used in acid-base titrations, changing from colorless (pH &lt; 8.2) to pink (pH &gt; 8.2).</p>
+                      </>
+                    ) : simulation.slug === 'quantum-atom-model' ? (
+                      <>
+                        <h4>Quantum Mechanical Model of the Atom</h4>
+                        <p>The quantum mechanical model of the atom is based on quantum physics principles and represents a major advancement over earlier atomic models like Bohr's model. In this model, electrons don't orbit the nucleus in fixed paths but exist in regions of probability called orbitals.</p>
+                        
+                        <h4>Atomic Orbitals</h4>
+                        <p>An orbital is a three-dimensional region around the nucleus where there is a high probability (typically 90-95%) of finding an electron. Each orbital can hold a maximum of two electrons with opposite spins.</p>
+                        <p>Orbitals are described by three quantum numbers:</p>
+                        <ul>
+                          <li><strong>Principal quantum number (n):</strong> Determines the energy level and size of the orbital (1, 2, 3, etc.)</li>
+                          <li><strong>Angular momentum quantum number (l):</strong> Determines the shape of the orbital (0 for s, 1 for p, 2 for d, etc.)</li>
+                          <li><strong>Magnetic quantum number (m<sub>l</sub>):</strong> Determines the orientation of the orbital in space</li>
+                        </ul>
+                        
+                        <h4>Types of Orbitals</h4>
+                        <ul>
+                          <li><strong>s orbitals (l=0):</strong> Spherical shape centered on the nucleus. One orbital per energy level.</li>
+                          <li><strong>p orbitals (l=1):</strong> Dumbbell shape with two lobes separated by a nodal plane. Three orbitals per energy level (p<sub>x</sub>, p<sub>y</sub>, p<sub>z</sub>).</li>
+                          <li><strong>d orbitals (l=2):</strong> More complex shapes, typically with four lobes. Five orbitals per energy level.</li>
+                          <li><strong>f orbitals (l=3):</strong> Even more complex shapes. Seven orbitals per energy level.</li>
+                        </ul>
+                        
+                        <h4>Electron Probability Density</h4>
+                        <p>The wave function (Ψ) describes the quantum state of an electron. The square of this function (Ψ²) gives the probability density of finding the electron at a particular point in space. This forms the "electron cloud" or "probability cloud" shown in the simulation.</p>
+                      </>
+                    ) : simulation.slug === 'chemical-bonds' ? (
+                      <>
+                        <h4>Chemical Bonding</h4>
+                        <p>Chemical bonds are forces that hold atoms together in molecules or compounds. The three primary types of chemical bonds are metallic, ionic, and covalent bonds, each with distinct properties and mechanisms.</p>
+                        
+                        <h4>Metallic Bonding</h4>
+                        <p>Metallic bonding occurs in metals where positive metal ions form a lattice structure while their valence electrons become delocalized, forming a "sea of electrons" that moves freely throughout the structure. This explains key properties of metals:</p>
+                        <ul>
+                          <li><strong>Electrical conductivity:</strong> Free electrons can carry electric current</li>
+                          <li><strong>Thermal conductivity:</strong> Energy can be easily transferred through the electron sea</li>
+                          <li><strong>Malleability and ductility:</strong> Metal ions can slide past each other while maintaining the bond</li>
+                          <li><strong>Metallic luster:</strong> Free electrons can absorb and emit photons of light</li>
+                        </ul>
+                        
+                        <h4>Ionic Bonding</h4>
+                        <p>Ionic bonding forms between metals and non-metals through the complete transfer of electrons. The metal atom loses electrons to become a positively charged ion (cation), while the non-metal atom gains electrons to become a negatively charged ion (anion). Electrostatic attraction between these oppositely charged ions creates the ionic bond.</p>
+                        <p>Properties of ionic compounds include:</p>
+                        <ul>
+                          <li>High melting and boiling points</li>
+                          <li>Brittle crystalline structure</li>
+                          <li>Electrical conductivity when dissolved in water or melted</li>
+                          <li>Solubility in polar solvents</li>
+                        </ul>
+                        
+                        <h4>Covalent Bonding</h4>
+                        <p>Covalent bonding occurs when atoms share electron pairs rather than transferring them. This typically happens between non-metal atoms. The shared electrons orbit around both nuclei, creating a strong bond.</p>
+                        <p>Covalent bonds can be:</p>
+                        <ul>
+                          <li><strong>Non-polar:</strong> When electrons are shared equally (e.g., H<sub>2</sub>, O<sub>2</sub>)</li>
+                          <li><strong>Polar:</strong> When electrons are unequally shared due to electronegativity differences (e.g., H<sub>2</sub>O)</li>
+                        </ul>
+                        <p>Properties of covalent compounds include:</p>
+                        <ul>
+                          <li>Lower melting and boiling points (compared to ionic compounds)</li>
+                          <li>Poor electrical conductivity</li>
+                          <li>Variable solubility depending on polarity</li>
+                        </ul>
                       </>
                     ) : (
                       <p>Theoretical background for this simulation will be available soon.</p>

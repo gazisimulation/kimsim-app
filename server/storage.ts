@@ -69,9 +69,17 @@ export class MemStorage implements IStorage {
       description: "Study of the structure, properties, and reactions of organic compounds"
     };
     
+    const quantumCategory: InsertCategory = {
+      name: "Quantum Chemistry",
+      icon: "atom",
+      slug: "quantum",
+      description: "Study of atoms and molecules using quantum mechanics principles"
+    };
+    
     this.createCategory(analyticalCategory);
     this.createCategory(physicalCategory);
     this.createCategory(organicCategory);
+    this.createCategory(quantumCategory);
     
     // Add simulations
     const acidBaseTitration: InsertSimulation = {
@@ -88,18 +96,32 @@ export class MemStorage implements IStorage {
       path: "/simulations/acid-base-titration"
     };
     
-    const gasLaws: InsertSimulation = {
-      title: "Gas Laws Exploration",
-      description: "Investigate pressure, volume, and temperature relationships",
-      slug: "gas-laws",
+    const quantumAtomModel: InsertSimulation = {
+      title: "Quantum Atom Model",
+      description: "Visualize electron probability clouds in atomic orbitals",
+      slug: "quantum-atom-model",
+      category: "quantum",
+      imageUrl: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=2070&auto=format&fit=crop",
+      duration: "15 min",
+      difficulty: "Advanced",
+      isFeatured: false,
+      isNew: true,
+      isPopular: true,
+      path: "/simulations/quantum-atom-model"
+    };
+    
+    const chemicalBonds: InsertSimulation = {
+      title: "Chemical Bonds 3D",
+      description: "Explore metallic, ionic, and covalent bonding mechanisms in 3D",
+      slug: "chemical-bonds",
       category: "physical",
-      imageUrl: "https://images.unsplash.com/photo-1575503802870-45de6a6217c8?q=80&w=2070&auto=format&fit=crop",
-      duration: "15-20 min",
-      difficulty: "Beginner",
+      imageUrl: "https://images.unsplash.com/photo-1616661320565-4a3790394c4a?q=80&w=2070&auto=format&fit=crop",
+      duration: "20 min",
+      difficulty: "Intermediate",
       isFeatured: false,
       isNew: true,
       isPopular: false,
-      path: "/simulations/gas-laws"
+      path: "/simulations/chemical-bonds"
     };
     
     const redoxReactions: InsertSimulation = {
@@ -120,13 +142,13 @@ export class MemStorage implements IStorage {
       title: "Molecular Orbital Theory",
       description: "Explore molecular orbital formation and bonding",
       slug: "molecular-orbital",
-      category: "physical",
+      category: "quantum",
       imageUrl: "https://images.unsplash.com/photo-1564937683015-a22c9266ee8c?q=80&w=2070&auto=format&fit=crop",
       duration: "25 min",
       difficulty: "Advanced",
       isFeatured: false,
       isNew: false,
-      isPopular: false,
+      isPopular: true,
       path: "/simulations/molecular-orbital"
     };
     
@@ -144,56 +166,12 @@ export class MemStorage implements IStorage {
       path: "/simulations/spectroscopy"
     };
     
-    const chromatography: InsertSimulation = {
-      title: "Chromatography",
-      description: "Separate and analyze complex mixtures",
-      slug: "chromatography",
-      category: "analytical",
-      imageUrl: "https://images.unsplash.com/photo-1554475900-0a0350e3fc7b?q=80&w=2069&auto=format&fit=crop",
-      duration: "15 min",
-      difficulty: "Intermediate",
-      isFeatured: false,
-      isNew: false,
-      isPopular: false,
-      path: "/simulations/chromatography"
-    };
-    
-    const potentiometry: InsertSimulation = {
-      title: "Potentiometry",
-      description: "Measure electrode potentials in solutions",
-      slug: "potentiometry",
-      category: "analytical",
-      imageUrl: "https://images.unsplash.com/photo-1576086776090-12f074ba4388?q=80&w=2080&auto=format&fit=crop",
-      duration: "20 min",
-      difficulty: "Advanced",
-      isFeatured: false,
-      isNew: false,
-      isPopular: false,
-      path: "/simulations/potentiometry"
-    };
-    
-    const thermodynamics: InsertSimulation = {
-      title: "Thermodynamics Explorer",
-      description: "Study energy transfer and transformation",
-      slug: "thermodynamics",
-      category: "physical",
-      imageUrl: "https://images.unsplash.com/photo-1619435545129-91c6ffa4eb05?q=80&w=2134&auto=format&fit=crop",
-      duration: "20 min",
-      difficulty: "Intermediate",
-      isFeatured: false,
-      isNew: false,
-      isPopular: false,
-      path: "/simulations/thermodynamics"
-    };
-    
     this.createSimulation(acidBaseTitration);
-    this.createSimulation(gasLaws);
+    this.createSimulation(quantumAtomModel);
+    this.createSimulation(chemicalBonds);
     this.createSimulation(redoxReactions);
     this.createSimulation(molecularOrbital);
     this.createSimulation(spectroscopy);
-    this.createSimulation(chromatography);
-    this.createSimulation(potentiometry);
-    this.createSimulation(thermodynamics);
   }
 
   async getUser(id: number): Promise<User | undefined> {
