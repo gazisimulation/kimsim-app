@@ -76,10 +76,18 @@ export class MemStorage implements IStorage {
       description: "Study of atoms and molecules using quantum mechanics principles"
     };
     
+    const electrochemistryCategory: InsertCategory = {
+      name: "Electrochemistry",
+      icon: "zap",
+      slug: "electrochemistry",
+      description: "Study of chemical processes that cause electrons to move, creating electricity"
+    };
+    
     this.createCategory(analyticalCategory);
     this.createCategory(physicalCategory);
     this.createCategory(organicCategory);
     this.createCategory(quantumCategory);
+    this.createCategory(electrochemistryCategory);
     
     // Add simulations
     const acidBaseTitration: InsertSimulation = {
@@ -196,6 +204,21 @@ export class MemStorage implements IStorage {
       path: "/simulations/gas-laws"
     };
     
+    // Battery Simulation
+    const batterySimulator: InsertSimulation = {
+      title: "Battery & Electrochemistry",
+      description: "Interactive visualization of how batteries work with different battery types and electrochemical reactions",
+      slug: "battery-simulator",
+      category: "electrochemistry",
+      imageUrl: "https://images.unsplash.com/photo-1584277261846-c6a1672ed979?q=80&w=2070&auto=format&fit=crop",
+      duration: "25 min",
+      difficulty: "Intermediate",
+      isFeatured: true,
+      isNew: true,
+      isPopular: true,
+      path: "/simulations/battery-simulator"
+    };
+    
     this.createSimulation(acidBaseTitration);
     this.createSimulation(quantumAtomModel);
     this.createSimulation(chemicalBonds);
@@ -204,6 +227,7 @@ export class MemStorage implements IStorage {
     this.createSimulation(spectroscopy);
     this.createSimulation(stateChange);
     this.createSimulation(gasLaws);
+    this.createSimulation(batterySimulator);
   }
 
   async getUser(id: number): Promise<User | undefined> {

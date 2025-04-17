@@ -16,6 +16,7 @@ import QuantumAtomModelSimulator from '@/components/simulations/QuantumAtomModel
 import ChemicalBondsSimulator from '@/components/simulations/ChemicalBondsSimulator';
 import StateChangeSimulator from '@/components/simulations/StateChangeSimulator';
 import GasLawsSimulator from '@/components/simulations/GasLawsSimulator';
+import BatterySimulator from '@/components/simulations/BatterySimulator';
 import type { Simulation } from '@/types';
 
 const SimulationPage = () => {
@@ -67,6 +68,8 @@ const SimulationPage = () => {
         return <StateChangeSimulator />;
       case 'gas-laws':
         return <GasLawsSimulator />;
+      case 'battery-simulator':
+        return <BatterySimulator />;
       default:
         return (
           <div className="p-8 text-center">
