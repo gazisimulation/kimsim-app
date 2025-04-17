@@ -181,6 +181,21 @@ export class MemStorage implements IStorage {
       path: "/simulations/state-change"
     };
     
+    // Gas Laws Simulation
+    const gasLaws: InsertSimulation = {
+      title: "Gas Laws & Kinetic Theory",
+      description: "Explore gas behavior, ideal gas law, kinetic theory, gas mixtures, and real gases",
+      slug: "gas-laws",
+      category: "physical",
+      imageUrl: "https://images.unsplash.com/photo-1599751449615-e24a5dd0468e?q=80&w=2069&auto=format&fit=crop",
+      duration: "30 min",
+      difficulty: "Intermediate",
+      isFeatured: true,
+      isNew: true,
+      isPopular: true,
+      path: "/simulations/gas-laws"
+    };
+    
     this.createSimulation(acidBaseTitration);
     this.createSimulation(quantumAtomModel);
     this.createSimulation(chemicalBonds);
@@ -188,6 +203,7 @@ export class MemStorage implements IStorage {
     this.createSimulation(molecularOrbital);
     this.createSimulation(spectroscopy);
     this.createSimulation(stateChange);
+    this.createSimulation(gasLaws);
   }
 
   async getUser(id: number): Promise<User | undefined> {
