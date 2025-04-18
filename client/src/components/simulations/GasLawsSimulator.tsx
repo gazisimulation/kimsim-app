@@ -966,16 +966,16 @@ export default function GasLawsSimulator() {
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
         <TabsList className="grid grid-cols-4 mb-4">
           <TabsTrigger value="ideal-gas-law" className="flex items-center gap-2">
-            <FlaskConical className="h-4 w-4" /> Ideal Gas Law
+            <FlaskConical className="h-4 w-4" /> İdeal Gaz Yasası
           </TabsTrigger>
           <TabsTrigger value="kinetic-theory" className="flex items-center gap-2">
-            <GripHorizontal className="h-4 w-4" /> Kinetic Theory
+            <GripHorizontal className="h-4 w-4" /> Kinetik Teori
           </TabsTrigger>
           <TabsTrigger value="gas-mixtures" className="flex items-center gap-2">
-            <ArrowDownUp className="h-4 w-4" /> Gas Mixtures
+            <ArrowDownUp className="h-4 w-4" /> Gaz Karışımları
           </TabsTrigger>
           <TabsTrigger value="real-gases" className="flex items-center gap-2">
-            <Maximize2 className="h-4 w-4" /> Real Gases
+            <Maximize2 className="h-4 w-4" /> Gerçek Gazlar
           </TabsTrigger>
         </TabsList>
       
@@ -983,8 +983,8 @@ export default function GasLawsSimulator() {
           <div className="flex flex-col md:flex-row gap-6">
             <Card className="w-full md:w-1/3">
               <CardHeader>
-                <CardTitle>Gas Parameters</CardTitle>
-                <CardDescription>Adjust parameters to observe changes</CardDescription>
+                <CardTitle>Gaz Parametreleri</CardTitle>
+                <CardDescription>Değişiklikleri gözlemlemek için parametreleri ayarlayın</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
@@ -1073,8 +1073,8 @@ export default function GasLawsSimulator() {
             
             <Card className="w-full md:w-2/3">
               <CardHeader>
-                <CardTitle>Gas Law Visualization</CardTitle>
-                <CardDescription>Interactive charts of gas behavior</CardDescription>
+                <CardTitle>Gaz Yasası Görselleştirmesi</CardTitle>
+                <CardDescription>Gaz davranışının interaktif grafikleri</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex flex-wrap gap-2">
@@ -1083,28 +1083,28 @@ export default function GasLawsSimulator() {
                     onClick={() => setChartType('pressure-volume')}
                     className="text-xs"
                   >
-                    Pressure-Volume
+                    Basınç-Hacim
                   </Button>
                   <Button 
                     variant={chartType === 'pressure-temperature' ? "default" : "outline"}
                     onClick={() => setChartType('pressure-temperature')}
                     className="text-xs"
                   >
-                    Pressure-Temperature
+                    Basınç-Sıcaklık
                   </Button>
                   <Button 
                     variant={chartType === 'volume-temperature' ? "default" : "outline"}
                     onClick={() => setChartType('volume-temperature')}
                     className="text-xs"
                   >
-                    Volume-Temperature
+                    Hacim-Sıcaklık
                   </Button>
                   <Button 
                     variant={chartType === 'molecular-speed' ? "default" : "outline"}
                     onClick={() => setChartType('molecular-speed')}
                     className="text-xs"
                   >
-                    Molecular Speed Distribution
+                    Moleküler Hız Dağılımı
                   </Button>
                 </div>
                 
@@ -1118,13 +1118,13 @@ export default function GasLawsSimulator() {
                 </div>
 
                 <div className="bg-gray-100 dark:bg-gray-800 p-3 rounded-md">
-                  <h3 className="font-medium mb-2">Equation Reference</h3>
-                  <p>Ideal Gas Law: PV = nRT, where R = {R} L·atm/mol·K</p>
+                  <h3 className="font-medium mb-2">Denklem Referansı</h3>
+                  <p>İdeal Gaz Yasası: PV = nRT, burada R = {R} L·atm/mol·K</p>
                   {gasLaw === 'vanderwaals' && (
                     <p className="mt-2">
-                      Van der Waals Equation: (P + a(n/V)²)(V - nb) = nRT
+                      Van der Waals Denklemi: (P + a(n/V)²)(V - nb) = nRT
                       <br />
-                      For {gasName}: a = {GASES[gasName].vanDerWaalsA} L²·atm/mol², b = {GASES[gasName].vanDerWaalsB} L/mol
+                      {gasName} için: a = {GASES[gasName].vanDerWaalsA} L²·atm/mol², b = {GASES[gasName].vanDerWaalsB} L/mol
                     </p>
                   )}
                 </div>
@@ -1137,8 +1137,8 @@ export default function GasLawsSimulator() {
           <div className="flex flex-col md:flex-row gap-6">
             <Card className="w-full md:w-1/3">
               <CardHeader>
-                <CardTitle>Kinetic Theory</CardTitle>
-                <CardDescription>Explore molecular behavior</CardDescription>
+                <CardTitle>Kinetik Teori</CardTitle>
+                <CardDescription>Moleküler davranışı keşfedin</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
@@ -1198,13 +1198,13 @@ export default function GasLawsSimulator() {
                 </div>
 
                 <div className="flex justify-between">
-                  <Label>Show Speed Distribution</Label>
+                  <Label>Hız Dağılımını Göster</Label>
                   <Button
                     variant={showHist ? "default" : "outline"}
                     size="sm"
                     onClick={() => setShowHist(!showHist)}
                   >
-                    {showHist ? "Hide" : "Show"}
+                    {showHist ? "Gizle" : "Göster"}
                   </Button>
                 </div>
 
@@ -1226,8 +1226,8 @@ export default function GasLawsSimulator() {
             
             <Card className="w-full md:w-2/3">
               <CardHeader>
-                <CardTitle>Molecular Motion Simulation</CardTitle>
-                <CardDescription>See how gas molecules move and interact</CardDescription>
+                <CardTitle>Moleküler Hareket Simülasyonu</CardTitle>
+                <CardDescription>Gaz moleküllerinin nasıl hareket ettiğini ve etkileştiğini görün</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="flex flex-col gap-4">
