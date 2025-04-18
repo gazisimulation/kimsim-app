@@ -49,38 +49,38 @@ export class MemStorage implements IStorage {
   private initializeDefaultData() {
     // Add categories
     const analyticalCategory: InsertCategory = {
-      name: "Analytical Chemistry",
+      name: "Analitik Kimya",
       icon: "test-tube",
       slug: "analytical",
-      description: "Techniques for separating, identifying, and quantifying matter"
+      description: "Maddeleri ayırma, tanımlama ve ölçme teknikleri"
     };
     
     const physicalCategory: InsertCategory = {
-      name: "Physical Chemistry",
+      name: "Fiziksel Kimya",
       icon: "drop",
       slug: "physical",
-      description: "Study of macroscopic and particulate phenomena in chemical systems"
+      description: "Kimyasal sistemlerdeki makroskopik ve parçacık fenomenlerinin incelenmesi"
     };
     
     const organicCategory: InsertCategory = {
-      name: "Organic Chemistry",
+      name: "Organik Kimya",
       icon: "atom",
       slug: "organic",
-      description: "Study of the structure, properties, and reactions of organic compounds"
+      description: "Organik bileşiklerin yapısı, özellikleri ve reaksiyonlarının incelenmesi"
     };
     
     const quantumCategory: InsertCategory = {
-      name: "Quantum Chemistry",
+      name: "Kuantum Kimyası",
       icon: "atom",
       slug: "quantum",
-      description: "Study of atoms and molecules using quantum mechanics principles"
+      description: "Kuantum mekaniği ilkelerini kullanarak atom ve moleküllerin incelenmesi"
     };
     
     const electrochemistryCategory: InsertCategory = {
-      name: "Electrochemistry",
+      name: "Elektrokimya",
       icon: "zap",
       slug: "electrochemistry",
-      description: "Study of chemical processes that cause electrons to move, creating electricity"
+      description: "Elektronların hareketine neden olan ve elektrik üreten kimyasal süreçlerin incelenmesi"
     };
     
     this.createCategory(analyticalCategory);
@@ -91,13 +91,13 @@ export class MemStorage implements IStorage {
     
     // Add simulations
     const acidBaseTitration: InsertSimulation = {
-      title: "Acid-Base Titration",
-      description: "Simulate titrations with strong acids and bases",
+      title: "Asit-Baz Titrasyonu",
+      description: "Güçlü asit ve bazlarla titrasyon simülasyonu yapın",
       slug: "acid-base-titration",
       category: "analytical",
       imageUrl: "https://images.unsplash.com/photo-1532634993-15f421e42ec0?q=80&w=2070&auto=format&fit=crop",
-      duration: "10-15 min",
-      difficulty: "Intermediate",
+      duration: "10-15 dk",
+      difficulty: "Orta",
       isFeatured: true,
       isNew: false,
       isPopular: true,
@@ -105,13 +105,13 @@ export class MemStorage implements IStorage {
     };
     
     const quantumAtomModel: InsertSimulation = {
-      title: "Quantum Atom Model",
-      description: "Visualize electron probability clouds in atomic orbitals",
+      title: "Kuantum Atom Modeli",
+      description: "Atomik orbitallerdeki elektron olasılık bulutlarını görselleştirin",
       slug: "quantum-atom-model",
       category: "quantum",
       imageUrl: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=2070&auto=format&fit=crop",
-      duration: "15 min",
-      difficulty: "Advanced",
+      duration: "15 dk",
+      difficulty: "İleri",
       isFeatured: false,
       isNew: true,
       isPopular: true,
@@ -119,13 +119,13 @@ export class MemStorage implements IStorage {
     };
     
     const chemicalBonds: InsertSimulation = {
-      title: "Chemical Bonds 3D",
-      description: "Explore metallic, ionic, and covalent bonding mechanisms in 3D",
+      title: "Kimyasal Bağlar 3B",
+      description: "Metalik, iyonik ve kovalent bağlanma mekanizmalarını 3B ortamda keşfedin",
       slug: "chemical-bonds",
       category: "physical",
       imageUrl: "https://images.unsplash.com/photo-1554475900-0a0350e3fc7b?q=80&w=3419&auto=format&fit=crop",
-      duration: "20 min",
-      difficulty: "Intermediate",
+      duration: "20 dk",
+      difficulty: "Orta",
       isFeatured: false,
       isNew: true,
       isPopular: false,
@@ -133,13 +133,13 @@ export class MemStorage implements IStorage {
     };
     
     const molecularOrbital: InsertSimulation = {
-      title: "Molecular Orbital Theory",
-      description: "Explore molecular orbital formation and bonding",
+      title: "Moleküler Orbital Teorisi",
+      description: "Moleküler orbital oluşumunu ve bağlanmayı keşfedin",
       slug: "molecular-orbital",
       category: "quantum",
       imageUrl: "https://images.unsplash.com/photo-1564937683015-a22c9266ee8c?q=80&w=2070&auto=format&fit=crop",
-      duration: "25 min",
-      difficulty: "Advanced",
+      duration: "25 dk",
+      difficulty: "İleri",
       isFeatured: false,
       isNew: false,
       isPopular: true,
@@ -148,13 +148,13 @@ export class MemStorage implements IStorage {
     
     // State Change Simulation
     const stateChange: InsertSimulation = {
-      title: "Phase Transitions",
-      description: "Explore state changes of matter with adjustable parameters",
+      title: "Faz Geçişleri",
+      description: "Ayarlanabilir parametrelerle maddenin hal değişimlerini keşfedin",
       slug: "state-change",
       category: "physical",
       imageUrl: "https://images.unsplash.com/photo-1506755594592-349d12a7c52a?q=80&w=2070&auto=format&fit=crop",
-      duration: "25 min",
-      difficulty: "Beginner",
+      duration: "25 dk",
+      difficulty: "Başlangıç",
       isFeatured: true,
       isNew: true,
       isPopular: false,
@@ -163,13 +163,13 @@ export class MemStorage implements IStorage {
     
     // Gas Laws Simulation
     const gasLaws: InsertSimulation = {
-      title: "Gas Laws & Kinetic Theory",
-      description: "Explore gas behavior, ideal gas law, kinetic theory, gas mixtures, and real gases",
+      title: "Gaz Yasaları ve Kinetik Teori",
+      description: "Gaz davranışı, ideal gaz yasası, kinetik teori, gaz karışımları ve gerçek gazları keşfedin",
       slug: "gas-laws",
       category: "physical",
       imageUrl: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?q=80&w=3270&auto=format&fit=crop",
-      duration: "30 min",
-      difficulty: "Intermediate",
+      duration: "30 dk",
+      difficulty: "Orta",
       isFeatured: true,
       isNew: true,
       isPopular: true,
@@ -178,13 +178,13 @@ export class MemStorage implements IStorage {
     
     // Battery Simulation
     const batterySimulator: InsertSimulation = {
-      title: "Battery & Electrochemistry",
-      description: "Interactive visualization of how batteries work with different battery types and electrochemical reactions",
+      title: "Pil ve Elektrokimya",
+      description: "Farklı pil türleri ve elektrokimyasal reaksiyonlarla pillerin nasıl çalıştığına dair interaktif görselleştirme",
       slug: "battery-simulator",
       category: "electrochemistry",
       imageUrl: "https://images.unsplash.com/photo-1584277261846-c6a1672ed979?q=80&w=2070&auto=format&fit=crop",
-      duration: "25 min",
-      difficulty: "Intermediate",
+      duration: "25 dk",
+      difficulty: "Orta",
       isFeatured: true,
       isNew: true,
       isPopular: true,
@@ -193,13 +193,13 @@ export class MemStorage implements IStorage {
     
     // Chemistry Calculators
     const chemistryCalculators: InsertSimulation = {
-      title: "Chemistry Calculators",
-      description: "Collection of essential chemistry calculators including Ideal Gas Law, pH, Molarity, Quantum Numbers, and more",
+      title: "Kimya Hesaplayıcıları",
+      description: "İdeal Gaz Yasası, pH, Molarite, Kuantum Sayıları ve daha fazlasını içeren temel kimya hesaplayıcıları koleksiyonu",
       slug: "chemistry-calculators",
       category: "analytical",
       imageUrl: "https://images.unsplash.com/photo-1603126857599-f6e157fa2fe6?q=80&w=2070&auto=format&fit=crop",
-      duration: "15 min",
-      difficulty: "Beginner",
+      duration: "15 dk",
+      difficulty: "Başlangıç",
       isFeatured: true,
       isNew: true,
       isPopular: true,
