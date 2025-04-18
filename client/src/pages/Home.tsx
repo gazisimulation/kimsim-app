@@ -43,8 +43,8 @@ const Home = () => {
     return (
       <div className="flex justify-center items-center min-h-screen text-center p-4">
         <div>
-          <h2 className="text-xl font-bold text-red-500 mb-2">Something went wrong</h2>
-          <p className="text-gray-400">Unable to load simulations. Please try again later.</p>
+          <h2 className="text-xl font-bold text-red-500 mb-2">Bir şeyler yanlış gitti</h2>
+          <p className="text-gray-400">Simülasyonlar yüklenemedi. Lütfen daha sonra tekrar deneyin.</p>
         </div>
       </div>
     );
@@ -59,7 +59,7 @@ const Home = () => {
       <div id="simulations">
         {recentSimulations.length > 0 && (
           <CategoryRow 
-            title="Recently Added" 
+            title="Yeni Eklenenler" 
             icon={<Clock className="h-5 w-5" />} 
             simulations={recentSimulations} 
           />
@@ -67,7 +67,7 @@ const Home = () => {
         
         {analyticalSimulations.length > 0 && (
           <CategoryRow 
-            title="Analytical Chemistry" 
+            title="Analitik Kimya" 
             icon={<TestTube className="h-5 w-5" />} 
             simulations={analyticalSimulations} 
           />
@@ -75,7 +75,7 @@ const Home = () => {
         
         {physicalSimulations.length > 0 && (
           <CategoryRow 
-            title="Physical Chemistry" 
+            title="Fiziksel Kimya" 
             icon={<Droplets className="h-5 w-5" />} 
             simulations={physicalSimulations} 
           />
@@ -83,7 +83,7 @@ const Home = () => {
         
         {organicSimulations.length > 0 && (
           <CategoryRow 
-            title="Organic Chemistry" 
+            title="Organik Kimya" 
             icon={<Atom className="h-5 w-5" />} 
             simulations={organicSimulations} 
           />
@@ -95,29 +95,28 @@ const Home = () => {
         <div className="container mx-auto max-w-4xl text-center">
           <div className="inline-flex items-center mb-4 bg-primary-500/20 px-3 py-1 rounded-full">
             <Sparkles className="mr-1 h-4 w-4 text-primary-500" />
-            <span className="text-sm font-medium text-primary-500">About ChemSim</span>
+            <span className="text-sm font-medium text-primary-500">ChemSim Hakkında</span>
           </div>
-          <h2 className="text-3xl md:text-4xl font-heading font-bold mb-6">Interactive Chemistry Simulations</h2>
+          <h2 className="text-3xl md:text-4xl font-heading font-bold mb-6">İnteraktif Kimya Simülasyonları</h2>
           <p className="text-gray-300 text-lg mb-8 max-w-prose mx-auto">
-            ChemSim provides interactive chemistry simulations designed to help students visualize and understand core chemistry concepts. 
-            Our simulations offer a hands-on approach to learning, allowing you to experiment with reactions, explore properties, 
-            and develop a deeper understanding of chemical principles.
+            ChemSim, öğrencilerin temel kimya kavramlarını görselleştirmelerini ve anlamalarını sağlamak için tasarlanmış interaktif kimya simülasyonları sunar. 
+            Simülasyonlarımız, reaksiyonlarla deney yapmanıza, özellikleri keşfetmenize ve kimyasal prensipleri daha derin bir şekilde anlamanıza olanak tanıyan uygulamalı bir öğrenme yaklaşımı sunar.
           </p>
           <div className="grid md:grid-cols-3 gap-6 text-left">
             <div className="p-5 bg-gray-800 rounded-lg">
               <TestTube className="h-8 w-8 text-primary-500 mb-3" />
-              <h3 className="text-lg font-bold mb-2">Virtual Labs</h3>
-              <p className="text-gray-400">Experience chemistry without the safety concerns of a physical lab.</p>
+              <h3 className="text-lg font-bold mb-2">Sanal Laboratuvarlar</h3>
+              <p className="text-gray-400">Fiziksel bir laboratuvarın güvenlik endişeleri olmadan kimyayı deneyimleyin.</p>
             </div>
             <div className="p-5 bg-gray-800 rounded-lg">
               <Atom className="h-8 w-8 text-primary-500 mb-3" />
-              <h3 className="text-lg font-bold mb-2">Interactive Learning</h3>
-              <p className="text-gray-400">Hands-on simulations that help visualize abstract chemistry concepts.</p>
+              <h3 className="text-lg font-bold mb-2">İnteraktif Öğrenme</h3>
+              <p className="text-gray-400">Soyut kimya kavramlarını görselleştirmeye yardımcı olan uygulamalı simülasyonlar.</p>
             </div>
             <div className="p-5 bg-gray-800 rounded-lg">
               <Droplets className="h-8 w-8 text-primary-500 mb-3" />
-              <h3 className="text-lg font-bold mb-2">Accessible Anywhere</h3>
-              <p className="text-gray-400">Access our simulations on any device with a web browser.</p>
+              <h3 className="text-lg font-bold mb-2">Her Yerden Erişim</h3>
+              <p className="text-gray-400">Simülasyonlarımıza web tarayıcısı olan herhangi bir cihazdan erişin.</p>
             </div>
           </div>
         </div>
@@ -126,51 +125,51 @@ const Home = () => {
       {/* Resources Section */}
       <section id="resources" className="py-16 px-4">
         <div className="container mx-auto max-w-4xl">
-          <h2 className="text-3xl font-heading font-bold mb-8 text-center">Educational Resources</h2>
+          <h2 className="text-3xl font-heading font-bold mb-8 text-center">Eğitim Kaynakları</h2>
           <div className="grid md:grid-cols-2 gap-8">
             <div className="bg-gray-800 p-6 rounded-lg">
-              <h3 className="text-xl font-bold mb-3">For Students</h3>
+              <h3 className="text-xl font-bold mb-3">Öğrenciler İçin</h3>
               <ul className="space-y-3 text-gray-300">
                 <li className="flex items-center">
                   <div className="bg-primary-500/20 p-2 rounded-full mr-3">
                     <TestTube className="h-4 w-4 text-primary-500" />
                   </div>
-                  Study guides for each simulation
+                  Her simülasyon için çalışma kılavuzları
                 </li>
                 <li className="flex items-center">
                   <div className="bg-primary-500/20 p-2 rounded-full mr-3">
                     <TestTube className="h-4 w-4 text-primary-500" />
                   </div>
-                  Practice questions and assessments
+                  Alıştırma soruları ve değerlendirmeler
                 </li>
                 <li className="flex items-center">
                   <div className="bg-primary-500/20 p-2 rounded-full mr-3">
                     <TestTube className="h-4 w-4 text-primary-500" />
                   </div>
-                  Video tutorials for complex topics
+                  Karmaşık konular için video eğitimleri
                 </li>
               </ul>
             </div>
             <div className="bg-gray-800 p-6 rounded-lg">
-              <h3 className="text-xl font-bold mb-3">For Educators</h3>
+              <h3 className="text-xl font-bold mb-3">Eğitmenler İçin</h3>
               <ul className="space-y-3 text-gray-300">
                 <li className="flex items-center">
                   <div className="bg-primary-500/20 p-2 rounded-full mr-3">
                     <TestTube className="h-4 w-4 text-primary-500" />
                   </div>
-                  Lesson plans and teaching guides
+                  Ders planları ve öğretim kılavuzları
                 </li>
                 <li className="flex items-center">
                   <div className="bg-primary-500/20 p-2 rounded-full mr-3">
                     <TestTube className="h-4 w-4 text-primary-500" />
                   </div>
-                  Customizable simulation parameters
+                  Özelleştirilebilir simülasyon parametreleri
                 </li>
                 <li className="flex items-center">
                   <div className="bg-primary-500/20 p-2 rounded-full mr-3">
                     <TestTube className="h-4 w-4 text-primary-500" />
                   </div>
-                  Assessment tools and analytics
+                  Değerlendirme araçları ve analizler
                 </li>
               </ul>
             </div>

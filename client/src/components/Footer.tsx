@@ -16,7 +16,7 @@ const Footer = () => {
               </h3>
             </div>
             <p className="text-sm mb-4">
-              Interactive chemistry simulations for students and educators. Explore fundamental concepts through virtual experiments.
+              Öğrenciler ve eğitimciler için interaktif kimya simülasyonları. Sanal deneylerle temel kavramları keşfedin.
             </p>
             <div className="flex gap-4">
               <a href="#" className="text-gray-400 hover:text-primary-500 transition">
@@ -32,31 +32,31 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="text-white font-medium mb-4">Quick Links</h4>
+            <h4 className="text-white font-medium mb-4">Hızlı Bağlantılar</h4>
             <ul className="space-y-2">
               <li>
                 <Link href="/">
-                  <a className="text-gray-400 hover:text-primary-500 transition">Home</a>
+                  <a className="text-gray-400 hover:text-primary-500 transition">Ana Sayfa</a>
                 </Link>
               </li>
               <li>
                 <Link href="/#simulations">
-                  <a className="text-gray-400 hover:text-primary-500 transition">Simulations</a>
+                  <a className="text-gray-400 hover:text-primary-500 transition">Simülasyonlar</a>
                 </Link>
               </li>
               <li>
                 <Link href="/#about">
-                  <a className="text-gray-400 hover:text-primary-500 transition">About</a>
+                  <a className="text-gray-400 hover:text-primary-500 transition">Hakkında</a>
                 </Link>
               </li>
               <li>
                 <Link href="/#resources">
-                  <a className="text-gray-400 hover:text-primary-500 transition">Resources</a>
+                  <a className="text-gray-400 hover:text-primary-500 transition">Kaynaklar</a>
                 </Link>
               </li>
               <li>
                 <Link href="/contact">
-                  <a className="text-gray-400 hover:text-primary-500 transition">Contact</a>
+                  <a className="text-gray-400 hover:text-primary-500 transition">İletişim</a>
                 </Link>
               </li>
             </ul>
