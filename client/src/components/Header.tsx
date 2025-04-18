@@ -11,7 +11,7 @@ const Header = () => {
           <a className="flex items-center gap-2">
             <FlaskRound className="h-6 w-6 text-primary" />
             <h1 className="text-xl md:text-2xl font-heading font-bold">
-              <span className="text-primary">Chem</span>Sim
+              <span className="text-primary">Kim</span>Sim
             </h1>
           </a>
         </Link>

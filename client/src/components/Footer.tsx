@@ -12,7 +12,7 @@ const Footer = () => {
             <div className="flex items-center gap-2 mb-4">
               <FlaskRound className="h-5 w-5 text-primary-500" />
               <h3 className="text-xl font-heading font-bold text-white">
-                <span className="text-primary-500">Chem</span>Sim
+                <span className="text-primary-500">Kim</span>Sim
               </h3>
             </div>
             <p className="text-sm mb-4">
@@ -82,7 +82,7 @@ const Footer = () => {
         </div>
         
         <div className="border-t border-gray-800 mt-8 pt-8 text-sm text-center">
-          <p>&copy; {new Date().getFullYear()} ChemSim. Tüm hakları saklıdır.</p>
+          <p>&copy; {new Date().getFullYear()} KimSim. Tüm hakları saklıdır.</p>
         </div>
       </div>
     </footer>
