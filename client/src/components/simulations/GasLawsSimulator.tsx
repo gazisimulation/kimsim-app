@@ -8,14 +8,14 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Thermometer, Maximize2, Weight, FlaskConical, ArrowDownUp, GripHorizontal } from 'lucide-react';
 
-// Gas constants
+// Gaz sabitleri
 const R = 0.08206; // L·atm/mol·K
 const BOLTZMANN = 1.380649e-23; // J/K
 const AVOGADRO = 6.02214076e23; // 1/mol
 
-// Gas properties
+// Gaz özellikleri
 const GASES = {
-  'Oxygen': {
+  'Oksijen': {
     molarMass: 32.0, // g/mol
     color: '#74c0fc',
     vanDerWaalsA: 1.382, // L²·atm/mol²
@@ -23,7 +23,7 @@ const GASES = {
     criticalTemperature: 154.6, // K
     criticalPressure: 50.43, // atm
   },
-  'Nitrogen': {
+  'Azot': {
     molarMass: 28.01, // g/mol
     color: '#74c0fc',
     vanDerWaalsA: 1.370, // L²·atm/mol²
@@ -31,7 +31,7 @@ const GASES = {
     criticalTemperature: 126.2, // K
     criticalPressure: 33.5, // atm
   },
-  'Carbon Dioxide': {
+  'Karbon Dioksit': {
     molarMass: 44.01, // g/mol
     color: '#ff6b6b',
     vanDerWaalsA: 3.658, // L²·atm/mol²
@@ -39,7 +39,7 @@ const GASES = {
     criticalTemperature: 304.2, // K
     criticalPressure: 72.8, // atm
   },
-  'Helium': {
+  'Helyum': {
     molarMass: 4.0026, // g/mol
     color: '#9775fa',
     vanDerWaalsA: 0.034, // L²·atm/mol²
@@ -47,7 +47,7 @@ const GASES = {
     criticalTemperature: 5.2, // K
     criticalPressure: 2.27, // atm
   },
-  'Methane': {
+  'Metan': {
     molarMass: 16.04, // g/mol
     color: '#63e6be',
     vanDerWaalsA: 2.283, // L²·atm/mol²
@@ -62,9 +62,9 @@ type GasLaw = 'ideal' | 'vanderwaals';
 type ChartType = 'pressure-volume' | 'pressure-temperature' | 'volume-temperature' | 'molecular-speed';
 
 export default function GasLawsSimulator() {
-  // Gas parameters
+  // Gaz parametreleri
   const [activeTab, setActiveTab] = useState<string>('ideal-gas-law');
-  const [gasName, setGasName] = useState<GasName>('Oxygen');
+  const [gasName, setGasName] = useState<GasName>('Oksijen');
   const [moles, setMoles] = useState<number>(1);
   const [temperature, setTemperature] = useState<number>(300); // K
   const [pressure, setPressure] = useState<number>(1); // atm
@@ -72,12 +72,12 @@ export default function GasLawsSimulator() {
   const [gasLaw, setGasLaw] = useState<GasLaw>('ideal');
   const [chartType, setChartType] = useState<ChartType>('pressure-volume');
   
-  // For mixture tab
-  const [gas1Name, setGas1Name] = useState<GasName>('Oxygen');
-  const [gas2Name, setGas2Name] = useState<GasName>('Nitrogen');
+  // Karışım sekmesi için
+  const [gas1Name, setGas1Name] = useState<GasName>('Oksijen');
+  const [gas2Name, setGas2Name] = useState<GasName>('Azot');
   const [gas1Fraction, setGas1Fraction] = useState<number>(0.5);
   
-  // For kinetic theory tab
+  // Kinetik teori sekmesi için
   const [showHist, setShowHist] = useState<boolean>(true);
   
   // Refs for canvas rendering
