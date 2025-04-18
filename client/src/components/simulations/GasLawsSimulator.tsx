@@ -568,11 +568,11 @@ export default function GasLawsSimulator() {
     const molarMass = GASES[gasName].molarMass; // g/mol
     
     // Labels
-    ctx.fillText('Molecular Speed (m/s)', chartX + chartWidth / 2 - 50, chartY + chartHeight + 30);
+    ctx.fillText('Moleküler Hız (m/s)', chartX + chartWidth / 2 - 50, chartY + chartHeight + 30);
     ctx.save();
     ctx.translate(chartX - 35, chartY + chartHeight / 2);
     ctx.rotate(-Math.PI / 2);
-    ctx.fillText('Probability Density', 0, 0);
+    ctx.fillText('Olasılık Yoğunluğu', 0, 0);
     ctx.restore();
     
     // Calculate Maxwell-Boltzmann distribution parameters
@@ -678,9 +678,9 @@ export default function GasLawsSimulator() {
     
     // Add legend for values
     ctx.fillStyle = '#333';
-    ctx.fillText(`Most probable speed (vmp): ${vmp.toFixed(0)} m/s`, chartX + 10, chartY + chartHeight - 60);
-    ctx.fillText(`Average speed (vavg): ${vavg.toFixed(0)} m/s`, chartX + 10, chartY + chartHeight - 40);
-    ctx.fillText(`Root mean square speed (vrms): ${vrms.toFixed(0)} m/s`, chartX + 10, chartY + chartHeight - 20);
+    ctx.fillText(`En olası hız (vmp): ${vmp.toFixed(0)} m/s`, chartX + 10, chartY + chartHeight - 60);
+    ctx.fillText(`Ortalama hız (vavg): ${vavg.toFixed(0)} m/s`, chartX + 10, chartY + chartHeight - 40);
+    ctx.fillText(`Kareli ortalama kök hızı (vrms): ${vrms.toFixed(0)} m/s`, chartX + 10, chartY + chartHeight - 20);
   }
   
   // Draw gas mixture visualization
@@ -751,7 +751,7 @@ export default function GasLawsSimulator() {
     ctx.fillStyle = '#333';
     ctx.font = '14px Arial';
     
-    ctx.fillText('Gas Mixture', containerX, containerY - 10);
+    ctx.fillText('Gaz Karışımı', containerX, containerY - 10);
     
     // Gas 1 info
     ctx.fillStyle = gas1.color;
