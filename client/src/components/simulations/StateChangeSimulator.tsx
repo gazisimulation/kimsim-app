@@ -262,27 +262,27 @@ export default function StateChangeSimulator() {
     <div className="flex flex-col lg:flex-row gap-6 p-4">
       <Card className="w-full lg:w-1/3">
         <CardHeader>
-          <CardTitle>State Change Simulation</CardTitle>
-          <CardDescription>Explore phase transitions of different substances</CardDescription>
+          <CardTitle>Hal Değişimi Simülasyonu</CardTitle>
+          <CardDescription>Farklı maddelerin faz geçişlerini keşfedin</CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="space-y-4">
             <div>
-              <Label htmlFor="substance">Substance</Label>
+              <Label htmlFor="substance">Madde</Label>
               <Select value={substance} onValueChange={setSubstance}>
                 <SelectTrigger id="substance">
-                  <SelectValue placeholder="Select substance" />
+                  <SelectValue placeholder="Madde seçin" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="Water">Water (H₂O)</SelectItem>
-                  <SelectItem value="Iron">Iron (Fe)</SelectItem>
-                  <SelectItem value="Nitrogen">Nitrogen (N₂)</SelectItem>
+                  <SelectItem value="Water">Su (H₂O)</SelectItem>
+                  <SelectItem value="Iron">Demir (Fe)</SelectItem>
+                  <SelectItem value="Nitrogen">Azot (N₂)</SelectItem>
                 </SelectContent>
               </Select>
             </div>
 
             <div>
-              <Label htmlFor="mass">Mass (g)</Label>
+              <Label htmlFor="mass">Kütle (g)</Label>
               <div className="flex items-center space-x-2">
                 <Input
                   id="mass"
@@ -297,7 +297,7 @@ export default function StateChangeSimulator() {
             </div>
 
             <div>
-              <Label htmlFor="heatingRate">Heating/Cooling Rate</Label>
+              <Label htmlFor="heatingRate">Isıtma/Soğutma Hızı</Label>
               <div className="flex items-center space-x-2">
                 <Input
                   id="heatingRate"
@@ -312,7 +312,7 @@ export default function StateChangeSimulator() {
             </div>
 
             <div>
-              <Label htmlFor="simulationSpeed">Simulation Speed</Label>
+              <Label htmlFor="simulationSpeed">Simülasyon Hızı</Label>
               <div className="pt-2">
                 <Slider
                   id="simulationSpeed"
@@ -323,8 +323,8 @@ export default function StateChangeSimulator() {
                   onValueChange={(value) => setIntervalMs(value[0])}
                 />
                 <div className="flex justify-between text-xs text-gray-500 mt-1">
-                  <span>Fast</span>
-                  <span>Slow</span>
+                  <span>Hızlı</span>
+                  <span>Yavaş</span>
                 </div>
               </div>
             </div>
@@ -337,7 +337,7 @@ export default function StateChangeSimulator() {
               variant={heating === -1 ? "secondary" : "outline"}
               className="w-1/3"
             >
-              Cool
+              Soğut
             </Button>
             <Button 
               onClick={stopHeatingCooling} 
@@ -345,7 +345,7 @@ export default function StateChangeSimulator() {
               variant={heating === 0 ? "secondary" : "outline"}
               className="w-1/3 mx-1"
             >
-              Stop
+              Durdur
             </Button>
             <Button 
               onClick={startHeating} 
@@ -353,7 +353,7 @@ export default function StateChangeSimulator() {
               variant={heating === 1 ? "secondary" : "outline"}
               className="w-1/3"
             >
-              Heat
+              Isıt
             </Button>
           </div>
         </CardContent>
@@ -361,10 +361,10 @@ export default function StateChangeSimulator() {
 
       <Card className="w-full lg:w-2/3 flex flex-col">
         <CardHeader className="pb-2">
-          <CardTitle>Simulation Results</CardTitle>
+          <CardTitle>Simülasyon Sonuçları</CardTitle>
           <CardDescription>
-            Current Temperature: {temperature.toFixed(2)}°C | 
-            Phase: <span className="capitalize">{state}</span>
+            Mevcut Sıcaklık: {temperature.toFixed(2)}°C | 
+            Faz: <span className="capitalize">{state}</span>
           </CardDescription>
         </CardHeader>
         <CardContent className="flex-grow">
@@ -375,9 +375,10 @@ export default function StateChangeSimulator() {
                 <div className="absolute inset-0 bg-blue-100 dark:bg-blue-900 flex flex-col justify-center items-center text-blue-700 dark:text-blue-300 text-xl font-bold">
                   <div className="flex items-center space-x-2">
                     <Snowflake className="h-6 w-6" />
-                    <span>{state === 'solid' ? 'Solid' : 'Melting'} ({substance === 'Water' ? 'Ice' : substance})</span>
+                    <span>{state === 'solid' ? 'Katı' : 'Erime'} ({substance === 'Water' ? 'Buz' : 
+                           substance === 'Iron' ? 'Demir' : 'Azot'})</span>
                   </div>
-                  {state === 'melting' && <div className="text-sm mt-1">Phase change in progress...</div>}
+                  {state === 'melting' && <div className="text-sm mt-1">Faz değişimi sürüyor...</div>}
                   <div className="absolute inset-0 bg-blue-200 dark:bg-blue-800 opacity-30 animate-pulse"></div>
                 </div>
               )}
@@ -406,34 +407,37 @@ export default function StateChangeSimulator() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Current data table */}
               <div>
-                <h3 className="text-lg font-medium mb-2">Current Data</h3>
+                <h3 className="text-lg font-medium mb-2">Mevcut Veriler</h3>
                 <table className="w-full border-collapse border dark:border-gray-700">
                   <thead className="bg-gray-50 dark:bg-gray-800">
                     <tr>
-                      <th className="border dark:border-gray-700 px-3 py-2 text-left">Property</th>
-                      <th className="border dark:border-gray-700 px-3 py-2 text-right">Value</th>
+                      <th className="border dark:border-gray-700 px-3 py-2 text-left">Özellik</th>
+                      <th className="border dark:border-gray-700 px-3 py-2 text-right">Değer</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td className="border dark:border-gray-700 px-3 py-2">Temperature</td>
+                      <td className="border dark:border-gray-700 px-3 py-2">Sıcaklık</td>
                       <td className="border dark:border-gray-700 px-3 py-2 text-right">{temperature.toFixed(2)} °C</td>
                     </tr>
                     <tr>
-                      <td className="border dark:border-gray-700 px-3 py-2">Phase</td>
+                      <td className="border dark:border-gray-700 px-3 py-2">Faz</td>
                       <td className="border dark:border-gray-700 px-3 py-2 text-right capitalize flex justify-end items-center">
                         {getPhaseIcon()}
-                        <span className="ml-2">{state}</span>
+                        <span className="ml-2">{state === 'solid' ? 'Katı' : 
+                               state === 'melting' ? 'Erime' : 
+                               state === 'liquid' ? 'Sıvı' : 
+                               state === 'boiling' ? 'Kaynama' : 'Gaz'}</span>
                       </td>
                     </tr>
                     <tr>
-                      <td className="border dark:border-gray-700 px-3 py-2">Energy</td>
+                      <td className="border dark:border-gray-700 px-3 py-2">Enerji</td>
                       <td className="border dark:border-gray-700 px-3 py-2 text-right">{formatEnergy(energy)}</td>
                     </tr>
                     <tr>
-                      <td className="border dark:border-gray-700 px-3 py-2">Heating Status</td>
+                      <td className="border dark:border-gray-700 px-3 py-2">Isıtma Durumu</td>
                       <td className="border dark:border-gray-700 px-3 py-2 text-right">
-                        {heating === 1 ? '🔥 Heating' : heating === -1 ? '❄️ Cooling' : '⏸️ Stopped'}
+                        {heating === 1 ? '🔥 Isıtılıyor' : heating === -1 ? '❄️ Soğutuluyor' : '⏸️ Durdu'}
                       </td>
                     </tr>
                   </tbody>
@@ -442,37 +446,37 @@ export default function StateChangeSimulator() {
 
               {/* Substance properties */}
               <div>
-                <h3 className="text-lg font-medium mb-2">Substance Properties</h3>
+                <h3 className="text-lg font-medium mb-2">Madde Özellikleri</h3>
                 <table className="w-full border-collapse border dark:border-gray-700">
                   <thead className="bg-gray-50 dark:bg-gray-800">
                     <tr>
-                      <th className="border dark:border-gray-700 px-3 py-2 text-left">Property</th>
-                      <th className="border dark:border-gray-700 px-3 py-2 text-right">Value</th>
+                      <th className="border dark:border-gray-700 px-3 py-2 text-left">Özellik</th>
+                      <th className="border dark:border-gray-700 px-3 py-2 text-right">Değer</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td className="border dark:border-gray-700 px-3 py-2">Melting Point</td>
+                      <td className="border dark:border-gray-700 px-3 py-2">Erime Noktası</td>
                       <td className="border dark:border-gray-700 px-3 py-2 text-right">{data.meltingPoint} °C</td>
                     </tr>
                     <tr>
-                      <td className="border dark:border-gray-700 px-3 py-2">Boiling Point</td>
+                      <td className="border dark:border-gray-700 px-3 py-2">Kaynama Noktası</td>
                       <td className="border dark:border-gray-700 px-3 py-2 text-right">{data.boilingPoint} °C</td>
                     </tr>
                     <tr>
-                      <td className="border dark:border-gray-700 px-3 py-2">Heat Capacity (solid)</td>
+                      <td className="border dark:border-gray-700 px-3 py-2">Isı Kapasitesi (katı)</td>
                       <td className="border dark:border-gray-700 px-3 py-2 text-right">{data.heatCapacitySolid} J/g·°C</td>
                     </tr>
                     <tr>
-                      <td className="border dark:border-gray-700 px-3 py-2">Heat Capacity (liquid)</td>
+                      <td className="border dark:border-gray-700 px-3 py-2">Isı Kapasitesi (sıvı)</td>
                       <td className="border dark:border-gray-700 px-3 py-2 text-right">{data.heatCapacityLiquid} J/g·°C</td>
                     </tr>
                     <tr>
-                      <td className="border dark:border-gray-700 px-3 py-2">Heat of Fusion</td>
+                      <td className="border dark:border-gray-700 px-3 py-2">Erime Isısı</td>
                       <td className="border dark:border-gray-700 px-3 py-2 text-right">{data.latentHeatFusion} J/g</td>
                     </tr>
                     <tr>
-                      <td className="border dark:border-gray-700 px-3 py-2">Heat of Vaporization</td>
+                      <td className="border dark:border-gray-700 px-3 py-2">Buharlaşma Isısı</td>
                       <td className="border dark:border-gray-700 px-3 py-2 text-right">{data.latentHeatVaporization} J/g</td>
                     </tr>
                   </tbody>
