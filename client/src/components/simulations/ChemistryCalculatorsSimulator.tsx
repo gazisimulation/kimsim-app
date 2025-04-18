@@ -649,14 +649,14 @@ function PercentYieldCalculator() {
       const expectedValue = parseFloat(expected as string) || 0;
 
       if (expectedValue <= 0 || actualValue < 0) {
-        setResult("Please enter valid values (expected > 0, actual >= 0)");
+        setResult("Lütfen geçerli değerler girin (teorik > 0, gerçek >= 0)");
         return;
       }
 
       const percentageYield = (actualValue / expectedValue) * 100;
       setResult(`${percentageYield.toFixed(1)}%`);
     } catch (err) {
-      setResult("Error in calculation");
+      setResult("Hesaplamada hata");
     }
   }
 
@@ -665,14 +665,14 @@ function PercentYieldCalculator() {
       <CardHeader>
         <CardTitle className="flex items-center">
           <Calculator className="mr-2 h-5 w-5" /> 
-          Percent Yield Calculator
+          Yüzde Verim Hesaplayıcısı
         </CardTitle>
-        <CardDescription>Calculate the efficiency of a chemical reaction</CardDescription>
+        <CardDescription>Bir kimyasal reaksiyonun verimliliğini hesaplayın</CardDescription>
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
           <div>
-            <Label htmlFor="actual-yield">Actual Yield (g)</Label>
+            <Label htmlFor="actual-yield">Gerçek Verim (g)</Label>
             <Input 
               id="actual-yield" 
               type="number" 
@@ -683,7 +683,7 @@ function PercentYieldCalculator() {
           </div>
 
           <div>
-            <Label htmlFor="theoretical-yield">Theoretical Yield (g)</Label>
+            <Label htmlFor="theoretical-yield">Teorik Verim (g)</Label>
             <Input 
               id="theoretical-yield" 
               type="number" 
@@ -694,7 +694,7 @@ function PercentYieldCalculator() {
           </div>
 
           <div className="p-4 bg-slate-100 dark:bg-slate-800 rounded-md">
-            <div className="text-sm font-medium mb-2">Calculation: (Actual Yield / Theoretical Yield) × 100%</div>
+            <div className="text-sm font-medium mb-2">Hesaplama: (Gerçek Verim / Teorik Verim) × 100%</div>
             <div className="text-2xl font-bold">{result}</div>
 
             {parseFloat(actual as string) > 0 && parseFloat(expected as string) > 0 && (
@@ -702,7 +702,7 @@ function PercentYieldCalculator() {
                 <div className="flex mb-2 items-center justify-between">
                   <div>
                     <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-slate-600 bg-slate-200">
-                      Efficiency
+                      Verimlilik
                     </span>
                   </div>
                   <div className="text-right">
@@ -727,7 +727,7 @@ function PercentYieldCalculator() {
 
             <div className="text-sm text-slate-500 mt-2">
               {parseFloat(actual as string) > parseFloat(expected as string) && 
-                "Note: Actual yield exceeds theoretical yield, which may indicate experimental error"}
+                "Not: Gerçek verim teorik verimi aşıyor, bu deneysel bir hataya işaret edebilir"}
             </div>
           </div>
         </div>
