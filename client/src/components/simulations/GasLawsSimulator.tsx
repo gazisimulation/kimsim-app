@@ -1210,14 +1210,14 @@ export default function GasLawsSimulator() {
 
                 <div className="pt-4">
                   <div className="bg-gray-100 dark:bg-gray-800 p-3 rounded-md">
-                    <h3 className="font-medium mb-2">Kinetic Properties</h3>
+                    <h3 className="font-medium mb-2">Kinetik Özellikler</h3>
                     <div className="grid grid-cols-2 gap-2 text-sm">
-                      <div>Gas:</div><div className="font-medium">{gasName}</div>
-                      <div>Molar mass:</div><div className="font-medium">{GASES[gasName].molarMass} g/mol</div>
-                      <div>Temperature:</div><div className="font-medium">{temperature} K</div>
-                      <div>Pressure:</div><div className="font-medium">{pressure.toFixed(2)} atm</div>
-                      <div>Average KE:</div><div className="font-medium">{((3/2) * BOLTZMANN * temperature * AVOGADRO / 1000).toFixed(2)} J/mol</div>
-                      <div>Most probable speed:</div><div className="font-medium">{calculateMolecularSpeed(temperature, GASES[gasName].molarMass).toFixed(0)} m/s</div>
+                      <div>Gaz:</div><div className="font-medium">{gasName}</div>
+                      <div>Molar kütle:</div><div className="font-medium">{GASES[gasName].molarMass} g/mol</div>
+                      <div>Sıcaklık:</div><div className="font-medium">{temperature} K</div>
+                      <div>Basınç:</div><div className="font-medium">{pressure.toFixed(2)} atm</div>
+                      <div>Ortalama KE:</div><div className="font-medium">{((3/2) * BOLTZMANN * temperature * AVOGADRO / 1000).toFixed(2)} J/mol</div>
+                      <div>En olası hız:</div><div className="font-medium">{calculateMolecularSpeed(temperature, GASES[gasName].molarMass).toFixed(0)} m/s</div>
                     </div>
                   </div>
                 </div>
@@ -1252,13 +1252,13 @@ export default function GasLawsSimulator() {
                   )}
                   
                   <div className="bg-gray-100 dark:bg-gray-800 p-3 rounded-md text-sm">
-                    <h3 className="font-medium mb-1">Kinetic Theory Key Points:</h3>
+                    <h3 className="font-medium mb-1">Kinetik Teori Anahtar Noktaları:</h3>
                     <ul className="list-disc pl-5 space-y-1">
-                      <li>Gas particles are in constant random motion</li>
-                      <li>Particle collisions are elastic (energy is conserved)</li>
-                      <li>Average kinetic energy is proportional to temperature</li>
-                      <li>Pressure results from particles colliding with container walls</li>
-                      <li>At the same temperature, lighter gases have higher average speeds</li>
+                      <li>Gaz parçacıkları sürekli rastgele hareket halindedir</li>
+                      <li>Parçacık çarpışmaları elastiktir (enerji korunur)</li>
+                      <li>Ortalama kinetik enerji sıcaklıkla orantılıdır</li>
+                      <li>Basınç, parçacıkların kap duvarlarına çarpmasından kaynaklanır</li>
+                      <li>Aynı sıcaklıkta, daha hafif gazlar daha yüksek ortalama hızlara sahiptir</li>
                     </ul>
                   </div>
                 </div>
@@ -1271,15 +1271,15 @@ export default function GasLawsSimulator() {
           <div className="flex flex-col md:flex-row gap-6">
             <Card className="w-full md:w-1/3">
               <CardHeader>
-                <CardTitle>Gas Mixture Properties</CardTitle>
-                <CardDescription>Explore Dalton's Law of Partial Pressures</CardDescription>
+                <CardTitle>Gaz Karışımı Özellikleri</CardTitle>
+                <CardDescription>Dalton'un Kısmi Basınçlar Kanunu'nu keşfedin</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="gas1-type">First Gas</Label>
+                  <Label htmlFor="gas1-type">Birinci Gaz</Label>
                   <Select value={gas1Name} onValueChange={(value: GasName) => setGas1Name(value)}>
                     <SelectTrigger>
-                      <SelectValue placeholder="Select gas" />
+                      <SelectValue placeholder="Gaz seçin" />
                     </SelectTrigger>
                     <SelectContent>
                       {Object.keys(GASES).map((gas) => (
@@ -1290,10 +1290,10 @@ export default function GasLawsSimulator() {
                 </div>
                 
                 <div className="space-y-2">
-                  <Label htmlFor="gas2-type">Second Gas</Label>
+                  <Label htmlFor="gas2-type">İkinci Gaz</Label>
                   <Select value={gas2Name} onValueChange={(value: GasName) => setGas2Name(value)}>
                     <SelectTrigger>
-                      <SelectValue placeholder="Select gas" />
+                      <SelectValue placeholder="Gaz seçin" />
                     </SelectTrigger>
                     <SelectContent>
                       {Object.keys(GASES).map((gas) => (
@@ -1304,7 +1304,7 @@ export default function GasLawsSimulator() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label>First Gas Mole Fraction</Label>
+                  <Label>Birinci Gaz Mol Fraksiyonu</Label>
                   <div className="flex items-center gap-2">
                     <Slider 
                       min={0.1} 
@@ -1347,11 +1347,11 @@ export default function GasLawsSimulator() {
 
                 <div className="pt-4">
                   <div className="bg-gray-100 dark:bg-gray-800 p-3 rounded-md">
-                    <h3 className="font-medium mb-2">Dalton's Law of Partial Pressures</h3>
-                    <p className="text-sm mb-2">The total pressure of a gas mixture equals the sum of the partial pressures of each individual gas:</p>
-                    <p className="text-center font-medium my-2">P<sub>total</sub> = P<sub>1</sub> + P<sub>2</sub> + ... + P<sub>n</sub></p>
-                    <p className="text-sm">Partial pressure of a gas is proportional to its mole fraction in the mixture:</p>
-                    <p className="text-center font-medium my-2">P<sub>i</sub> = x<sub>i</sub> × P<sub>total</sub></p>
+                    <h3 className="font-medium mb-2">Dalton'un Kısmi Basınçlar Yasası</h3>
+                    <p className="text-sm mb-2">Bir gaz karışımının toplam basıncı, her bir gazın kısmi basınçlarının toplamına eşittir:</p>
+                    <p className="text-center font-medium my-2">P<sub>toplam</sub> = P<sub>1</sub> + P<sub>2</sub> + ... + P<sub>n</sub></p>
+                    <p className="text-sm">Bir gazın kısmi basıncı, karışımdaki mol fraksiyonu ile orantılıdır:</p>
+                    <p className="text-center font-medium my-2">P<sub>i</sub> = x<sub>i</sub> × P<sub>toplam</sub></p>
                   </div>
                 </div>
               </CardContent>
@@ -1359,8 +1359,8 @@ export default function GasLawsSimulator() {
             
             <Card className="w-full md:w-2/3">
               <CardHeader>
-                <CardTitle>Gas Mixture Visualization</CardTitle>
-                <CardDescription>Visual representation of a gas mixture</CardDescription>
+                <CardTitle>Gaz Karışımı Görselleştirmesi</CardTitle>
+                <CardDescription>Gaz karışımının görsel temsili</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="h-[400px] bg-gray-50 dark:bg-gray-900 rounded-md">
@@ -1373,25 +1373,25 @@ export default function GasLawsSimulator() {
                 </div>
                 
                 <div className="bg-gray-100 dark:bg-gray-800 p-3 rounded-md mt-4">
-                  <h3 className="font-medium mb-2">Current Mixture Properties</h3>
+                  <h3 className="font-medium mb-2">Mevcut Karışım Özellikleri</h3>
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-2 text-sm">
-                    <div>Total pressure:</div>
+                    <div>Toplam basınç:</div>
                     <div className="font-medium">{pressure.toFixed(2)} atm</div>
                     <div></div>
                     
-                    <div>{gas1Name} partial pressure:</div>
+                    <div>{gas1Name} kısmi basıncı:</div>
                     <div className="font-medium">{(pressure * gas1Fraction).toFixed(2)} atm</div>
                     <div className="font-medium">{(gas1Fraction * 100).toFixed(0)}%</div>
                     
-                    <div>{gas2Name} partial pressure:</div>
+                    <div>{gas2Name} kısmi basıncı:</div>
                     <div className="font-medium">{(pressure * (1 - gas1Fraction)).toFixed(2)} atm</div>
                     <div className="font-medium">{((1 - gas1Fraction) * 100).toFixed(0)}%</div>
                     
-                    <div>Temperature:</div>
+                    <div>Sıcaklık:</div>
                     <div className="font-medium">{temperature} K</div>
                     <div></div>
                     
-                    <div>Average molar mass:</div>
+                    <div>Ortalama molar kütle:</div>
                     <div className="font-medium">
                       {(GASES[gas1Name].molarMass * gas1Fraction + 
                         GASES[gas2Name].molarMass * (1 - gas1Fraction)).toFixed(2)} g/mol
@@ -1408,15 +1408,15 @@ export default function GasLawsSimulator() {
           <div className="flex flex-col md:flex-row gap-6">
             <Card className="w-full md:w-1/3">
               <CardHeader>
-                <CardTitle>Real Gas Behavior</CardTitle>
-                <CardDescription>Compare ideal vs. real gas models</CardDescription>
+                <CardTitle>Gerçek Gaz Davranışı</CardTitle>
+                <CardDescription>İdeal ve gerçek gaz modellerini karşılaştırın</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="gas-type">Gas Type</Label>
+                  <Label htmlFor="gas-type">Gaz Türü</Label>
                   <Select value={gasName} onValueChange={(value: GasName) => setGasName(value)}>
                     <SelectTrigger>
-                      <SelectValue placeholder="Select gas" />
+                      <SelectValue placeholder="Gaz seçin" />
                     </SelectTrigger>
                     <SelectContent>
                       {Object.keys(GASES).map((gas) => (
@@ -1427,7 +1427,7 @@ export default function GasLawsSimulator() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label>Moles (n)</Label>
+                  <Label>Mol Sayısı (n)</Label>
                   <div className="flex items-center gap-2">
                     <Slider 
                       min={0.1} 
@@ -1441,7 +1441,7 @@ export default function GasLawsSimulator() {
                 </div>
                 
                 <div className="space-y-2">
-                  <Label>Temperature (K)</Label>
+                  <Label>Sıcaklık (K)</Label>
                   <div className="flex items-center gap-2">
                     <Slider 
                       min={100} 
@@ -1455,7 +1455,7 @@ export default function GasLawsSimulator() {
                 </div>
                 
                 <div className="space-y-2">
-                  <Label>Pressure (atm)</Label>
+                  <Label>Basınç (atm)</Label>
                   <div className="flex items-center gap-2">
                     <Slider 
                       min={0.1} 
@@ -1470,15 +1470,15 @@ export default function GasLawsSimulator() {
 
                 <div className="pt-4">
                   <div className="bg-gray-100 dark:bg-gray-800 p-3 rounded-md">
-                    <h3 className="font-medium mb-2">Van der Waals Parameters for {gasName}</h3>
+                    <h3 className="font-medium mb-2">{gasName} için Van der Waals Parametreleri</h3>
                     <div className="grid grid-cols-2 gap-2 text-sm">
                       <div>a (L²·atm/mol²):</div>
                       <div className="font-medium">{GASES[gasName].vanDerWaalsA}</div>
                       <div>b (L/mol):</div>
                       <div className="font-medium">{GASES[gasName].vanDerWaalsB}</div>
-                      <div>Critical temperature:</div>
+                      <div>Kritik sıcaklık:</div>
                       <div className="font-medium">{GASES[gasName].criticalTemperature} K</div>
-                      <div>Critical pressure:</div>
+                      <div>Kritik basınç:</div>
                       <div className="font-medium">{GASES[gasName].criticalPressure} atm</div>
                     </div>
                   </div>
