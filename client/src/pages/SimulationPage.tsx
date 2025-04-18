@@ -45,11 +45,11 @@ const SimulationPage = () => {
     return (
       <div className="flex justify-center items-center min-h-screen text-center p-4">
         <div>
-          <h2 className="text-xl font-bold text-red-500 mb-2">Simulation Not Found</h2>
-          <p className="text-gray-400 mb-4">The simulation you're looking for doesn't exist or has been moved.</p>
+          <h2 className="text-xl font-bold text-red-500 mb-2">Simülasyon Bulunamadı</h2>
+          <p className="text-gray-400 mb-4">Aradığınız simülasyon mevcut değil veya taşınmış.</p>
           <Button asChild>
             <Link href="/">
-              <a>Return to Home</a>
+              <a>Ana Sayfaya Dön</a>
             </Link>
           </Button>
         </div>
@@ -77,9 +77,9 @@ const SimulationPage = () => {
         return (
           <div className="p-8 text-center">
             <Beaker className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-            <h3 className="text-xl font-bold mb-2">Simulation Under Development</h3>
+            <h3 className="text-xl font-bold mb-2">Simülasyon Geliştiriliyor</h3>
             <p className="text-gray-500 max-w-md mx-auto">
-              This simulation is currently being developed and will be available soon.
+              Bu simülasyon şu anda geliştiriliyor ve yakında kullanıma sunulacak.
             </p>
           </div>
         );
@@ -173,7 +173,7 @@ const SimulationPage = () => {
               
               <TabsContent value="instructions" className="mt-0">
                 <div className="max-w-3xl mx-auto py-6">
-                  <h3 className="text-2xl font-bold mb-4">How to Use This Simulation</h3>
+                  <h3 className="text-2xl font-bold mb-4">Bu Simülasyonu Nasıl Kullanılır</h3>
                   <div className="prose dark:prose-invert">
                     {simulation.slug === 'acid-base-titration' ? (
                       <>
@@ -311,7 +311,7 @@ const SimulationPage = () => {
               
               <TabsContent value="theory" className="mt-0">
                 <div className="max-w-3xl mx-auto py-6">
-                  <h3 className="text-2xl font-bold mb-4">Theoretical Background</h3>
+                  <h3 className="text-2xl font-bold mb-4">Teorik Arka Plan</h3>
                   <div className="prose dark:prose-invert">
                     {simulation.slug === 'acid-base-titration' ? (
                       <>
@@ -525,7 +525,7 @@ const SimulationPage = () => {
               
               <TabsContent value="questions" className="mt-0">
                 <div className="max-w-3xl mx-auto py-6">
-                  <h3 className="text-2xl font-bold mb-4">Practice Questions</h3>
+                  <h3 className="text-2xl font-bold mb-4">Alıştırma Soruları</h3>
                   <div className="prose dark:prose-invert">
                     {simulation.slug === 'acid-base-titration' ? (
                       <>
@@ -575,7 +575,7 @@ const SimulationPage = () => {
                         </ol>
                       </>
                     ) : (
-                      <p>Practice questions for this simulation will be available soon.</p>
+                      <p>Bu simülasyon için alıştırma soruları yakında eklenecektir.</p>
                     )}
                   </div>
                 </div>
