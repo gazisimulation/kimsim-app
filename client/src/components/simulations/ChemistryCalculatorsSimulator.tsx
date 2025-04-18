@@ -189,7 +189,7 @@ function RaoultsLawCalculator() {
 
 // The rest of the component code (IdealGasLawCalculator, AverageAtomicMassCalculator, etc.) remains the same as it was in the original file
 function IdealGasLawCalculator() {
-  const [calc, setCalc] = useState("PV product");
+  const [calc, setCalc] = useState("PV çarpımı");
   const [p, setP] = useState<number | string>(1);
   const [v, setV] = useState<number | string>(22.4);
   const [n, setN] = useState<number | string>(1);
@@ -210,19 +210,19 @@ function IdealGasLawCalculator() {
       const tValue = new Big(t || 0);
 
       switch (calc) {
-        case "PV product":
+        case "PV çarpımı":
           setResult(nValue.times(rValue).times(tValue).toFixed(3));
           break;
-        case "Pressure":
+        case "Basınç":
           setResult(nValue.times(rValue).times(tValue).div(vValue).toFixed(3));
           break;
-        case "Volume":
+        case "Hacim":
           setResult(nValue.times(rValue).times(tValue).div(pValue).toFixed(3));
           break;
-        case "Moles":
+        case "Mol Sayısı":
           setResult(pValue.times(vValue).div(rValue.times(tValue)).toFixed(3));
           break;
-        case "Temperature":
+        case "Sıcaklık":
           setResult(pValue.times(vValue).div(nValue.times(rValue)).toFixed(3));
           break;
       }
@@ -249,17 +249,17 @@ function IdealGasLawCalculator() {
                 <SelectValue placeholder="Select calculation" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="PV product">PV product</SelectItem>
-                <SelectItem value="Pressure">Pressure (P)</SelectItem>
-                <SelectItem value="Volume">Volume (V)</SelectItem>
-                <SelectItem value="Moles">Number of moles (n)</SelectItem>
-                <SelectItem value="Temperature">Temperature (T)</SelectItem>
+                <SelectItem value="PV çarpımı">PV çarpımı</SelectItem>
+                <SelectItem value="Basınç">Basınç (P)</SelectItem>
+                <SelectItem value="Hacim">Hacim (V)</SelectItem>
+                <SelectItem value="Mol Sayısı">Mol Sayısı (n)</SelectItem>
+                <SelectItem value="Sıcaklık">Sıcaklık (T)</SelectItem>
               </SelectContent>
             </Select>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-            {calc !== "PV product" && calc !== "Pressure" && (
+            {calc !== "PV çarpımı" && calc !== "Basınç" && (
               <div>
                 <Label htmlFor="pressure">P (atm)</Label>
                 <Input 
@@ -272,7 +272,7 @@ function IdealGasLawCalculator() {
               </div>
             )}
 
-            {calc !== "PV product" && calc !== "Volume" && (
+            {calc !== "PV çarpımı" && calc !== "Hacim" && (
               <div>
                 <Label htmlFor="volume">V (L)</Label>
                 <Input 
@@ -285,7 +285,7 @@ function IdealGasLawCalculator() {
               </div>
             )}
 
-            {calc !== "Moles" && (
+            {calc !== "Mol Sayısı" && (
               <div>
                 <Label htmlFor="moles">n (mol)</Label>
                 <Input 
