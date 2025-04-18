@@ -70,6 +70,8 @@ const SimulationPage = () => {
         return <GasLawsSimulator />;
       case 'battery-simulator':
         return <BatterySimulator />;
+      case 'chemistry-calculators':
+        return <ChemistryCalculatorsSimulator />;
       default:
         return (
           <div className="p-8 text-center">
