@@ -56,14 +56,13 @@ const Home = () => {
       {featuredSimulation && <SimulationHero simulation={featuredSimulation} />}
       
       {/* Category Sections */}
-      <div id="simulations" className="px-4">
+      <div id="simulations">
         {recentSimulations.length > 0 && (
-          <div className="mb-8">
-            <div className="inline-flex items-center mb-4 bg-primary-500/30 px-4 py-2 rounded-lg shadow-lg backdrop-blur-sm">
-              <Clock className="mr-2 h-5 w-5 text-primary-400" />
-              <span className="text-base font-semibold text-primary-400">Recently Added</span>
-            </div>
-            <CategoryRow 
+          <div className="inline-flex items-center mb-4 bg-primary-500/20 px-3 py-1 rounded-full">
+            <Clock className="mr-1 h-4 w-4 text-primary-500" />
+            <span className="text-sm font-medium text-primary-500">Recently Added</span>
+          </div>
+          <CategoryRow 
             title="Recently Added" 
             icon={<Clock className="h-5 w-5" />} 
             simulations={recentSimulations} 
@@ -71,9 +70,9 @@ const Home = () => {
         )}
         
         {analyticalSimulations.length > 0 && (
-          <div className="inline-flex items-center mb-4 bg-primary-500/30 px-4 py-2 rounded-lg shadow-lg backdrop-blur-sm">
-            <TestTube className="mr-2 h-5 w-5 text-primary-400" />
-            <span className="text-base font-semibold text-primary-400">Analytical Chemistry</span>
+          <div className="inline-flex items-center mb-4 bg-primary-500/20 px-3 py-1 rounded-full">
+            <TestTube className="mr-1 h-4 w-4 text-primary-500" />
+            <span className="text-sm font-medium text-primary-500">Analytical Chemistry</span>
           </div>
           <CategoryRow 
             title="Analytical Chemistry" 
@@ -83,9 +82,9 @@ const Home = () => {
         )}
         
         {physicalSimulations.length > 0 && (
-          <div className="inline-flex items-center mb-4 bg-primary-500/30 px-4 py-2 rounded-lg shadow-lg backdrop-blur-sm">
-            <Droplets className="mr-2 h-5 w-5 text-primary-400" />
-            <span className="text-base font-semibold text-primary-400">Physical Chemistry</span>
+          <div className="inline-flex items-center mb-4 bg-primary-500/20 px-3 py-1 rounded-full">
+            <Droplets className="mr-1 h-4 w-4 text-primary-500" />
+            <span className="text-sm font-medium text-primary-500">Physical Chemistry</span>
           </div>
           <CategoryRow 
             title="Physical Chemistry" 
@@ -139,10 +138,7 @@ const Home = () => {
       {/* Resources Section */}
       <section id="resources" className="py-16 px-4">
         <div className="container mx-auto max-w-4xl">
-          <div className="inline-flex items-center mb-8 bg-primary-500/30 px-4 py-2 rounded-lg shadow-lg backdrop-blur-sm">
-            <TestTube className="mr-2 h-5 w-5 text-primary-400" />
-            <span className="text-base font-semibold text-primary-400">Educational Resources</span>
-          </div>
+          <h2 className="text-3xl font-heading font-bold mb-8 text-center">Educational Resources</h2>
           <div className="grid md:grid-cols-2 gap-8">
             <div className="bg-gray-800 p-6 rounded-lg">
               <h3 className="text-xl font-bold mb-3">For Students</h3>
