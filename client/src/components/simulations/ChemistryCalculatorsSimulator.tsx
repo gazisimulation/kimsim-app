@@ -487,7 +487,7 @@ function AvogadroCalculator() {
       <CardContent>
         <div className="space-y-4">
           <div>
-            <Label htmlFor="avogadro-value">Number</Label>
+            <Label htmlFor="avogadro-value">Sayı</Label>
             <Input 
               id="avogadro-value" 
               type="number" 
@@ -498,21 +498,21 @@ function AvogadroCalculator() {
           </div>
 
           <div>
-            <Label className="block mb-2">Operation</Label>
+            <Label className="block mb-2">İşlem</Label>
             <RadioGroup value={operation} onValueChange={setOperation} className="flex space-x-4">
               <div className="flex items-center space-x-2">
                 <RadioGroupItem value="multiply" id="multiply" />
-                <Label htmlFor="multiply">Multiply by Avogadro's Number</Label>
+                <Label htmlFor="multiply">Avogadro Sayısı ile Çarp</Label>
               </div>
               <div className="flex items-center space-x-2">
                 <RadioGroupItem value="divide" id="divide" />
-                <Label htmlFor="divide">Divide by Avogadro's Number</Label>
+                <Label htmlFor="divide">Avogadro Sayısına Böl</Label>
               </div>
             </RadioGroup>
           </div>
 
           <div className="p-4 bg-slate-100 dark:bg-slate-800 rounded-md">
-            <div className="text-sm font-medium mb-2">Result:</div>
+            <div className="text-sm font-medium mb-2">Sonuç:</div>
             <div className="text-2xl font-bold">{result}</div>
             <div className="text-sm text-slate-500 mt-2">
               {operation === "multiply" 
@@ -539,19 +539,19 @@ function PHCalculator() {
       const pHValue = parseFloat(pH as string);
 
       if (isNaN(pHValue) || pHValue < 0 || pHValue > 14) {
-        setResult("Please enter a value between 0 and 14");
+        setResult("Lütfen 0 ile 14 arasında bir değer girin");
         return;
       }
 
       const closenessTo7 = Math.abs(pHValue - 7);
 
       if (closenessTo7 >= 3) {
-        setResult(`May be harmful to human body. pH difference from neutral: ${closenessTo7.toFixed(1)}`);
+        setResult(`İnsan vücudu için zararlı olabilir. Nötr pH'dan fark: ${closenessTo7.toFixed(1)}`);
       } else {
-        setResult(`Safe in terms of pH level. pH difference from neutral: ${closenessTo7.toFixed(1)}`);
+        setResult(`pH seviyesi açısından güvenli. Nötr pH'dan fark: ${closenessTo7.toFixed(1)}`);
       }
     } catch (err) {
-      setResult("Error in calculation");
+      setResult("Hesaplamada hata");
     }
   }
 
@@ -565,11 +565,11 @@ function PHCalculator() {
   };
 
   const getDescriptionForPH = (ph: number): string => {
-    if (ph <= 2) return "Strongly Acidic";
-    if (ph <= 6) return "Acidic";
-    if (ph <= 8) return "Neutral";
-    if (ph <= 12) return "Basic";
-    return "Strongly Basic";
+    if (ph <= 2) return "Çok Asidik";
+    if (ph <= 6) return "Asidik";
+    if (ph <= 8) return "Nötr";
+    if (ph <= 12) return "Bazik";
+    return "Çok Bazik";
   };
 
   return (
@@ -577,14 +577,14 @@ function PHCalculator() {
       <CardHeader>
         <CardTitle className="flex items-center">
           <FlaskConical className="mr-2 h-5 w-5" /> 
-          pH Level Calculator
+          pH Seviyesi Hesaplayıcısı
         </CardTitle>
-        <CardDescription>Check if a pH value is safe for human contact</CardDescription>
+        <CardDescription>Bir pH değerinin insan teması için güvenli olup olmadığını kontrol edin</CardDescription>
       </CardHeader>
       <CardContent>
         <div className="space-y-6">
           <div>
-            <Label htmlFor="ph-value">pH Value (0-14)</Label>
+            <Label htmlFor="ph-value">pH Değeri (0-14)</Label>
             <Input 
               id="ph-value" 
               type="number" 
@@ -616,7 +616,7 @@ function PHCalculator() {
 
           <div className="p-4 bg-slate-100 dark:bg-slate-800 rounded-md">
             <div className="flex justify-between items-center mb-2">
-              <div className="text-sm font-medium">Result:</div>
+              <div className="text-sm font-medium">Sonuç:</div>
               {parseFloat(pH as string) >= 0 && parseFloat(pH as string) <= 14 && (
                 <div 
                   className="px-2 py-1 rounded-full text-xs text-white"
