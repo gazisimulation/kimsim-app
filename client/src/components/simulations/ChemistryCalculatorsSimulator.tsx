@@ -1017,9 +1017,9 @@ function QuantumNumbersCalculator() {
           // For calculating possible l values for a given n
           if (nValue > 0) {
             const possibleLValues = Array.from({length: nValue}, (_, i) => i);
-            setResult(`For n = ${nValue}, possible l values are: ${possibleLValues.join(', ')}`);
+            setResult(`n = ${nValue} için olası l değerleri: ${possibleLValues.join(', ')}`);
           } else {
-            setResult("n must be a positive integer");
+            setResult("n pozitif bir tam sayı olmalıdır");
           }
           break;
 
@@ -1027,22 +1027,22 @@ function QuantumNumbersCalculator() {
           // For calculating possible ml values for a given l
           if (lValue >= 0) {
             const mlValues = Array.from({length: 2 * lValue + 1}, (_, i) => -lValue + i);
-            setResult(`For l = ${lValue}, possible ml values are: ${mlValues.join(', ')}`);
+            setResult(`l = ${lValue} için olası ml değerleri: ${mlValues.join(', ')}`);
           } else {
-            setResult("l must be non-negative");
+            setResult("l negatif olmamalıdır");
           }
           break;
 
         case "Check validity":
           // Check if the quantum numbers are valid
           if (nValue <= 0) {
-            setResult("Invalid: n must be a positive integer");
+            setResult("Geçersiz: n pozitif bir tam sayı olmalıdır");
           } else if (lValue < 0 || lValue >= nValue) {
-            setResult(`Invalid: For n = ${nValue}, l must be between 0 and ${nValue - 1}`);
+            setResult(`Geçersiz: n = ${nValue} için, l değeri 0 ile ${nValue - 1} arasında olmalıdır`);
           } else if (mlValue < -lValue || mlValue > lValue) {
-            setResult(`Invalid: For l = ${lValue}, ml must be between -${lValue} and ${lValue}`);
+            setResult(`Geçersiz: l = ${lValue} için, ml değeri -${lValue} ile ${lValue} arasında olmalıdır`);
           } else {
-            setResult(`Valid quantum numbers: n = ${nValue}, l = ${lValue}, ml = ${mlValue}`);
+            setResult(`Geçerli kuantum sayıları: n = ${nValue}, l = ${lValue}, ml = ${mlValue}`);
           }
           break;
       }
