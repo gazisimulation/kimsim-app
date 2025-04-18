@@ -18,7 +18,10 @@ export default function ChemistryCalculatorsSimulator() {
   return (
     <div className="flex flex-col gap-6">
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <TabsList className="grid grid-cols-7 mb-4">
+        <TabsList className="grid grid-cols-4 md:grid-cols-8 mb-4 gap-2">
+          <TabsTrigger value="raoult" className="flex items-center gap-2">
+            <FlaskConical className="h-4 w-4" /> Raoult's Law
+          </TabsTrigger>
           <TabsTrigger value="ideal-gas" className="flex items-center gap-2">
             <Thermometer className="h-4 w-4" /> Ideal Gas Law
           </TabsTrigger>
@@ -75,6 +78,10 @@ export default function ChemistryCalculatorsSimulator() {
         {/* Quantum Numbers Calculator */}
         <TabsContent value="quantum" className="space-y-4">
           <QuantumNumbersCalculator />
+        </TabsContent>
+        {/* Raoult's Law Calculator */}
+        <TabsContent value="raoult" className="space-y-4">
+          <RaoultsLawCalculator /> {/* Placeholder - needs implementation */}
         </TabsContent>
       </Tabs>
     </div>
@@ -301,7 +308,7 @@ function AverageAtomicMassCalculator() {
                 />
               </div>
             </div>
-            
+
             <div className="space-y-4">
               <Label className="text-center block">Second Isotope</Label>
               <div>
@@ -356,7 +363,7 @@ function AvogadroCalculator() {
   function calculate() {
     try {
       const inputValue = parseFloat(value as string) || 0;
-      
+
       if (operation === "multiply") {
         const result = inputValue * AVOGADRO_VALUE;
         // Format with scientific notation
@@ -434,14 +441,14 @@ function PHCalculator() {
   function checkPH() {
     try {
       const pHValue = parseFloat(pH as string);
-      
+
       if (isNaN(pHValue) || pHValue < 0 || pHValue > 14) {
         setResult("Please enter a value between 0 and 14");
         return;
       }
-      
+
       const closenessTo7 = Math.abs(pHValue - 7);
-      
+
       if (closenessTo7 >= 3) {
         setResult(`May be harmful to human body. pH difference from neutral: ${closenessTo7.toFixed(1)}`);
       } else {
@@ -503,7 +510,7 @@ function PHCalculator() {
               <div className="w-4 h-4 bg-white border-2 border-gray-400 rounded-full"></div>
               <div className="mt-2 text-center text-sm font-medium">pH {pH}</div>
             </div>
-            
+
             <div className="flex justify-between mt-1 text-xs text-slate-500">
               <span>0</span>
               <span>7</span>
@@ -545,12 +552,12 @@ function PercentYieldCalculator() {
     try {
       const actualValue = parseFloat(actual as string) || 0;
       const expectedValue = parseFloat(expected as string) || 0;
-      
+
       if (expectedValue <= 0 || actualValue < 0) {
         setResult("Please enter valid values (expected > 0, actual >= 0)");
         return;
       }
-      
+
       const percentageYield = (actualValue / expectedValue) * 100;
       setResult(`${percentageYield.toFixed(1)}%`);
     } catch (err) {
@@ -579,7 +586,7 @@ function PercentYieldCalculator() {
               min={0}
             />
           </div>
-          
+
           <div>
             <Label htmlFor="theoretical-yield">Theoretical Yield (g)</Label>
             <Input 
@@ -594,7 +601,7 @@ function PercentYieldCalculator() {
           <div className="p-4 bg-slate-100 dark:bg-slate-800 rounded-md">
             <div className="text-sm font-medium mb-2">Calculation: (Actual Yield / Theoretical Yield) × 100%</div>
             <div className="text-2xl font-bold">{result}</div>
-            
+
             {parseFloat(actual as string) > 0 && parseFloat(expected as string) > 0 && (
               <div className="mt-4 relative pt-1">
                 <div className="flex mb-2 items-center justify-between">
@@ -622,7 +629,7 @@ function PercentYieldCalculator() {
                 </div>
               </div>
             )}
-            
+
             <div className="text-sm text-slate-500 mt-2">
               {parseFloat(actual as string) > parseFloat(expected as string) && 
                 "Note: Actual yield exceeds theoretical yield, which may indicate experimental error"}
@@ -729,7 +736,7 @@ function MolarityCalculator() {
             <TabsTrigger value="basic">Basic Molarity</TabsTrigger>
             <TabsTrigger value="advanced">Advanced Calculation</TabsTrigger>
           </TabsList>
-          
+
           <TabsContent value="basic" className="space-y-4 mt-4">
             <div>
               <Label htmlFor="molarity-calc">What do you want to calculate?</Label>
@@ -758,7 +765,7 @@ function MolarityCalculator() {
                   />
                 </div>
               )}
-              
+
               {calc !== "Moles" && (
                 <div>
                   <Label htmlFor="n-value">n (mol)</Label>
@@ -771,7 +778,7 @@ function MolarityCalculator() {
                   />
                 </div>
               )}
-              
+
               {calc !== "Volume or Mass" && (
                 <div>
                   <Label htmlFor="v-value">V (L) or Mass (kg)</Label>
@@ -796,7 +803,7 @@ function MolarityCalculator() {
               </div>
             </div>
           </TabsContent>
-          
+
           <TabsContent value="advanced" className="space-y-4 mt-4">
             <div>
               <Label htmlFor="advanced-calc">What do you want to calculate?</Label>
@@ -826,7 +833,7 @@ function MolarityCalculator() {
                   />
                 </div>
               )}
-              
+
               {calcM !== "Find density" && (
                 <div>
                   <Label htmlFor="d-value">Density (g/mL)</Label>
@@ -839,7 +846,7 @@ function MolarityCalculator() {
                   />
                 </div>
               )}
-              
+
               {calcM !== "Find %" && (
                 <div>
                   <Label htmlFor="percent-value">% Concentration</Label>
@@ -853,7 +860,7 @@ function MolarityCalculator() {
                   />
                 </div>
               )}
-              
+
               {calcM !== "Find Molar Mass" && (
                 <div>
                   <Label htmlFor="ma-value">Molar Mass (g/mol)</Label>
@@ -1002,7 +1009,7 @@ function QuantumNumbersCalculator() {
                 <p className="text-xs text-slate-500 mt-1">Positive integer (n ≥ 1)</p>
               </div>
             )}
-            
+
             {calc !== "Calculate possible l" && (
               <div>
                 <Label htmlFor="l-value">Angular Momentum Quantum Number (l)</Label>
@@ -1017,7 +1024,7 @@ function QuantumNumbersCalculator() {
                 <p className="text-xs text-slate-500 mt-1">0 ≤ l ≤ n-1</p>
               </div>
             )}
-            
+
             {calc !== "Calculate possible ml" && calc !== "Calculate n" && calc !== "Calculate possible l" && (
               <div>
                 <Label htmlFor="ml-value">Magnetic Quantum Number (ml)</Label>
@@ -1037,7 +1044,7 @@ function QuantumNumbersCalculator() {
           <div className="p-4 bg-slate-100 dark:bg-slate-800 rounded-md">
             <div className="text-sm font-medium mb-2">Result:</div>
             <div className="text-lg font-medium">{result}</div>
-            
+
             {calc === "Check validity" && parseInt(n as string) > 0 && parseInt(l as string) >= 0 && parseInt(l as string) < parseInt(n as string) && (
               <div className="mt-4 text-sm">
                 <p className="font-medium">Orbital designation: {n}{getOrbitalName(parseInt(l as string))}</p>
@@ -1054,4 +1061,9 @@ function QuantumNumbersCalculator() {
       </CardContent>
     </Card>
   );
+}
+
+// Placeholder for Raoult's Law Calculator
+function RaoultsLawCalculator() {
+  return <div>Raoult's Law Calculator (To be implemented)</div>;
 }
