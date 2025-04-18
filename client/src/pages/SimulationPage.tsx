@@ -177,133 +177,133 @@ const SimulationPage = () => {
                   <div className="prose dark:prose-invert">
                     {simulation.slug === 'acid-base-titration' ? (
                       <>
-                        <p>This simulation allows you to perform a virtual titration experiment between a strong acid and a strong base. Follow these steps to get started:</p>
+                        <p>Bu simülasyon, güçlü bir asit ve güçlü bir baz arasında sanal bir titrasyon deneyi yapmanızı sağlar. Başlamak için aşağıdaki adımları izleyin:</p>
                         <ol>
-                          <li>Select whether you want to titrate an acid with a base, or a base with an acid using the <strong>Analyte Type</strong> dropdown.</li>
-                          <li>Set the <strong>Analyte Volume</strong> in milliliters.</li>
-                          <li>Set the <strong>Analyte Concentration</strong> in molarity (M).</li>
-                          <li>Set the <strong>Titrant Concentration</strong> in molarity (M).</li>
-                          <li>Use the <strong>slider</strong> to add titrant and observe the pH changes.</li>
-                          <li>Watch as the titration curve is generated in real-time.</li>
-                          <li>Note the <strong>Equivalence Point</strong> that shows where the amount of titrant added is stoichiometrically equal to the amount of analyte.</li>
-                          <li>Observe the <strong>color change</strong> in the flask when the phenolphthalein indicator changes color (around pH 8.2).</li>
+                          <li><strong>Analit Türü</strong> açılır menüsünü kullanarak bir asidi bir bazla mı yoksa bir bazı bir asitle mi titre etmek istediğinizi seçin.</li>
+                          <li><strong>Analit Hacmi</strong>ni mililitre cinsinden ayarlayın.</li>
+                          <li><strong>Analit Konsantrasyonu</strong>nu molarite (M) cinsinden ayarlayın.</li>
+                          <li><strong>Titrant Konsantrasyonu</strong>nu molarite (M) cinsinden ayarlayın.</li>
+                          <li>Titrant eklemek ve pH değişimlerini gözlemlemek için <strong>kaydırıcıyı</strong> kullanın.</li>
+                          <li>Titrasyon eğrisinin gerçek zamanlı olarak oluşturulmasını izleyin.</li>
+                          <li>Eklenen titrant miktarının stokiyometrik olarak analit miktarına eşit olduğu yeri gösteren <strong>Eşdeğerlik Noktası</strong>nı not edin.</li>
+                          <li>Fenolftalein indikatörünün renk değiştirdiği zaman (yaklaşık pH 8.2) flakondaki <strong>renk değişimini</strong> gözlemleyin.</li>
                         </ol>
-                        <p>You can reset the simulation at any time using the Reset button.</p>
+                        <p>Sıfırla düğmesini kullanarak simülasyonu istediğiniz zaman sıfırlayabilirsiniz.</p>
                       </>
                     ) : simulation.slug === 'quantum-atom-model' ? (
                       <>
-                        <p>This simulation allows you to visualize different atomic orbitals in a quantum mechanical model of the atom. Follow these steps to interact with the simulation:</p>
+                        <p>Bu simülasyon, atomun kuantum mekanik modelinde farklı atomik orbitalleri görselleştirmenizi sağlar. Simülasyonla etkileşim kurmak için şu adımları izleyin:</p>
                         <ol>
-                          <li>Use the <strong>Orbital Type</strong> dropdown to select different orbitals (1s, 2s, 2p, 3s, 3p, 3d).</li>
-                          <li><strong>Drag</strong> with your mouse to rotate the 3D visualization and view the orbital from different angles.</li>
-                          <li>Use your mouse <strong>scroll wheel</strong> to zoom in and out.</li>
-                          <li>Observe the different shapes of each orbital type:</li>
+                          <li>Farklı orbitalleri (1s, 2s, 2p, 3s, 3p, 3d) seçmek için <strong>Orbital Türü</strong> açılır menüsünü kullanın.</li>
+                          <li>3B görselleştirmeyi döndürmek ve orbitali farklı açılardan görmek için farenizle <strong>sürükleyin</strong>.</li>
+                          <li>Yakınlaştırmak ve uzaklaştırmak için farenizin <strong>kaydırma tekerleğini</strong> kullanın.</li>
+                          <li>Her orbital türünün farklı şekillerini gözlemleyin:</li>
                           <ul>
-                            <li><strong>s orbitals</strong> (1s, 2s, 3s): Spherical shape</li>
-                            <li><strong>p orbitals</strong> (2p, 3p): Dumbbell shape with two lobes</li>
-                            <li><strong>d orbitals</strong> (3d): Complex four-lobed shapes</li>
+                            <li><strong>s orbitalleri</strong> (1s, 2s, 3s): Küresel şekil</li>
+                            <li><strong>p orbitalleri</strong> (2p, 3p): İki loblu dambıl şekli</li>
+                            <li><strong>d orbitalleri</strong> (3d): Karmaşık dört loblu şekiller</li>
                           </ul>
-                          <li>Read the <strong>Orbital Information</strong> section to learn about each orbital's properties.</li>
+                          <li>Her orbitalin özellikleri hakkında bilgi edinmek için <strong>Orbital Bilgisi</strong> bölümünü okuyun.</li>
                         </ol>
-                        <p>You can reset the view at any time using the Reset View button.</p>
+                        <p>Görünümü Sıfırla düğmesini kullanarak görünümü istediğiniz zaman sıfırlayabilirsiniz.</p>
                       </>
                     ) : simulation.slug === 'chemical-bonds' ? (
                       <>
-                        <p>This simulation allows you to explore three fundamental types of chemical bonds in 3D. Follow these steps to use the simulation:</p>
+                        <p>Bu simülasyon, üç temel kimyasal bağ türünü 3B olarak keşfetmenizi sağlar. Simülasyonu kullanmak için şu adımları izleyin:</p>
                         <ol>
-                          <li>Select a bond type using the tabs at the top:</li>
+                          <li>Üstteki sekmeleri kullanarak bir bağ türü seçin:</li>
                           <ul>
-                            <li><strong>Metallic</strong>: Shows a metal lattice with a "sea of electrons"</li>
-                            <li><strong>Ionic</strong>: Displays a sodium chloride (NaCl) crystal structure</li>
-                            <li><strong>Covalent</strong>: Shows a water molecule (H₂O) with shared electron pairs</li>
+                            <li><strong>Metalik</strong>: "Elektron denizi" ile bir metal kafes gösterir</li>
+                            <li><strong>İyonik</strong>: Sodyum klorür (NaCl) kristal yapısını gösterir</li>
+                            <li><strong>Kovalent</strong>: Paylaşılan elektron çiftleriyle bir su molekülünü (H₂O) gösterir</li>
                           </ul>
-                          <li><strong>Drag</strong> with your mouse to rotate the 3D visualization and examine the structure from different angles.</li>
-                          <li>Use your mouse <strong>scroll wheel</strong> to zoom in and out.</li>
-                          <li>Observe the behavior and characteristics unique to each bond type:</li>
+                          <li>3B görselleştirmeyi döndürmek ve yapıyı farklı açılardan incelemek için farenizle <strong>sürükleyin</strong>.</li>
+                          <li>Yakınlaştırmak ve uzaklaştırmak için farenizin <strong>kaydırma tekerleğini</strong> kullanın.</li>
+                          <li>Her bağ türüne özgü davranışları ve özellikleri gözlemleyin:</li>
                           <ul>
-                            <li>In the <strong>metallic bond</strong>, watch how the electrons (blue spheres) move freely through the metal lattice.</li>
-                            <li>In the <strong>ionic bond</strong>, notice the alternating positive and negative ions and the electrostatic field lines between them.</li>
-                            <li>In the <strong>covalent bond</strong>, observe how electrons are shared between atoms and the resulting molecular polarity.</li>
+                            <li><strong>Metalik bağda</strong>, elektronların (mavi küreler) metal kafes boyunca nasıl serbestçe hareket ettiğini izleyin.</li>
+                            <li><strong>İyonik bağda</strong>, değişen pozitif ve negatif iyonları ve aralarındaki elektrostatik alan çizgilerini fark edin.</li>
+                            <li><strong>Kovalent bağda</strong>, elektronların atomlar arasında nasıl paylaşıldığını ve bunun sonucunda oluşan moleküler polariteyi gözlemleyin.</li>
                           </ul>
                         </ol>
-                        <p>Take time to read the descriptions for each bond type to understand their properties and significance in chemistry.</p>
+                        <p>Her bağ türünün özelliklerini ve kimyadaki önemini anlamak için bağ türlerine ait açıklamaları okumak için zaman ayırın.</p>
                       </>
                     ) : simulation.slug === 'state-change' ? (
                       <>
-                        <p>This simulation allows you to explore phase transitions of different substances with customizable parameters. Follow these steps to use the simulation:</p>
+                        <p>Bu simülasyon, özelleştirilebilir parametrelerle farklı maddelerin faz geçişlerini keşfetmenizi sağlar. Simülasyonu kullanmak için şu adımları izleyin:</p>
                         <ol>
-                          <li>Select a <strong>substance</strong> from the dropdown menu (Water, Iron, or Nitrogen).</li>
-                          <li>Adjust the <strong>mass</strong> of the substance (in grams) to see how it affects the energy required for phase changes.</li>
-                          <li>Modify the <strong>heating/cooling rate</strong> to control how quickly energy is added or removed from the system.</li>
-                          <li>Use the <strong>simulation speed</strong> slider to adjust how fast the simulation runs.</li>
-                          <li>Click the <strong>Heat</strong> button to add thermal energy to the substance and observe phase transitions as temperature increases.</li>
-                          <li>Click the <strong>Cool</strong> button to remove thermal energy and watch the substance transition to lower energy states.</li>
-                          <li>Use the <strong>Stop</strong> button to pause the heating or cooling process.</li>
-                          <li>Observe how the substance changes between solid, liquid, and gas phases:</li>
+                          <li>Açılır menüden bir <strong>madde</strong> seçin (Su, Demir veya Azot).</li>
+                          <li>Faz değişimleri için gereken enerjiyi nasıl etkilediğini görmek için maddenin <strong>kütlesini</strong> (gram cinsinden) ayarlayın.</li>
+                          <li>Sistemden ne kadar hızlı enerji eklendiğini veya çıkarıldığını kontrol etmek için <strong>ısıtma/soğutma hızını</strong> değiştirin.</li>
+                          <li>Simülasyonun ne kadar hızlı çalıştığını ayarlamak için <strong>simülasyon hızı</strong> kaydırıcısını kullanın.</li>
+                          <li>Maddeye ısı enerjisi eklemek ve sıcaklık arttıkça faz geçişlerini gözlemlemek için <strong>Isıt</strong> düğmesine tıklayın.</li>
+                          <li>Isı enerjisini çıkarmak ve maddenin daha düşük enerji durumlarına geçişini izlemek için <strong>Soğut</strong> düğmesine tıklayın.</li>
+                          <li>Isıtma veya soğutma işlemini duraklatmak için <strong>Durdur</strong> düğmesini kullanın.</li>
+                          <li>Maddenin katı, sıvı ve gaz fazları arasında nasıl değiştiğini gözlemleyin:</li>
                           <ul>
-                            <li>During <strong>melting</strong> and <strong>boiling</strong>, notice how the temperature remains constant while energy is still being added (latent heat).</li>
-                            <li>Note the different heat capacities for each phase of the substance.</li>
-                            <li>Compare the different melting and boiling points of the three substances.</li>
+                            <li><strong>Erime</strong> ve <strong>kaynama</strong> sırasında, enerji hala ekleniyorken sıcaklığın nasıl sabit kaldığını fark edin (gizli ısı).</li>
+                            <li>Maddenin her fazı için farklı ısı kapasitelerini not edin.</li>
+                            <li>Üç maddenin farklı erime ve kaynama noktalarını karşılaştırın.</li>
                           </ul>
                         </ol>
-                        <p>The right side of the simulation shows detailed data about the current state, temperature, and energy of the substance, as well as substance-specific properties like heat capacity and latent heat values.</p>
+                        <p>Simülasyonun sağ tarafı, maddenin mevcut durumu, sıcaklığı ve enerjisi hakkında ayrıntılı verilerin yanı sıra ısı kapasitesi ve gizli ısı değerleri gibi maddeye özgü özellikleri gösterir.</p>
                       </>
                     ) : simulation.slug === 'gas-laws' ? (
                       <>
-                        <p>This simulation allows you to explore gas behavior and the relationships between pressure, volume, temperature, and moles of gas. Follow these steps to use the simulation:</p>
+                        <p>Bu simülasyon, gaz davranışını ve basınç, hacim, sıcaklık ve gaz mol sayısı arasındaki ilişkileri keşfetmenizi sağlar. Simülasyonu kullanmak için şu adımları izleyin:</p>
                         <ol>
-                          <li>Navigate between four tabs to explore different aspects of gas behavior:
+                          <li>Gaz davranışının farklı yönlerini keşfetmek için dört sekme arasında gezinin:
                             <ul>
-                              <li><strong>Ideal Gas Law</strong>: Explore relationships between gas parameters (P, V, T, n)</li>
-                              <li><strong>Kinetic Theory</strong>: Visualize molecular motion and speed distribution</li>
-                              <li><strong>Gas Mixtures</strong>: Explore Dalton's Law of Partial Pressures</li>
-                              <li><strong>Real Gases</strong>: Compare ideal and non-ideal (Van der Waals) gas behaviors</li>
+                              <li><strong>İdeal Gaz Yasası</strong>: Gaz parametreleri (P, V, T, n) arasındaki ilişkileri keşfedin</li>
+                              <li><strong>Kinetik Teori</strong>: Moleküler hareketi ve hız dağılımını görselleştirin</li>
+                              <li><strong>Gaz Karışımları</strong>: Dalton'un Kısmi Basınçlar Yasasını keşfedin</li>
+                              <li><strong>Gerçek Gazlar</strong>: İdeal ve ideal olmayan (Van der Waals) gaz davranışlarını karşılaştırın</li>
                             </ul>
                           </li>
-                          <li>For each tab:
+                          <li>Her sekme için:
                             <ul>
-                              <li>Select different <strong>gas types</strong> from the dropdown menu to compare properties</li>
-                              <li>Adjust parameters using the <strong>sliders</strong>:
+                              <li>Özellikleri karşılaştırmak için açılır menüden farklı <strong>gaz türleri</strong> seçin</li>
+                              <li>Parametreleri <strong>kaydırıcıları</strong> kullanarak ayarlayın:
                                 <ul>
-                                  <li>Moles of gas (n)</li>
-                                  <li>Temperature (T) in Kelvin</li>
-                                  <li>Pressure (P) in atmospheres</li>
-                                  <li>Volume (V) in liters (in some tabs)</li>
+                                  <li>Gaz mol sayısı (n)</li>
+                                  <li>Sıcaklık (T) Kelvin cinsinden</li>
+                                  <li>Basınç (P) atmosfer cinsinden</li>
+                                  <li>Hacim (V) litre cinsinden (bazı sekmelerde)</li>
                                 </ul>
                               </li>
                             </ul>
                           </li>
-                          <li>In the <strong>Ideal Gas Law</strong> tab:
+                          <li><strong>İdeal Gaz Yasası</strong> sekmesinde:
                             <ul>
-                              <li>Select the gas law model (Ideal or Van der Waals)</li>
-                              <li>Choose different chart types (pressure-volume, pressure-temperature, etc.)</li>
-                              <li>Observe how changing parameters affects the graphs</li>
+                              <li>Gaz yasası modelini seçin (İdeal veya Van der Waals)</li>
+                              <li>Farklı grafik türleri seçin (basınç-hacim, basınç-sıcaklık, vb.)</li>
+                              <li>Parametreleri değiştirmenin grafikleri nasıl etkilediğini gözlemleyin</li>
                             </ul>
                           </li>
-                          <li>In the <strong>Kinetic Theory</strong> tab:
+                          <li><strong>Kinetik Teori</strong> sekmesinde:
                             <ul>
-                              <li>Watch the particle simulation to see how molecular motion changes with temperature</li>
-                              <li>Toggle the speed distribution histogram to visualize the Maxwell-Boltzmann distribution</li>
+                              <li>Sıcaklıkla moleküler hareketin nasıl değiştiğini görmek için parçacık simülasyonunu izleyin</li>
+                              <li>Maxwell-Boltzmann dağılımını görselleştirmek için hız dağılımı histogramını açıp kapatın</li>
                             </ul>
                           </li>
-                          <li>In the <strong>Gas Mixtures</strong> tab:
+                          <li><strong>Gaz Karışımları</strong> sekmesinde:
                             <ul>
-                              <li>Select two different gases and adjust their proportions</li>
-                              <li>Observe how the partial pressures change based on Dalton's Law</li>
+                              <li>İki farklı gaz seçin ve oranlarını ayarlayın</li>
+                              <li>Dalton Yasasına dayalı olarak kısmi basınçların nasıl değiştiğini gözlemleyin</li>
                             </ul>
                           </li>
-                          <li>In the <strong>Real Gases</strong> tab:
+                          <li><strong>Gerçek Gazlar</strong> sekmesinde:
                             <ul>
-                              <li>Compare ideal and real gas behaviors at various pressures and temperatures</li>
-                              <li>See the deviation percentage between the models</li>
-                              <li>Learn about the Van der Waals parameters for different gases</li>
+                              <li>Çeşitli basınç ve sıcaklıklarda ideal ve gerçek gaz davranışlarını karşılaştırın</li>
+                              <li>Modeller arasındaki sapma yüzdesini görün</li>
+                              <li>Farklı gazlar için Van der Waals parametreleri hakkında bilgi edinin</li>
                             </ul>
                           </li>
                         </ol>
-                        <p>All charts and visualizations update in real-time as you adjust the parameters, allowing you to observe the relationships between gas variables dynamically.</p>
+                        <p>Tüm grafikler ve görselleştirmeler, parametreleri ayarladıkça gerçek zamanlı olarak güncellenir ve gaz değişkenleri arasındaki ilişkileri dinamik olarak gözlemlemenizi sağlar.</p>
                       </>
                     ) : (
-                      <p>Instructions for this simulation will be available soon.</p>
+                      <p>Bu simülasyon için talimatlar yakında eklenecektir.</p>
                     )}
                   </div>
                 </div>
@@ -315,51 +315,51 @@ const SimulationPage = () => {
                   <div className="prose dark:prose-invert">
                     {simulation.slug === 'acid-base-titration' ? (
                       <>
-                        <h4>Acid-Base Titration</h4>
-                        <p>An acid-base titration is a method in analytical chemistry used to determine the concentration of an acid or base by exactly neutralizing it with a standard solution of base or acid of known concentration.</p>
+                        <h4>Asit-Baz Titrasyonu</h4>
+                        <p>Asit-baz titrasyonu, analitik kimyada bir asit veya bazın konsantrasyonunu, bilinen konsantrasyondaki bir baz veya asit standart çözeltisiyle tam olarak nötralize ederek belirlemek için kullanılan bir yöntemdir.</p>
                         
-                        <h4>The Titration Curve</h4>
-                        <p>The titration curve represents the pH as a function of the amount of titrant added. For a strong acid-strong base titration, the curve has several key regions:</p>
+                        <h4>Titrasyon Eğrisi</h4>
+                        <p>Titrasyon eğrisi, eklenen titrant miktarının bir fonksiyonu olarak pH'ı gösterir. Güçlü asit-güçlü baz titrasyonu için eğrinin birkaç önemli bölgesi vardır:</p>
                         <ul>
-                          <li><strong>Before the equivalence point:</strong> The pH is dominated by the excess analyte.</li>
-                          <li><strong>At the equivalence point:</strong> The pH is 7.0 for a strong acid-strong base titration.</li>
-                          <li><strong>After the equivalence point:</strong> The pH is dominated by the excess titrant.</li>
+                          <li><strong>Eşdeğerlik noktasından önce:</strong> pH, fazla analite bağlıdır.</li>
+                          <li><strong>Eşdeğerlik noktasında:</strong> Güçlü asit-güçlü baz titrasyonu için pH 7.0'dır.</li>
+                          <li><strong>Eşdeğerlik noktasından sonra:</strong> pH, fazla titranta bağlıdır.</li>
                         </ul>
                         
-                        <h4>pH Calculations</h4>
-                        <p>The pH at any point during the titration is calculated based on the concentration of H+ ions:</p>
+                        <h4>pH Hesaplamaları</h4>
+                        <p>Titrasyon sırasında herhangi bir noktadaki pH, H+ iyonlarının konsantrasyonuna dayanarak hesaplanır:</p>
                         <ul>
-                          <li>For acids: pH = -log[H+]</li>
-                          <li>For bases: pH = 14 - (-log[OH-]) = 14 - pOH</li>
+                          <li>Asitler için: pH = -log[H+]</li>
+                          <li>Bazlar için: pH = 14 - (-log[OH-]) = 14 - pOH</li>
                         </ul>
                         
-                        <h4>Indicators</h4>
-                        <p>Indicators are substances that change color at specific pH values. Phenolphthalein is commonly used in acid-base titrations, changing from colorless (pH &lt; 8.2) to pink (pH &gt; 8.2).</p>
+                        <h4>İndikatörler</h4>
+                        <p>İndikatörler, belirli pH değerlerinde renk değiştiren maddelerdir. Fenolftalein, asit-baz titrasyonlarında yaygın olarak kullanılır ve renksizden (pH &lt; 8.2) pembeye (pH &gt; 8.2) değişir.</p>
                       </>
                     ) : simulation.slug === 'quantum-atom-model' ? (
                       <>
-                        <h4>Quantum Mechanical Model of the Atom</h4>
-                        <p>The quantum mechanical model of the atom is based on quantum physics principles and represents a major advancement over earlier atomic models like Bohr's model. In this model, electrons don't orbit the nucleus in fixed paths but exist in regions of probability called orbitals.</p>
+                        <h4>Atomun Kuantum Mekanik Modeli</h4>
+                        <p>Atomun kuantum mekanik modeli, kuantum fiziği ilkelerine dayanır ve Bohr'un modeli gibi daha önceki atom modellerine göre önemli bir ilerlemeyi temsil eder. Bu modelde, elektronlar çekirdeğin etrafında sabit yörüngelerde hareket etmez, bunun yerine orbital adı verilen olasılık bölgelerinde bulunurlar.</p>
                         
-                        <h4>Atomic Orbitals</h4>
-                        <p>An orbital is a three-dimensional region around the nucleus where there is a high probability (typically 90-95%) of finding an electron. Each orbital can hold a maximum of two electrons with opposite spins.</p>
-                        <p>Orbitals are described by three quantum numbers:</p>
+                        <h4>Atomik Orbitaller</h4>
+                        <p>Orbital, çekirdeğin etrafında bir elektronun bulunma olasılığının yüksek olduğu (genellikle %90-95) üç boyutlu bir bölgedir. Her orbital, zıt spinlere sahip maksimum iki elektron içerebilir.</p>
+                        <p>Orbitaller üç kuantum sayısıyla tanımlanır:</p>
                         <ul>
-                          <li><strong>Principal quantum number (n):</strong> Determines the energy level and size of the orbital (1, 2, 3, etc.)</li>
-                          <li><strong>Angular momentum quantum number (l):</strong> Determines the shape of the orbital (0 for s, 1 for p, 2 for d, etc.)</li>
-                          <li><strong>Magnetic quantum number (m<sub>l</sub>):</strong> Determines the orientation of the orbital in space</li>
+                          <li><strong>Temel kuantum sayısı (n):</strong> Orbitalin enerji seviyesini ve boyutunu belirler (1, 2, 3, vb.)</li>
+                          <li><strong>Açısal momentum kuantum sayısı (l):</strong> Orbitalin şeklini belirler (s için 0, p için 1, d için 2, vb.)</li>
+                          <li><strong>Manyetik kuantum sayısı (m<sub>l</sub>):</strong> Orbitalin uzaydaki yönünü belirler</li>
                         </ul>
                         
-                        <h4>Types of Orbitals</h4>
+                        <h4>Orbital Türleri</h4>
                         <ul>
-                          <li><strong>s orbitals (l=0):</strong> Spherical shape centered on the nucleus. One orbital per energy level.</li>
-                          <li><strong>p orbitals (l=1):</strong> Dumbbell shape with two lobes separated by a nodal plane. Three orbitals per energy level (p<sub>x</sub>, p<sub>y</sub>, p<sub>z</sub>).</li>
-                          <li><strong>d orbitals (l=2):</strong> More complex shapes, typically with four lobes. Five orbitals per energy level.</li>
-                          <li><strong>f orbitals (l=3):</strong> Even more complex shapes. Seven orbitals per energy level.</li>
+                          <li><strong>s orbitalleri (l=0):</strong> Çekirdek merkezli küresel şekil. Her enerji seviyesinde bir orbital.</li>
+                          <li><strong>p orbitalleri (l=1):</strong> Nodal düzlemle ayrılmış iki loblu dambıl şekli. Her enerji seviyesinde üç orbital (p<sub>x</sub>, p<sub>y</sub>, p<sub>z</sub>).</li>
+                          <li><strong>d orbitalleri (l=2):</strong> Genellikle dört loblu daha karmaşık şekiller. Her enerji seviyesinde beş orbital.</li>
+                          <li><strong>f orbitalleri (l=3):</strong> Daha da karmaşık şekiller. Her enerji seviyesinde yedi orbital.</li>
                         </ul>
                         
-                        <h4>Electron Probability Density</h4>
-                        <p>The wave function (Ψ) describes the quantum state of an electron. The square of this function (Ψ²) gives the probability density of finding the electron at a particular point in space. This forms the "electron cloud" or "probability cloud" shown in the simulation.</p>
+                        <h4>Elektron Olasılık Yoğunluğu</h4>
+                        <p>Dalga fonksiyonu (Ψ), bir elektronun kuantum durumunu tanımlar. Bu fonksiyonun karesi (Ψ²), elektronun uzayda belirli bir noktada bulunma olasılık yoğunluğunu verir. Bu, simülasyonda gösterilen "elektron bulutu" veya "olasılık bulutu"nu oluşturur.</p>
                       </>
                     ) : simulation.slug === 'chemical-bonds' ? (
                       <>
