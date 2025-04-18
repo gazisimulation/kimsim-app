@@ -66,8 +66,9 @@ const Home = () => {
             <CategoryRow 
               title="Recently Added" 
               icon={<Clock className="h-5 w-5" />} 
-            simulations={recentSimulations} 
-          />
+              simulations={recentSimulations} 
+            />
+          </>
         )}
         
         {analyticalSimulations.length > 0 && (
