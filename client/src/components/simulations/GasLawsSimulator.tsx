@@ -232,11 +232,11 @@ export default function GasLawsSimulator() {
     const n = moles; // mol
     
     // Labels
-    ctx.fillText('Volume (L)', chartX + chartWidth / 2 - 30, chartY + chartHeight + 30);
+    ctx.fillText('Hacim (L)', chartX + chartWidth / 2 - 30, chartY + chartHeight + 30);
     ctx.save();
     ctx.translate(chartX - 35, chartY + chartHeight / 2);
     ctx.rotate(-Math.PI / 2);
-    ctx.fillText('Pressure (atm)', 0, 0);
+    ctx.fillText('Basınç (atm)', 0, 0);
     ctx.restore();
     
     // Draw isotherms for current gas
@@ -988,10 +988,10 @@ export default function GasLawsSimulator() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="gas-type">Gas Type</Label>
+                  <Label htmlFor="gas-type">Gaz Türü</Label>
                   <Select value={gasName} onValueChange={(value: GasName) => setGasName(value)}>
                     <SelectTrigger>
-                      <SelectValue placeholder="Select gas" />
+                      <SelectValue placeholder="Gaz seçin" />
                     </SelectTrigger>
                     <SelectContent>
                       {Object.keys(GASES).map((gas) => (
@@ -1002,20 +1002,20 @@ export default function GasLawsSimulator() {
                 </div>
                 
                 <div className="space-y-2">
-                  <Label htmlFor="gas-law">Gas Law Model</Label>
+                  <Label htmlFor="gas-law">Gaz Yasası Modeli</Label>
                   <Select value={gasLaw} onValueChange={(value: GasLaw) => setGasLaw(value)}>
                     <SelectTrigger>
-                      <SelectValue placeholder="Select model" />
+                      <SelectValue placeholder="Model seçin" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="ideal">Ideal Gas Law</SelectItem>
-                      <SelectItem value="vanderwaals">Van der Waals Equation</SelectItem>
+                      <SelectItem value="ideal">İdeal Gaz Yasası</SelectItem>
+                      <SelectItem value="vanderwaals">Van der Waals Denklemi</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
 
                 <div className="space-y-2">
-                  <Label>Moles (n)</Label>
+                  <Label>Mol (n)</Label>
                   <div className="flex items-center gap-2">
                     <Slider 
                       min={0.1} 
@@ -1029,7 +1029,7 @@ export default function GasLawsSimulator() {
                 </div>
                 
                 <div className="space-y-2">
-                  <Label>Temperature (K)</Label>
+                  <Label>Sıcaklık (K)</Label>
                   <div className="flex items-center gap-2">
                     <Slider 
                       min={100} 
@@ -1043,7 +1043,7 @@ export default function GasLawsSimulator() {
                 </div>
                 
                 <div className="space-y-2">
-                  <Label>Pressure (atm)</Label>
+                  <Label>Basınç (atm)</Label>
                   <div className="flex items-center gap-2">
                     <Slider 
                       min={0.1} 
@@ -1058,13 +1058,13 @@ export default function GasLawsSimulator() {
 
                 <div className="pt-4">
                   <div className="bg-gray-100 dark:bg-gray-800 p-3 rounded-md">
-                    <h3 className="font-medium mb-2">Current Values</h3>
+                    <h3 className="font-medium mb-2">Mevcut Değerler</h3>
                     <div className="grid grid-cols-2 gap-2 text-sm">
-                      <div>Gas:</div><div className="font-medium">{gasName}</div>
-                      <div>Moles (n):</div><div className="font-medium">{moles} mol</div>
-                      <div>Temperature (T):</div><div className="font-medium">{temperature} K</div>
-                      <div>Pressure (P):</div><div className="font-medium">{pressure} atm</div>
-                      <div>Volume (V):</div><div className="font-medium">{volume.toFixed(2)} L</div>
+                      <div>Gaz:</div><div className="font-medium">{gasName}</div>
+                      <div>Mol (n):</div><div className="font-medium">{moles} mol</div>
+                      <div>Sıcaklık (T):</div><div className="font-medium">{temperature} K</div>
+                      <div>Basınç (P):</div><div className="font-medium">{pressure} atm</div>
+                      <div>Hacim (V):</div><div className="font-medium">{volume.toFixed(2)} L</div>
                     </div>
                   </div>
                 </div>
@@ -1142,10 +1142,10 @@ export default function GasLawsSimulator() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="gas-type">Gas Type</Label>
+                  <Label htmlFor="gas-type">Gaz Türü</Label>
                   <Select value={gasName} onValueChange={(value: GasName) => setGasName(value)}>
                     <SelectTrigger>
-                      <SelectValue placeholder="Select gas" />
+                      <SelectValue placeholder="Gaz seçin" />
                     </SelectTrigger>
                     <SelectContent>
                       {Object.keys(GASES).map((gas) => (
@@ -1156,7 +1156,7 @@ export default function GasLawsSimulator() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label>Moles (n)</Label>
+                  <Label>Mol (n)</Label>
                   <div className="flex items-center gap-2">
                     <Slider 
                       min={0.1} 
@@ -1170,7 +1170,7 @@ export default function GasLawsSimulator() {
                 </div>
                 
                 <div className="space-y-2">
-                  <Label>Temperature (K)</Label>
+                  <Label>Sıcaklık (K)</Label>
                   <div className="flex items-center gap-2">
                     <Slider 
                       min={100} 
@@ -1184,7 +1184,7 @@ export default function GasLawsSimulator() {
                 </div>
                 
                 <div className="space-y-2">
-                  <Label>Volume (L)</Label>
+                  <Label>Hacim (L)</Label>
                   <div className="flex items-center gap-2">
                     <Slider 
                       min={1} 
