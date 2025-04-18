@@ -1007,9 +1007,9 @@ function QuantumNumbersCalculator() {
         case "Calculate n":
           // For calculating n from l (n must be greater than l)
           if (lValue >= 0) {
-            setResult(`n ≥ ${lValue + 1}, so n can be ${lValue + 1}, ${lValue + 2}, ${lValue + 3}, ...`);
+            setResult(`n ≥ ${lValue + 1}, yani n değerleri ${lValue + 1}, ${lValue + 2}, ${lValue + 3}, ... olabilir`);
           } else {
-            setResult("l must be non-negative");
+            setResult("l değeri negatif olmamalıdır");
           }
           break;
 
@@ -1067,23 +1067,23 @@ function QuantumNumbersCalculator() {
       <CardHeader>
         <CardTitle className="flex items-center">
           <CircleDot className="mr-2 h-5 w-5" /> 
-          Quantum Numbers Calculator
+          Kuantum Sayıları Hesaplayıcısı
         </CardTitle>
-        <CardDescription>Calculate and validate quantum numbers for atomic orbitals</CardDescription>
+        <CardDescription>Atom yörüngeleri için kuantum sayılarını hesaplayın ve doğrulayın</CardDescription>
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
           <div>
-            <Label htmlFor="quantum-calc">What do you want to calculate?</Label>
+            <Label htmlFor="quantum-calc">Ne hesaplamak istiyorsunuz?</Label>
             <Select value={calc} onValueChange={setCalc}>
               <SelectTrigger id="quantum-calc">
-                <SelectValue placeholder="Select calculation" />
+                <SelectValue placeholder="Hesaplama seçin" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="Calculate n">Find possible n values</SelectItem>
-                <SelectItem value="Calculate possible l">Find possible l values</SelectItem>
-                <SelectItem value="Calculate possible ml">Find possible ml values</SelectItem>
-                <SelectItem value="Check validity">Check if quantum numbers are valid</SelectItem>
+                <SelectItem value="Calculate n">Olası n değerlerini bul</SelectItem>
+                <SelectItem value="Calculate possible l">Olası l değerlerini bul</SelectItem>
+                <SelectItem value="Calculate possible ml">Olası ml değerlerini bul</SelectItem>
+                <SelectItem value="Check validity">Kuantum sayılarının geçerliliğini kontrol et</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -1091,7 +1091,7 @@ function QuantumNumbersCalculator() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {calc !== "Calculate n" && (
               <div>
-                <Label htmlFor="n-value">Principal Quantum Number (n)</Label>
+                <Label htmlFor="n-value">Ana Kuantum Sayısı (n)</Label>
                 <Input 
                   id="n-value" 
                   type="number" 
@@ -1099,13 +1099,13 @@ function QuantumNumbersCalculator() {
                   onChange={(e) => setN(e.target.value)}
                   min={1}
                 />
-                <p className="text-xs text-slate-500 mt-1">Positive integer (n ≥ 1)</p>
+                <p className="text-xs text-slate-500 mt-1">Pozitif tam sayı (n ≥ 1)</p>
               </div>
             )}
 
             {calc !== "Calculate possible l" && (
               <div>
-                <Label htmlFor="l-value">Angular Momentum Quantum Number (l)</Label>
+                <Label htmlFor="l-value">Açısal Momentum Kuantum Sayısı (l)</Label>
                 <Input 
                   id="l-value" 
                   type="number" 
@@ -1120,7 +1120,7 @@ function QuantumNumbersCalculator() {
 
             {calc !== "Calculate possible ml" && calc !== "Calculate n" && calc !== "Calculate possible l" && (
               <div>
-                <Label htmlFor="ml-value">Magnetic Quantum Number (ml)</Label>
+                <Label htmlFor="ml-value">Manyetik Kuantum Sayısı (ml)</Label>
                 <Input 
                   id="ml-value" 
                   type="number" 
@@ -1135,17 +1135,17 @@ function QuantumNumbersCalculator() {
           </div>
 
           <div className="p-4 bg-slate-100 dark:bg-slate-800 rounded-md">
-            <div className="text-sm font-medium mb-2">Result:</div>
+            <div className="text-sm font-medium mb-2">Sonuç:</div>
             <div className="text-lg font-medium">{result}</div>
 
             {calc === "Check validity" && parseInt(n as string) > 0 && parseInt(l as string) >= 0 && parseInt(l as string) < parseInt(n as string) && (
               <div className="mt-4 text-sm">
-                <p className="font-medium">Orbital designation: {n}{getOrbitalName(parseInt(l as string))}</p>
+                <p className="font-medium">Orbital gösterimi: {n}{getOrbitalName(parseInt(l as string))}</p>
                 <p className="text-slate-500 mt-1">
-                  {parseInt(l as string) === 0 && "s orbital (spherical)"}
-                  {parseInt(l as string) === 1 && "p orbital (dumbbell shaped, 3 orientations)"}
-                  {parseInt(l as string) === 2 && "d orbital (4-lobed shape, 5 orientations)"}
-                  {parseInt(l as string) === 3 && "f orbital (complex shape, 7 orientations)"}
+                  {parseInt(l as string) === 0 && "s orbitali (küresel)"}
+                  {parseInt(l as string) === 1 && "p orbitali (halter şeklinde, 3 yönelim)"}
+                  {parseInt(l as string) === 2 && "d orbitali (4 loblu şekil, 5 yönelim)"}
+                  {parseInt(l as string) === 3 && "f orbitali (karmaşık şekil, 7 yönelim)"}
                 </p>
               </div>
             )}
