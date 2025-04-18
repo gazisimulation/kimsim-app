@@ -236,17 +236,17 @@ function IdealGasLawCalculator() {
       <CardHeader>
         <CardTitle className="flex items-center">
           <Thermometer className="mr-2 h-5 w-5" /> 
-          Ideal Gas Law Calculator
+          İdeal Gaz Yasası Hesaplayıcısı
         </CardTitle>
-        <CardDescription>PV = nRT - Calculate any variable when you know the others</CardDescription>
+        <CardDescription>PV = nRT - Diğer değişkenleri bildiğinizde herhangi bir değişkeni hesaplayın</CardDescription>
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
           <div>
-            <Label htmlFor="calc">What do you want to calculate?</Label>
+            <Label htmlFor="calc">Ne hesaplamak istiyorsunuz?</Label>
             <Select value={calc} onValueChange={setCalc}>
               <SelectTrigger id="calc">
-                <SelectValue placeholder="Select calculation" />
+                <SelectValue placeholder="Hesaplama seçin" />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="PV çarpımı">PV çarpımı</SelectItem>
@@ -299,10 +299,10 @@ function IdealGasLawCalculator() {
             )}
 
             <div>
-              <Label htmlFor="gas-constant">R (gas constant)</Label>
+              <Label htmlFor="gas-constant">R (gaz sabiti)</Label>
               <Select value={r.toString()} onValueChange={(value) => setR(parseFloat(value))}>
                 <SelectTrigger id="gas-constant">
-                  <SelectValue placeholder="Select R value" />
+                  <SelectValue placeholder="R değeri seçin" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="0">22.4/273 (L·atm/mol·K)</SelectItem>
@@ -312,7 +312,7 @@ function IdealGasLawCalculator() {
               </Select>
             </div>
 
-            {calc !== "Temperature" && (
+            {calc !== "Sıcaklık" && (
               <div>
                 <Label htmlFor="temperature">T (K)</Label>
                 <Input 
@@ -327,14 +327,14 @@ function IdealGasLawCalculator() {
           </div>
 
           <div className="p-4 bg-slate-100 dark:bg-slate-800 rounded-md">
-            <div className="text-sm font-medium mb-2">Result:</div>
+            <div className="text-sm font-medium mb-2">Sonuç:</div>
             <div className="text-2xl font-bold">{result}</div>
             <div className="text-sm text-slate-500 mt-2">
-              {calc === "PV product" && "PV value in atm·L"}
-              {calc === "Pressure" && "Pressure in atm"}
-              {calc === "Volume" && "Volume in L"}
-              {calc === "Moles" && "Number of moles"}
-              {calc === "Temperature" && "Temperature in K"}
+              {calc === "PV çarpımı" && "PV değeri (atm·L)"}
+              {calc === "Basınç" && "Basınç (atm)"}
+              {calc === "Hacim" && "Hacim (L)"}
+              {calc === "Mol Sayısı" && "Mol sayısı"}
+              {calc === "Sıcaklık" && "Sıcaklık (K)"}
             </div>
           </div>
         </div>
@@ -375,17 +375,17 @@ function AverageAtomicMassCalculator() {
       <CardHeader>
         <CardTitle className="flex items-center">
           <Atom className="mr-2 h-5 w-5" /> 
-          Average Atomic Mass Calculator
+          Ortalama Atom Kütlesi Hesaplayıcısı
         </CardTitle>
-        <CardDescription>Calculate the average atomic mass of an element with isotopes</CardDescription>
+        <CardDescription>İzotopları olan bir elementin ortalama atom kütlesini hesaplayın</CardDescription>
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
           <div className="grid grid-cols-2 gap-6">
             <div className="space-y-4 border-r pr-6">
-              <Label className="text-center block">First Isotope</Label>
+              <Label className="text-center block">Birinci İzotop</Label>
               <div>
-                <Label htmlFor="atomic-mass-1">Atomic Mass</Label>
+                <Label htmlFor="atomic-mass-1">Atom Kütlesi</Label>
                 <Input 
                   id="atomic-mass-1" 
                   type="number" 
@@ -395,7 +395,7 @@ function AverageAtomicMassCalculator() {
                 />
               </div>
               <div>
-                <Label htmlFor="abundance-1">Abundance (%)</Label>
+                <Label htmlFor="abundance-1">Bolluk (%)</Label>
                 <Input 
                   id="abundance-1" 
                   type="number" 
@@ -408,9 +408,9 @@ function AverageAtomicMassCalculator() {
             </div>
 
             <div className="space-y-4">
-              <Label className="text-center block">Second Isotope</Label>
+              <Label className="text-center block">İkinci İzotop</Label>
               <div>
-                <Label htmlFor="atomic-mass-2">Atomic Mass</Label>
+                <Label htmlFor="atomic-mass-2">Atom Kütlesi</Label>
                 <Input 
                   id="atomic-mass-2" 
                   type="number" 
@@ -420,7 +420,7 @@ function AverageAtomicMassCalculator() {
                 />
               </div>
               <div>
-                <Label htmlFor="abundance-2">Abundance (%)</Label>
+                <Label htmlFor="abundance-2">Bolluk (%)</Label>
                 <Input 
                   id="abundance-2" 
                   type="number" 
@@ -434,10 +434,10 @@ function AverageAtomicMassCalculator() {
           </div>
 
           <div className="p-4 bg-slate-100 dark:bg-slate-800 rounded-md">
-            <div className="text-sm font-medium mb-2">Calculation: (a₁ × y₁ + a₂ × y₂) / 100</div>
+            <div className="text-sm font-medium mb-2">Hesaplama: (a₁ × y₁ + a₂ × y₂) / 100</div>
             <div className="text-2xl font-bold">{result} amu</div>
             <div className="text-sm text-slate-500 mt-2">
-              Average atomic mass in atomic mass units (amu)
+              Ortalama atom kütlesi (amu biriminde)
             </div>
           </div>
         </div>
@@ -480,9 +480,9 @@ function AvogadroCalculator() {
       <CardHeader>
         <CardTitle className="flex items-center">
           <Hash className="mr-2 h-5 w-5" /> 
-          Avogadro Number Calculator
+          Avogadro Sayısı Hesaplayıcısı
         </CardTitle>
-        <CardDescription>Multiply or divide a number by Avogadro's constant ({AVOGADRO_NUMBER})</CardDescription>
+        <CardDescription>Avogadro sabitiyle ({AVOGADRO_NUMBER}) bir sayıyı çarpın veya bölün</CardDescription>
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
