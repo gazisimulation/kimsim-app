@@ -875,7 +875,7 @@ function MolarityCalculator() {
 
               {calc !== "Volume or Mass" && (
                 <div>
-                  <Label htmlFor="v-value">V (L) or Mass (kg)</Label>
+                  <Label htmlFor="v-value">V (L) veya Kütle (kg)</Label>
                   <Input 
                     id="v-value" 
                     type="number" 
@@ -900,16 +900,16 @@ function MolarityCalculator() {
 
           <TabsContent value="advanced" className="space-y-4 mt-4">
             <div>
-              <Label htmlFor="advanced-calc">What do you want to calculate?</Label>
+              <Label htmlFor="advanced-calc">Ne hesaplamak istiyorsunuz?</Label>
               <Select value={calcM} onValueChange={setCalcM}>
                 <SelectTrigger id="advanced-calc">
-                  <SelectValue placeholder="Select calculation" />
+                  <SelectValue placeholder="Hesaplama seçin" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="Find M">Find Molarity (M)</SelectItem>
-                  <SelectItem value="Find %">Find Concentration (%)</SelectItem>
-                  <SelectItem value="Find density">Find Density (d)</SelectItem>
-                  <SelectItem value="Find Molar Mass">Find Molar Mass (Ma)</SelectItem>
+                  <SelectItem value="Find M">Molarite Hesapla (M)</SelectItem>
+                  <SelectItem value="Find %">Konsantrasyon Hesapla (%)</SelectItem>
+                  <SelectItem value="Find density">Yoğunluk Hesapla (d)</SelectItem>
+                  <SelectItem value="Find Molar Mass">Molar Kütleyi Hesapla (Ma)</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -930,7 +930,7 @@ function MolarityCalculator() {
 
               {calcM !== "Find density" && (
                 <div>
-                  <Label htmlFor="d-value">Density (g/mL)</Label>
+                  <Label htmlFor="d-value">Yoğunluk (g/mL)</Label>
                   <Input 
                     id="d-value" 
                     type="number" 
@@ -943,7 +943,7 @@ function MolarityCalculator() {
 
               {calcM !== "Find %" && (
                 <div>
-                  <Label htmlFor="percent-value">% Concentration</Label>
+                  <Label htmlFor="percent-value">% Konsantrasyon</Label>
                   <Input 
                     id="percent-value" 
                     type="number" 
@@ -957,7 +957,7 @@ function MolarityCalculator() {
 
               {calcM !== "Find Molar Mass" && (
                 <div>
-                  <Label htmlFor="ma-value">Molar Mass (g/mol)</Label>
+                  <Label htmlFor="ma-value">Molar Kütle (g/mol)</Label>
                   <Input 
                     id="ma-value" 
                     type="number" 
@@ -970,13 +970,13 @@ function MolarityCalculator() {
             </div>
 
             <div className="p-4 bg-slate-100 dark:bg-slate-800 rounded-md">
-              <div className="text-sm font-medium mb-2">Calculation: M = d × % × 10 / Ma</div>
+              <div className="text-sm font-medium mb-2">Hesaplama: M = d × % × 10 / Ma</div>
               <div className="text-2xl font-bold">{result2}</div>
               <div className="text-sm text-slate-500 mt-2">
-                {calcM === "Find M" && "Molarity in mol/L"}
-                {calcM === "Find %" && "Concentration in %"}
-                {calcM === "Find density" && "Density in g/mL"}
-                {calcM === "Find Molar Mass" && "Molar Mass in g/mol"}
+                {calcM === "Find M" && "Molarite (mol/L)"}
+                {calcM === "Find %" && "Konsantrasyon (%)"}
+                {calcM === "Find density" && "Yoğunluk (g/mL)"}
+                {calcM === "Find Molar Mass" && "Molar Kütle (g/mol)"}
               </div>
             </div>
           </TabsContent>
