@@ -343,11 +343,11 @@ export default function GasLawsSimulator() {
     const n = moles; // mol
     
     // Labels
-    ctx.fillText('Temperature (K)', chartX + chartWidth / 2 - 40, chartY + chartHeight + 30);
+    ctx.fillText('Sıcaklık (K)', chartX + chartWidth / 2 - 40, chartY + chartHeight + 30);
     ctx.save();
     ctx.translate(chartX - 35, chartY + chartHeight / 2);
     ctx.rotate(-Math.PI / 2);
-    ctx.fillText('Pressure (atm)', 0, 0);
+    ctx.fillText('Basınç (atm)', 0, 0);
     ctx.restore();
     
     // Draw isobaric lines
@@ -454,11 +454,11 @@ export default function GasLawsSimulator() {
     const n = moles; // mol
     
     // Labels
-    ctx.fillText('Temperature (K)', chartX + chartWidth / 2 - 40, chartY + chartHeight + 30);
+    ctx.fillText('Sıcaklık (K)', chartX + chartWidth / 2 - 40, chartY + chartHeight + 30);
     ctx.save();
     ctx.translate(chartX - 35, chartY + chartHeight / 2);
     ctx.rotate(-Math.PI / 2);
-    ctx.fillText('Volume (L)', 0, 0);
+    ctx.fillText('Hacim (L)', 0, 0);
     ctx.restore();
     
     // Draw isotherms
