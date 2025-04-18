@@ -386,9 +386,10 @@ export default function StateChangeSimulator() {
                 <div className="absolute inset-0 bg-blue-300 dark:bg-blue-700 flex flex-col justify-center items-center text-blue-700 dark:text-blue-200 text-xl font-bold overflow-hidden">
                   <div className="flex items-center space-x-2">
                     <Droplets className="h-6 w-6" />
-                    <span>{state === 'liquid' ? 'Liquid' : 'Boiling'} ({substance === 'Water' ? 'Water' : substance})</span>
+                    <span>{state === 'liquid' ? 'Sıvı' : 'Kaynama'} ({substance === 'Water' ? 'Su' : 
+                           substance === 'Iron' ? 'Demir' : 'Azot'})</span>
                   </div>
-                  {state === 'boiling' && <div className="text-sm mt-1">Phase change in progress...</div>}
+                  {state === 'boiling' && <div className="text-sm mt-1">Faz değişimi sürüyor...</div>}
                   <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-blue-300 dark:from-blue-600 dark:to-blue-700 opacity-40 bg-[length:200%_100%] animate-[wave_2s_linear_infinite]"></div>
                 </div>
               )}
@@ -396,7 +397,8 @@ export default function StateChangeSimulator() {
                 <div className="absolute inset-0 bg-blue-50 dark:bg-blue-950 flex justify-center items-center text-blue-700 dark:text-blue-400 text-xl font-bold">
                   <div className="flex items-center space-x-2">
                     <Wind className="h-6 w-6" />
-                    <span>Gas ({substance === 'Water' ? 'Steam' : substance})</span>
+                    <span>Gaz ({substance === 'Water' ? 'Buhar' : 
+                         substance === 'Iron' ? 'Demir' : 'Azot'})</span>
                   </div>
                   <div className="absolute inset-0 bg-blue-100 dark:bg-blue-900 opacity-10 animate-[fadeOut_1.5s_forwards]"></div>
                   <div className="absolute inset-0 bg-blue-50 dark:bg-blue-950 opacity-5 animate-[fadeOut_1.5s_0.25s_forwards]"></div>
