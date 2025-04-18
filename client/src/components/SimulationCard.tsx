@@ -53,8 +53,8 @@ const SimulationCard: React.FC<SimulationCardProps> = ({ simulation }) => {
               </div>
             </div>
             <CardContent className="p-4 bg-gray-800">
-              <h3 className="font-medium text-lg text-white mb-1">{simulation.title}</h3>
-              <p className="text-gray-300 text-sm mb-2">{simulation.description}</p>
+              <h3 className="font-semibold text-lg text-white mb-2 leading-tight">{simulation.title}</h3>
+              <p className="text-gray-200 text-sm mb-3 leading-relaxed">{simulation.description}</p>
               <div className="flex items-center text-xs text-gray-400">
                 <span className="flex items-center">
                   {getCategoryIcon(simulation.category)}

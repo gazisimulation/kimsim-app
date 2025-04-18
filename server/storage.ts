@@ -123,27 +123,13 @@ export class MemStorage implements IStorage {
       description: "Explore metallic, ionic, and covalent bonding mechanisms in 3D",
       slug: "chemical-bonds",
       category: "physical",
-      imageUrl: "https://images.unsplash.com/photo-1616661320565-4a3790394c4a?q=80&w=2070&auto=format&fit=crop",
+      imageUrl: "https://images.unsplash.com/photo-1554475900-0a0350e3fc7b?q=80&w=3419&auto=format&fit=crop",
       duration: "20 min",
       difficulty: "Intermediate",
       isFeatured: false,
       isNew: true,
       isPopular: false,
       path: "/simulations/chemical-bonds"
-    };
-    
-    const redoxReactions: InsertSimulation = {
-      title: "Redox Reactions",
-      description: "Visualize electron transfer in redox reactions",
-      slug: "redox-reactions",
-      category: "analytical",
-      imageUrl: "https://images.unsplash.com/photo-1580894732930-0babd100d356?q=80&w=2070&auto=format&fit=crop",
-      duration: "20 min",
-      difficulty: "Advanced",
-      isFeatured: false,
-      isNew: false,
-      isPopular: false,
-      path: "/simulations/redox-reactions"
     };
     
     const molecularOrbital: InsertSimulation = {
@@ -158,20 +144,6 @@ export class MemStorage implements IStorage {
       isNew: false,
       isPopular: true,
       path: "/simulations/molecular-orbital"
-    };
-    
-    const spectroscopy: InsertSimulation = {
-      title: "Spectroscopy Basics",
-      description: "Learn about light-matter interactions",
-      slug: "spectroscopy",
-      category: "analytical",
-      imageUrl: "https://images.unsplash.com/photo-1616661316529-3338a04a1b5b?q=80&w=2128&auto=format&fit=crop",
-      duration: "15 min",
-      difficulty: "Intermediate",
-      isFeatured: false,
-      isNew: true,
-      isPopular: false,
-      path: "/simulations/spectroscopy"
     };
     
     // State Change Simulation
@@ -195,7 +167,7 @@ export class MemStorage implements IStorage {
       description: "Explore gas behavior, ideal gas law, kinetic theory, gas mixtures, and real gases",
       slug: "gas-laws",
       category: "physical",
-      imageUrl: "https://images.unsplash.com/photo-1599751449615-e24a5dd0468e?q=80&w=2069&auto=format&fit=crop",
+      imageUrl: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?q=80&w=3270&auto=format&fit=crop",
       duration: "30 min",
       difficulty: "Intermediate",
       isFeatured: true,
