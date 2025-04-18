@@ -400,49 +400,49 @@ export default function QuantumAtomModelSimulator() {
     <div className="flex flex-col lg:flex-row items-start justify-center gap-6">
       <Card className="w-full lg:w-1/3">
         <CardHeader>
-          <CardTitle>Quantum Atom Model</CardTitle>
+          <CardTitle>Kuantum Atom Modeli</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="orbital-type">Orbital Type</Label>
+            <Label htmlFor="orbital-type">Orbital Tipi</Label>
             <Select value={currentOrbital} onValueChange={handleOrbitalChange}>
               <SelectTrigger id="orbital-type">
-                <SelectValue placeholder="Select orbital" />
+                <SelectValue placeholder="Orbital seçin" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="1s">1s Orbital</SelectItem>
-                <SelectItem value="2s">2s Orbital</SelectItem>
-                <SelectItem value="2p">2p Orbital</SelectItem>
-                <SelectItem value="3s">3s Orbital</SelectItem>
-                <SelectItem value="3p">3p Orbital</SelectItem>
-                <SelectItem value="3d">3d Orbital</SelectItem>
+                <SelectItem value="1s">1s Orbitali</SelectItem>
+                <SelectItem value="2s">2s Orbitali</SelectItem>
+                <SelectItem value="2p">2p Orbitali</SelectItem>
+                <SelectItem value="3s">3s Orbitali</SelectItem>
+                <SelectItem value="3p">3p Orbitali</SelectItem>
+                <SelectItem value="3d">3d Orbitali</SelectItem>
               </SelectContent>
             </Select>
           </div>
           
           <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-md">
-            <h3 className="text-lg font-semibold mb-2">Orbital Information</h3>
+            <h3 className="text-lg font-semibold mb-2">Orbital Bilgisi</h3>
             <p className="text-sm mb-2">
-              Current orbital: <span className="font-bold">{currentOrbital}</span>
+              Mevcut orbital: <span className="font-bold">{currentOrbital}</span>
             </p>
             <p className="text-sm mb-4">
-              {currentOrbital === '1s' && "The 1s orbital is spherical and holds up to 2 electrons."}
-              {currentOrbital === '2s' && "The 2s orbital is spherical, larger than 1s, and holds up to 2 electrons."}
-              {currentOrbital === '2p' && "The 2p orbital has a dumbbell shape with 3 orientations (px, py, pz) and holds up to 6 electrons."}
-              {currentOrbital === '3s' && "The 3s orbital is spherical, larger than 2s, and holds up to 2 electrons."}
-              {currentOrbital === '3p' && "The 3p orbital has a dumbbell shape with 3 orientations and holds up to 6 electrons."}
-              {currentOrbital === '3d' && "The 3d orbital has a complex 4-lobed shape and holds up to 10 electrons."}
+              {currentOrbital === '1s' && "1s orbitali küreseldir ve en fazla 2 elektron barındırır."}
+              {currentOrbital === '2s' && "2s orbitali küreseldir, 1s'den daha büyüktür ve en fazla 2 elektron barındırır."}
+              {currentOrbital === '2p' && "2p orbitali halter şeklindedir, 3 yönelimi vardır (px, py, pz) ve en fazla 6 elektron barındırır."}
+              {currentOrbital === '3s' && "3s orbitali küreseldir, 2s'den daha büyüktür ve en fazla 2 elektron barındırır."}
+              {currentOrbital === '3p' && "3p orbitali halter şeklindedir, 3 yönelimi vardır ve en fazla 6 elektron barındırır."}
+              {currentOrbital === '3d' && "3d orbitali karmaşık 4 loblu bir şekle sahiptir ve en fazla 10 elektron barındırır."}
             </p>
             
             <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
               <AtomIcon className="h-4 w-4" />
               <span>
-                {currentOrbital === '1s' && "Energy level: 1, Angular momentum: 0"}
-                {currentOrbital === '2s' && "Energy level: 2, Angular momentum: 0"}
-                {currentOrbital === '2p' && "Energy level: 2, Angular momentum: 1"}
-                {currentOrbital === '3s' && "Energy level: 3, Angular momentum: 0"}
-                {currentOrbital === '3p' && "Energy level: 3, Angular momentum: 1"}
-                {currentOrbital === '3d' && "Energy level: 3, Angular momentum: 2"}
+                {currentOrbital === '1s' && "Enerji seviyesi: 1, Açısal momentum: 0"}
+                {currentOrbital === '2s' && "Enerji seviyesi: 2, Açısal momentum: 0"}
+                {currentOrbital === '2p' && "Enerji seviyesi: 2, Açısal momentum: 1"}
+                {currentOrbital === '3s' && "Enerji seviyesi: 3, Açısal momentum: 0"}
+                {currentOrbital === '3p' && "Enerji seviyesi: 3, Açısal momentum: 1"}
+                {currentOrbital === '3d' && "Enerji seviyesi: 3, Açısal momentum: 2"}
               </span>
             </div>
           </div>
@@ -452,7 +452,7 @@ export default function QuantumAtomModelSimulator() {
       <div className="w-full lg:w-2/3">
         <Card>
           <CardHeader>
-            <CardTitle>3D Visualization</CardTitle>
+            <CardTitle>3D Görselleştirme</CardTitle>
           </CardHeader>
           <CardContent>
             <div ref={containerRef} className="w-full h-[400px] relative bg-gray-900 rounded-md overflow-hidden">
@@ -466,7 +466,7 @@ export default function QuantumAtomModelSimulator() {
                 className="w-full h-full"
               />
               <div className="absolute bottom-4 left-4 text-white text-sm bg-black/50 px-3 py-1 rounded-full">
-                Drag to rotate | Scroll to zoom
+                Döndürmek için sürükleyin | Yakınlaştırmak için kaydırın
               </div>
             </div>
             <div className="mt-4 flex justify-center">
@@ -478,7 +478,7 @@ export default function QuantumAtomModelSimulator() {
                 }}
                 className="flex items-center"
               >
-                <RotateCcw className="mr-2 h-4 w-4" /> Reset View
+                <RotateCcw className="mr-2 h-4 w-4" /> Görünümü Sıfırla
               </Button>
             </div>
           </CardContent>
