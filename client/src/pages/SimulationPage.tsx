@@ -94,7 +94,7 @@ const SimulationPage = () => {
           <Button variant="ghost" asChild>
             <Link href="/">
               <a className="text-primary-500 hover:text-primary-400 flex items-center">
-                <ArrowLeft className="mr-1 h-4 w-4" /> Back to Simulations
+                <ArrowLeft className="mr-1 h-4 w-4" /> Simülasyonlara Dön
               </a>
             </Link>
           </Button>
@@ -114,29 +114,29 @@ const SimulationPage = () => {
           <div className="w-full md:w-4/12">
             <Card>
               <CardContent className="pt-6">
-                <h3 className="text-lg font-bold mb-4">Simulation Details</h3>
+                <h3 className="text-lg font-bold mb-4">Simülasyon Detayları</h3>
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <span className="text-gray-500 dark:text-gray-400">Category</span>
+                    <span className="text-gray-500 dark:text-gray-400">Kategori</span>
                     <div className="flex items-center">
                       <FlaskRound className="h-4 w-4 mr-1" />
                       <span>{simulation.category.charAt(0).toUpperCase() + simulation.category.slice(1)}</span>
                     </div>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-gray-500 dark:text-gray-400">Duration</span>
+                    <span className="text-gray-500 dark:text-gray-400">Süre</span>
                     <div className="flex items-center">
                       <Clock className="h-4 w-4 mr-1" />
                       <span>{simulation.duration}</span>
                     </div>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-gray-500 dark:text-gray-400">Difficulty</span>
+                    <span className="text-gray-500 dark:text-gray-400">Zorluk</span>
                     <Badge>{simulation.difficulty}</Badge>
                   </div>
                   <div className="flex flex-wrap gap-2 mt-4">
-                    {simulation.isNew && <Badge variant="secondary">New</Badge>}
-                    {simulation.isPopular && <Badge>Popular</Badge>}
+                    {simulation.isNew && <Badge variant="secondary">Yeni</Badge>}
+                    {simulation.isPopular && <Badge>Popüler</Badge>}
                   </div>
                 </div>
               </CardContent>
@@ -151,16 +151,16 @@ const SimulationPage = () => {
             <div className="bg-gray-100 dark:bg-gray-900 px-4 py-3 border-b border-gray-200 dark:border-gray-700">
               <TabsList className="bg-transparent">
                 <TabsTrigger value="simulation" className="data-[state=active]:text-primary-500 data-[state=active]:border-b-2 data-[state=active]:border-primary-500">
-                  <Beaker className="h-4 w-4 mr-2" /> Simulation
+                  <Beaker className="h-4 w-4 mr-2" /> Simülasyon
                 </TabsTrigger>
                 <TabsTrigger value="instructions" className="data-[state=active]:text-primary-500 data-[state=active]:border-b-2 data-[state=active]:border-primary-500">
-                  <HelpCircle className="h-4 w-4 mr-2" /> Instructions
+                  <HelpCircle className="h-4 w-4 mr-2" /> Talimatlar
                 </TabsTrigger>
                 <TabsTrigger value="theory" className="data-[state=active]:text-primary-500 data-[state=active]:border-b-2 data-[state=active]:border-primary-500">
-                  <BookOpen className="h-4 w-4 mr-2" /> Theory
+                  <BookOpen className="h-4 w-4 mr-2" /> Teori
                 </TabsTrigger>
                 <TabsTrigger value="questions" className="data-[state=active]:text-primary-500 data-[state=active]:border-b-2 data-[state=active]:border-primary-500">
-                  <Atom className="h-4 w-4 mr-2" /> Questions
+                  <Atom className="h-4 w-4 mr-2" /> Sorular
                 </TabsTrigger>
               </TabsList>
             </div>
