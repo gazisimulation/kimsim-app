@@ -17,28 +17,28 @@ export default function ChemistryCalculatorsSimulator() {
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
         <TabsList className="grid grid-cols-4 md:grid-cols-8 mb-4 gap-2">
           <TabsTrigger value="raoult" className="flex items-center gap-2">
-            <FlaskConical className="h-4 w-4" /> Raoult's Law
+            <FlaskConical className="h-4 w-4" /> Raoult Yasası
           </TabsTrigger>
           <TabsTrigger value="ideal-gas" className="flex items-center gap-2">
-            <Thermometer className="h-4 w-4" /> Ideal Gas Law
+            <Thermometer className="h-4 w-4" /> İdeal Gaz Yasası
           </TabsTrigger>
           <TabsTrigger value="atomic-mass" className="flex items-center gap-2">
-            <Atom className="h-4 w-4" /> Average Atomic Mass
+            <Atom className="h-4 w-4" /> Ortalama Atom Kütlesi
           </TabsTrigger>
           <TabsTrigger value="avogadro" className="flex items-center gap-2">
-            <Hash className="h-4 w-4" /> Avogadro Calculations
+            <Hash className="h-4 w-4" /> Avogadro Hesaplamaları
           </TabsTrigger>
           <TabsTrigger value="ph" className="flex items-center gap-2">
-            <FlaskConical className="h-4 w-4" /> pH Calculator
+            <FlaskConical className="h-4 w-4" /> pH Hesaplayıcı
           </TabsTrigger>
           <TabsTrigger value="yield" className="flex items-center gap-2">
-            <Calculator className="h-4 w-4" /> Percent Yield
+            <Calculator className="h-4 w-4" /> Yüzde Verim
           </TabsTrigger>
           <TabsTrigger value="molarity" className="flex items-center gap-2">
-            <Beaker className="h-4 w-4" /> Molarity & Molality
+            <Beaker className="h-4 w-4" /> Molarite & Molalite
           </TabsTrigger>
           <TabsTrigger value="quantum" className="flex items-center gap-2">
-            <CircleDot className="h-4 w-4" /> Quantum Numbers
+            <CircleDot className="h-4 w-4" /> Kuantum Sayıları
           </TabsTrigger>
         </TabsList>
 
@@ -48,9 +48,9 @@ export default function ChemistryCalculatorsSimulator() {
             <CardHeader>
               <CardTitle className="flex items-center">
                 <FlaskConical className="mr-2 h-5 w-5" /> 
-                Raoult's Law Calculator
+                Raoult Yasası Hesaplayıcısı
               </CardTitle>
-              <CardDescription>Calculate total vapor pressure of a solution</CardDescription>
+              <CardDescription>Bir çözeltinin toplam buhar basıncını hesaplayın</CardDescription>
             </CardHeader>
             <CardContent>
               <RaoultsLawCalculator />
@@ -127,9 +127,9 @@ function RaoultsLawCalculator() {
     <div className="space-y-4">
       <div className="grid grid-cols-2 gap-6">
         <div className="space-y-4 border-r pr-6">
-          <Label className="text-center block">First Component</Label>
+          <Label className="text-center block">Birinci Bileşen</Label>
           <div>
-            <Label htmlFor="p0-1">P₀ (Vapor Pressure)</Label>
+            <Label htmlFor="p0-1">P₀ (Buhar Basıncı)</Label>
             <Input 
               id="p0-1" 
               type="number" 
@@ -139,7 +139,7 @@ function RaoultsLawCalculator() {
             />
           </div>
           <div>
-            <Label htmlFor="x1">X (Mole Fraction)</Label>
+            <Label htmlFor="x1">X (Mol Fraksiyonu)</Label>
             <Input 
               id="x1" 
               type="number" 
@@ -153,9 +153,9 @@ function RaoultsLawCalculator() {
         </div>
 
         <div className="space-y-4">
-          <Label className="text-center block">Second Component</Label>
+          <Label className="text-center block">İkinci Bileşen</Label>
           <div>
-            <Label htmlFor="p0-2">P₀ (Vapor Pressure)</Label>
+            <Label htmlFor="p0-2">P₀ (Buhar Basıncı)</Label>
             <Input 
               id="p0-2" 
               type="number" 
@@ -165,7 +165,7 @@ function RaoultsLawCalculator() {
             />
           </div>
           <div>
-            <Label htmlFor="x2">X (Mole Fraction)</Label>
+            <Label htmlFor="x2">X (Mol Fraksiyonu)</Label>
             <Input 
               id="x2" 
               type="number" 
@@ -180,7 +180,7 @@ function RaoultsLawCalculator() {
       </div>
 
       <div className="p-4 bg-slate-100 dark:bg-slate-800 rounded-md">
-        <div className="text-sm font-medium mb-2">Total Vapor Pressure = P₁° × X₁ + P₂° × X₂</div>
+        <div className="text-sm font-medium mb-2">Toplam Buhar Basıncı = P₁° × X₁ + P₂° × X₂</div>
         <div className="text-2xl font-bold">{result}</div>
       </div>
     </div>
