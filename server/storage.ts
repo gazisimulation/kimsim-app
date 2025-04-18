@@ -209,9 +209,7 @@ export class MemStorage implements IStorage {
     this.createSimulation(acidBaseTitration);
     this.createSimulation(quantumAtomModel);
     this.createSimulation(chemicalBonds);
-    this.createSimulation(redoxReactions);
     this.createSimulation(molecularOrbital);
-    this.createSimulation(spectroscopy);
     this.createSimulation(stateChange);
     this.createSimulation(gasLaws);
     this.createSimulation(batterySimulator);
