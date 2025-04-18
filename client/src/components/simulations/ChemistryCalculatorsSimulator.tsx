@@ -820,28 +820,28 @@ function MolarityCalculator() {
       <CardHeader>
         <CardTitle className="flex items-center">
           <Beaker className="mr-2 h-5 w-5" /> 
-          Molarity & Molality Calculator
+          Molarite ve Molalite Hesaplayıcısı
         </CardTitle>
-        <CardDescription>Calculate concentration of solutions</CardDescription>
+        <CardDescription>Çözeltilerin konsantrasyonunu hesaplayın</CardDescription>
       </CardHeader>
       <CardContent>
         <Tabs defaultValue="basic" className="w-full">
           <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="basic">Basic Molarity</TabsTrigger>
-            <TabsTrigger value="advanced">Advanced Calculation</TabsTrigger>
+            <TabsTrigger value="basic">Temel Molarite</TabsTrigger>
+            <TabsTrigger value="advanced">Gelişmiş Hesaplama</TabsTrigger>
           </TabsList>
 
           <TabsContent value="basic" className="space-y-4 mt-4">
             <div>
-              <Label htmlFor="molarity-calc">What do you want to calculate?</Label>
+              <Label htmlFor="molarity-calc">Ne hesaplamak istiyorsunuz?</Label>
               <Select value={calc} onValueChange={setCalc}>
                 <SelectTrigger id="molarity-calc">
-                  <SelectValue placeholder="Select calculation" />
+                  <SelectValue placeholder="Hesaplama seçin" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="M value">Molarity (M = n/V)</SelectItem>
-                  <SelectItem value="Moles">Moles (n = M×V)</SelectItem>
-                  <SelectItem value="Volume or Mass">Volume or Mass (V = n/M)</SelectItem>
+                  <SelectItem value="M value">Molarite (M = n/V)</SelectItem>
+                  <SelectItem value="Moles">Mol Sayısı (n = M×V)</SelectItem>
+                  <SelectItem value="Volume or Mass">Hacim veya Kütle (V = n/M)</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -888,12 +888,12 @@ function MolarityCalculator() {
             </div>
 
             <div className="p-4 bg-slate-100 dark:bg-slate-800 rounded-md">
-              <div className="text-sm font-medium mb-2">Result:</div>
+              <div className="text-sm font-medium mb-2">Sonuç:</div>
               <div className="text-2xl font-bold">{result}</div>
               <div className="text-sm text-slate-500 mt-2">
-                {calc === "M value" && "Molarity in mol/L"}
-                {calc === "Moles" && "Number of moles (mol)"}
-                {calc === "Volume or Mass" && "Volume (L) or Mass (kg)"}
+                {calc === "M value" && "Molarite (mol/L)"}
+                {calc === "Moles" && "Mol sayısı (mol)"}
+                {calc === "Volume or Mass" && "Hacim (L) veya Kütle (kg)"}
               </div>
             </div>
           </TabsContent>
