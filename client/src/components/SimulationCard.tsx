@@ -45,10 +45,10 @@ const SimulationCard: React.FC<SimulationCardProps> = ({ simulation }) => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-3">
                 {simulation.isNew && (
-                  <Badge variant="secondary" className="bg-secondary-500 text-white">New</Badge>
+                  <Badge variant="secondary" className="bg-secondary-500 text-white">Yeni</Badge>
                 )}
                 {simulation.isPopular && (
-                  <Badge className="bg-primary-500 text-white">Popular</Badge>
+                  <Badge className="bg-primary-500 text-white">Popüler</Badge>
                 )}
               </div>
             </div>

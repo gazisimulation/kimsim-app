@@ -23,7 +23,7 @@ const SimulationHero: React.FC<SimulationHeroProps> = ({ simulation }) => {
         <div className="max-w-2xl backdrop-blur-sm bg-black/40 p-6 rounded-xl shadow-2xl border border-white/10">
           <div className="inline-flex items-center mb-2 bg-primary-500/30 px-3 py-1 rounded-full shadow-lg">
             <Sparkles className="mr-1 h-4 w-4 text-primary-400" />
-            <span className="text-sm font-medium text-primary-400">Featured Simulation</span>
+            <span className="text-sm font-medium text-primary-400">Öne Çıkan Simülasyon</span>
           </div>
           <h2 className="text-4xl md:text-5xl font-heading font-bold mb-4 text-white drop-shadow-lg">{simulation.title}</h2>
           <p className="text-gray-100 text-lg mb-6 max-w-prose drop-shadow">
@@ -37,7 +37,7 @@ const SimulationHero: React.FC<SimulationHeroProps> = ({ simulation }) => {
             >
               <Link href={`/simulations/${simulation.slug}`}>
                 <a>
-                  <Play className="mr-2 h-5 w-5" /> Launch Simulation
+                  <Play className="mr-2 h-5 w-5" /> Simülasyonu Başlat
                 </a>
               </Link>
             </Button>

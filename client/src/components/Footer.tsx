@@ -63,26 +63,26 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="text-white font-medium mb-4">Subscribe to Updates</h4>
-            <p className="text-sm mb-3">Get notified when we add new simulations.</p>
+            <h4 className="text-white font-medium mb-4">Güncellemelere Abone Ol</h4>
+            <p className="text-sm mb-3">Yeni simülasyonlar eklediğimizde haberdar ol.</p>
             <form className="flex">
               <Input 
                 type="email" 
-                placeholder="Your email" 
+                placeholder="E-posta adresiniz" 
                 className="bg-gray-800 border border-gray-700 rounded-l-md py-2 px-3 text-sm w-full focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
               />
               <Button 
                 type="submit" 
                 className="bg-primary-500 hover:bg-primary-600 text-white py-2 px-4 rounded-r-md text-sm font-medium"
               >
-                Subscribe
+                Abone Ol
               </Button>
             </form>
           </div>
         </div>
         
         <div className="border-t border-gray-800 mt-8 pt-8 text-sm text-center">
-          <p>&copy; {new Date().getFullYear()} ChemSim. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} ChemSim. Tüm hakları saklıdır.</p>
         </div>
       </div>
     </footer>
