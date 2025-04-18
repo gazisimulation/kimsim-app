@@ -1318,7 +1318,7 @@ export default function GasLawsSimulator() {
                 </div>
                 
                 <div className="space-y-2">
-                  <Label>Temperature (K)</Label>
+                  <Label>Sıcaklık (K)</Label>
                   <div className="flex items-center gap-2">
                     <Slider 
                       min={100} 
@@ -1332,7 +1332,7 @@ export default function GasLawsSimulator() {
                 </div>
                 
                 <div className="space-y-2">
-                  <Label>Total Pressure (atm)</Label>
+                  <Label>Toplam Basınç (atm)</Label>
                   <div className="flex items-center gap-2">
                     <Slider 
                       min={0.1} 
@@ -1485,13 +1485,13 @@ export default function GasLawsSimulator() {
                 </div>
                 
                 <div className="bg-gray-100 dark:bg-gray-800 p-3 rounded-md mt-4">
-                  <h3 className="font-medium mb-2">Volume Comparison</h3>
+                  <h3 className="font-medium mb-2">Hacim Karşılaştırması</h3>
                   <div className="grid grid-cols-2 gap-2 text-sm">
-                    <div>Ideal gas volume:</div>
+                    <div>İdeal gaz hacmi:</div>
                     <div className="font-medium">{calculateVolume(moles, temperature, pressure, 'ideal', gasName).toFixed(2)} L</div>
-                    <div>Van der Waals volume:</div>
+                    <div>Van der Waals hacmi:</div>
                     <div className="font-medium">{calculateVolume(moles, temperature, pressure, 'vanderwaals', gasName).toFixed(2)} L</div>
-                    <div>Deviation:</div>
+                    <div>Sapma:</div>
                     <div className="font-medium">
                       {((calculateVolume(moles, temperature, pressure, 'vanderwaals', gasName) / 
                          calculateVolume(moles, temperature, pressure, 'ideal', gasName) - 1) * 100).toFixed(2)}%
@@ -1503,17 +1503,17 @@ export default function GasLawsSimulator() {
             
             <Card className="w-full md:w-2/3">
               <CardHeader>
-                <CardTitle>Comparison of Gas Models</CardTitle>
+                <CardTitle>Gaz Modellerinin Karşılaştırması</CardTitle>
                 <CardDescription>
-                  <span className="mr-4">Select chart type:</span>
+                  <span className="mr-4">Grafik türü seçin:</span>
                   <Select value={chartType} onValueChange={(value: ChartType) => setChartType(value as ChartType)}>
                     <SelectTrigger className="w-52">
-                      <SelectValue placeholder="Select chart type" />
+                      <SelectValue placeholder="Grafik türü seçin" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="pressure-volume">Pressure vs. Volume</SelectItem>
-                      <SelectItem value="pressure-temperature">Pressure vs. Temperature</SelectItem>
-                      <SelectItem value="volume-temperature">Volume vs. Temperature</SelectItem>
+                      <SelectItem value="pressure-volume">Basınç - Hacim</SelectItem>
+                      <SelectItem value="pressure-temperature">Basınç - Sıcaklık</SelectItem>
+                      <SelectItem value="volume-temperature">Hacim - Sıcaklık</SelectItem>
                     </SelectContent>
                   </Select>
                 </CardDescription>
@@ -1529,19 +1529,19 @@ export default function GasLawsSimulator() {
                 </div>
                 
                 <div className="bg-gray-100 dark:bg-gray-800 p-3 rounded-md mt-4">
-                  <h3 className="font-medium mb-2">Why Real Gases Deviate from Ideal Behavior</h3>
-                  <p className="text-sm mb-2">The ideal gas model assumes:</p>
+                  <h3 className="font-medium mb-2">Gerçek Gazların İdeal Davranıştan Sapma Nedenleri</h3>
+                  <p className="text-sm mb-2">İdeal gaz modeli şunları varsayar:</p>
                   <ul className="list-disc pl-5 text-sm space-y-1 mb-2">
-                    <li>Gas particles have zero volume</li>
-                    <li>No attractive/repulsive forces between particles</li>
-                    <li>Perfectly elastic collisions</li>
+                    <li>Gaz parçacıklarının sıfır hacmi vardır</li>
+                    <li>Parçacıklar arasında çekim/itme kuvvetleri yoktur</li>
+                    <li>Tamamen elastik çarpışmalar gerçekleşir</li>
                   </ul>
-                  <p className="text-sm mb-2">The Van der Waals equation accounts for:</p>
+                  <p className="text-sm mb-2">Van der Waals denklemi şunları hesaba katar:</p>
                   <ul className="list-disc pl-5 text-sm space-y-1">
-                    <li>The actual volume of gas molecules (b term)</li>
-                    <li>Attractive forces between molecules (a term)</li>
+                    <li>Gaz moleküllerinin gerçek hacmi (b terimi)</li>
+                    <li>Moleküller arası çekim kuvvetleri (a terimi)</li>
                   </ul>
-                  <p className="text-sm mt-2">Deviations are most significant at high pressures and low temperatures.</p>
+                  <p className="text-sm mt-2">Sapmalar yüksek basınçlarda ve düşük sıcaklıklarda en belirgindir.</p>
                 </div>
               </CardContent>
             </Card>
