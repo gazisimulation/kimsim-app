@@ -1,19 +1,16 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { Beaker, Calculator, FlaskConical, Atom, Thermometer, CircleDot, Hash } from 'lucide-react';
-
-// Import Big.js library for precise calculations
-// To ensure accurate results even with floating-point arithmetic
+import { FlaskConical, Calculator, Beaker, Atom, Thermometer, CircleDot, Hash } from 'lucide-react';
 import Big from 'big.js';
 
+// Import existing components from the codebase
 export default function ChemistryCalculatorsSimulator() {
-  const [activeTab, setActiveTab] = useState('ideal-gas');
+  const [activeTab, setActiveTab] = useState('raoult');
 
   return (
     <div className="flex flex-col gap-6">
@@ -44,6 +41,22 @@ export default function ChemistryCalculatorsSimulator() {
             <CircleDot className="h-4 w-4" /> Quantum Numbers
           </TabsTrigger>
         </TabsList>
+
+        {/* Raoult's Law Calculator */}
+        <TabsContent value="raoult" className="space-y-4">
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center">
+                <FlaskConical className="mr-2 h-5 w-5" /> 
+                Raoult's Law Calculator
+              </CardTitle>
+              <CardDescription>Calculate total vapor pressure of a solution</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <RaoultsLawCalculator />
+            </CardContent>
+          </Card>
+        </TabsContent>
 
         {/* Ideal Gas Law Calculator */}
         <TabsContent value="ideal-gas" className="space-y-4">
@@ -79,16 +92,102 @@ export default function ChemistryCalculatorsSimulator() {
         <TabsContent value="quantum" className="space-y-4">
           <QuantumNumbersCalculator />
         </TabsContent>
-        {/* Raoult's Law Calculator */}
-        <TabsContent value="raoult" className="space-y-4">
-          <RaoultsLawCalculator /> {/* Placeholder - needs implementation */}
-        </TabsContent>
       </Tabs>
     </div>
   );
 }
 
-// 1. Ideal Gas Law Calculator: PV = nRT
+// Raoult's Law Calculator
+function RaoultsLawCalculator() {
+  const [a1, setA1] = useState<number | string>(1);
+  const [y1, setY1] = useState<number | string>(1);
+  const [a2, setA2] = useState<number | string>(1);
+  const [y2, setY2] = useState<number | string>(1);
+  const [result, setResult] = useState<string>("");
+
+  useEffect(() => {
+    calculate();
+  }, [a1, y1, a2, y2]);
+
+  function calculate() {
+    try {
+      const a1Value = new Big(a1 || 0);
+      const y1Value = new Big(y1 || 0);
+      const a2Value = new Big(a2 || 0);
+      const y2Value = new Big(y2 || 0);
+
+      const result = a1Value.times(y1Value).plus(a2Value.times(y2Value));
+      setResult(result.toFixed(4));
+    } catch (err) {
+      setResult("Error in calculation");
+    }
+  }
+
+  return (
+    <div className="space-y-4">
+      <div className="grid grid-cols-2 gap-6">
+        <div className="space-y-4 border-r pr-6">
+          <Label className="text-center block">First Component</Label>
+          <div>
+            <Label htmlFor="p0-1">P₀ (Vapor Pressure)</Label>
+            <Input 
+              id="p0-1" 
+              type="number" 
+              value={a1} 
+              onChange={(e) => setA1(e.target.value)}
+              min={0}
+            />
+          </div>
+          <div>
+            <Label htmlFor="x1">X (Mole Fraction)</Label>
+            <Input 
+              id="x1" 
+              type="number" 
+              value={y1} 
+              onChange={(e) => setY1(e.target.value)}
+              min={0}
+              max={1}
+              step={0.1}
+            />
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          <Label className="text-center block">Second Component</Label>
+          <div>
+            <Label htmlFor="p0-2">P₀ (Vapor Pressure)</Label>
+            <Input 
+              id="p0-2" 
+              type="number" 
+              value={a2} 
+              onChange={(e) => setA2(e.target.value)}
+              min={0}
+            />
+          </div>
+          <div>
+            <Label htmlFor="x2">X (Mole Fraction)</Label>
+            <Input 
+              id="x2" 
+              type="number" 
+              value={y2} 
+              onChange={(e) => setY2(e.target.value)}
+              min={0}
+              max={1}
+              step={0.1}
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className="p-4 bg-slate-100 dark:bg-slate-800 rounded-md">
+        <div className="text-sm font-medium mb-2">Total Vapor Pressure = P₁° × X₁ + P₂° × X₂</div>
+        <div className="text-2xl font-bold">{result}</div>
+      </div>
+    </div>
+  );
+}
+
+// The rest of the component code (IdealGasLawCalculator, AverageAtomicMassCalculator, etc.) remains the same as it was in the original file
 function IdealGasLawCalculator() {
   const [calc, setCalc] = useState("PV product");
   const [p, setP] = useState<number | string>(1);
@@ -244,7 +343,6 @@ function IdealGasLawCalculator() {
   );
 }
 
-// 2. Average Atomic Mass Calculator
 function AverageAtomicMassCalculator() {
   const [a1, setA1] = useState<number | string>(1);
   const [y1, setY1] = useState<number | string>(1);
@@ -348,7 +446,6 @@ function AverageAtomicMassCalculator() {
   );
 }
 
-// 3. Avogadro Calculator
 function AvogadroCalculator() {
   const [value, setValue] = useState<number | string>(1);
   const [operation, setOperation] = useState("multiply");
@@ -429,7 +526,6 @@ function AvogadroCalculator() {
   );
 }
 
-// 4. pH Calculator
 function PHCalculator() {
   const [pH, setPH] = useState<number | string>(7);
   const [result, setResult] = useState<string>("");
@@ -480,7 +576,7 @@ function PHCalculator() {
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center">
-          <Flask className="mr-2 h-5 w-5" /> 
+          <FlaskConical className="mr-2 h-5 w-5" /> 
           pH Level Calculator
         </CardTitle>
         <CardDescription>Check if a pH value is safe for human contact</CardDescription>
@@ -538,7 +634,6 @@ function PHCalculator() {
   );
 }
 
-// 5. Percent Yield Calculator
 function PercentYieldCalculator() {
   const [actual, setActual] = useState<number | string>(100);
   const [expected, setExpected] = useState<number | string>(100);
@@ -641,7 +736,6 @@ function PercentYieldCalculator() {
   );
 }
 
-// 6. Molarity & Molality Calculator 
 function MolarityCalculator() {
   const [calcType, setCalcType] = useState("Molarity");
   const [calc, setCalc] = useState("M value");
@@ -712,7 +806,7 @@ function MolarityCalculator() {
           setResult2(dResult.toFixed(3));
           break;
         case "Find Molar Mass":
-          const maResult = d.times(percent).times(10).div(m);
+          const maResult = d.times(percent).times(10).div((m);
           setResult2(maResult.toFixed(3));
           break;
       }
@@ -892,7 +986,6 @@ function MolarityCalculator() {
   );
 }
 
-// 7. Quantum Numbers Calculator
 function QuantumNumbersCalculator() {
   const [n, setN] = useState<number | string>(1);
   const [l, setL] = useState<number | string>(0);
@@ -1063,7 +1156,91 @@ function QuantumNumbersCalculator() {
   );
 }
 
-// Placeholder for Raoult's Law Calculator
 function RaoultsLawCalculator() {
-  return <div>Raoult's Law Calculator (To be implemented)</div>;
+  const [a1, setA1] = useState<number | string>(1);
+  const [y1, setY1] = useState<number | string>(1);
+  const [a2, setA2] = useState<number | string>(1);
+  const [y2, setY2] = useState<number | string>(1);
+  const [result, setResult] = useState<string>("");
+
+  useEffect(() => {
+    calculate();
+  }, [a1, y1, a2, y2]);
+
+  function calculate() {
+    try {
+      const a1Value = new Big(a1 || 0);
+      const y1Value = new Big(y1 || 0);
+      const a2Value = new Big(a2 || 0);
+      const y2Value = new Big(y2 || 0);
+
+      const result = a1Value.times(y1Value).plus(a2Value.times(y2Value));
+      setResult(result.toFixed(4));
+    } catch (err) {
+      setResult("Error in calculation");
+    }
+  }
+
+  return (
+    <div className="space-y-4">
+      <div className="grid grid-cols-2 gap-6">
+        <div className="space-y-4 border-r pr-6">
+          <Label className="text-center block">First Component</Label>
+          <div>
+            <Label htmlFor="p0-1">P₀ (Vapor Pressure)</Label>
+            <Input 
+              id="p0-1" 
+              type="number" 
+              value={a1} 
+              onChange={(e) => setA1(e.target.value)}
+              min={0}
+            />
+          </div>
+          <div>
+            <Label htmlFor="x1">X (Mole Fraction)</Label>
+            <Input 
+              id="x1" 
+              type="number" 
+              value={y1} 
+              onChange={(e) => setY1(e.target.value)}
+              min={0}
+              max={1}
+              step={0.1}
+            />
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          <Label className="text-center block">Second Component</Label>
+          <div>
+            <Label htmlFor="p0-2">P₀ (Vapor Pressure)</Label>
+            <Input 
+              id="p0-2" 
+              type="number" 
+              value={a2} 
+              onChange={(e) => setA2(e.target.value)}
+              min={0}
+            />
+          </div>
+          <div>
+            <Label htmlFor="x2">X (Mole Fraction)</Label>
+            <Input 
+              id="x2" 
+              type="number" 
+              value={y2} 
+              onChange={(e) => setY2(e.target.value)}
+              min={0}
+              max={1}
+              step={0.1}
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className="p-4 bg-slate-100 dark:bg-slate-800 rounded-md">
+        <div className="text-sm font-medium mb-2">Total Vapor Pressure = P₁° × X₁ + P₂° × X₂</div>
+        <div className="text-2xl font-bold">{result}</div>
+      </div>
+    </div>
+  );
 }
