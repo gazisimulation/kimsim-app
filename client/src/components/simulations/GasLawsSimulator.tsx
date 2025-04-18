@@ -316,7 +316,7 @@ export default function GasLawsSimulator() {
       ctx.fillStyle = '#1a73e8';
       ctx.fillRect(chartX + chartWidth - 150, chartY + 10, 15, 15);
       ctx.fillStyle = '#333';
-      ctx.fillText('Ideal Gas Law', chartX + chartWidth - 130, chartY + 22);
+      ctx.fillText('İdeal Gaz Yasası', chartX + chartWidth - 130, chartY + 22);
       
       ctx.fillStyle = '#e67700';
       ctx.fillRect(chartX + chartWidth - 150, chartY + 35, 15, 15);
@@ -427,7 +427,7 @@ export default function GasLawsSimulator() {
       ctx.fillStyle = '#1a73e8';
       ctx.fillRect(chartX + chartWidth - 150, chartY + 10, 15, 15);
       ctx.fillStyle = '#333';
-      ctx.fillText('Ideal Gas Law', chartX + chartWidth - 130, chartY + 22);
+      ctx.fillText('İdeal Gaz Yasası', chartX + chartWidth - 130, chartY + 22);
       
       ctx.fillStyle = '#e67700';
       ctx.fillRect(chartX + chartWidth - 150, chartY + 35, 15, 15);
@@ -541,7 +541,7 @@ export default function GasLawsSimulator() {
       ctx.fillStyle = '#1a73e8';
       ctx.fillRect(chartX + chartWidth - 150, chartY + 10, 15, 15);
       ctx.fillStyle = '#333';
-      ctx.fillText('Ideal Gas Law', chartX + chartWidth - 130, chartY + 22);
+      ctx.fillText('İdeal Gaz Yasası', chartX + chartWidth - 130, chartY + 22);
       
       ctx.fillStyle = '#e67700';
       ctx.fillRect(chartX + chartWidth - 150, chartY + 35, 15, 15);
