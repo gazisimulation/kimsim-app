@@ -363,161 +363,161 @@ const SimulationPage = () => {
                       </>
                     ) : simulation.slug === 'chemical-bonds' ? (
                       <>
-                        <h4>Chemical Bonding</h4>
-                        <p>Chemical bonds are forces that hold atoms together in molecules or compounds. The three primary types of chemical bonds are metallic, ionic, and covalent bonds, each with distinct properties and mechanisms.</p>
+                        <h4>Kimyasal Bağlanma</h4>
+                        <p>Kimyasal bağlar, atomları moleküllerde veya bileşiklerde bir arada tutan kuvvetlerdir. Üç temel kimyasal bağ türü metalik, iyonik ve kovalent bağlardır ve her biri farklı özelliklere ve mekanizmalara sahiptir.</p>
                         
-                        <h4>Metallic Bonding</h4>
-                        <p>Metallic bonding occurs in metals where positive metal ions form a lattice structure while their valence electrons become delocalized, forming a "sea of electrons" that moves freely throughout the structure. This explains key properties of metals:</p>
+                        <h4>Metalik Bağlanma</h4>
+                        <p>Metalik bağlanma, pozitif metal iyonlarının bir kafes yapısı oluştururken değerlik elektronlarının delokalize olduğu, yapı boyunca serbestçe hareket eden bir "elektron denizi" oluşturduğu metallerde meydana gelir. Bu, metallerin temel özelliklerini açıklar:</p>
                         <ul>
-                          <li><strong>Electrical conductivity:</strong> Free electrons can carry electric current</li>
-                          <li><strong>Thermal conductivity:</strong> Energy can be easily transferred through the electron sea</li>
-                          <li><strong>Malleability and ductility:</strong> Metal ions can slide past each other while maintaining the bond</li>
-                          <li><strong>Metallic luster:</strong> Free electrons can absorb and emit photons of light</li>
+                          <li><strong>Elektriksel iletkenlik:</strong> Serbest elektronlar elektrik akımını taşıyabilir</li>
+                          <li><strong>Isıl iletkenlik:</strong> Enerji, elektron denizi boyunca kolayca aktarılabilir</li>
+                          <li><strong>Şekillendirilebilirlik ve sünek yapı:</strong> Metal iyonları, bağı korurken birbirleri üzerinden kayabilir</li>
+                          <li><strong>Metalik parlaklık:</strong> Serbest elektronlar ışık fotonlarını soğurabilir ve yayabilir</li>
                         </ul>
                         
-                        <h4>Ionic Bonding</h4>
-                        <p>Ionic bonding forms between metals and non-metals through the complete transfer of electrons. The metal atom loses electrons to become a positively charged ion (cation), while the non-metal atom gains electrons to become a negatively charged ion (anion). Electrostatic attraction between these oppositely charged ions creates the ionic bond.</p>
-                        <p>Properties of ionic compounds include:</p>
+                        <h4>İyonik Bağlanma</h4>
+                        <p>İyonik bağlanma, elektronların tam transferi yoluyla metaller ve ametaller arasında oluşur. Metal atomu, pozitif yüklü bir iyon (katyon) oluşturmak için elektron kaybederken, ametal atomu negatif yüklü bir iyon (anyon) oluşturmak için elektron kazanır. Bu zıt yüklü iyonlar arasındaki elektrostatik çekim, iyonik bağı oluşturur.</p>
+                        <p>İyonik bileşiklerin özellikleri şunları içerir:</p>
                         <ul>
-                          <li>High melting and boiling points</li>
-                          <li>Brittle crystalline structure</li>
-                          <li>Electrical conductivity when dissolved in water or melted</li>
-                          <li>Solubility in polar solvents</li>
+                          <li>Yüksek erime ve kaynama noktaları</li>
+                          <li>Kırılgan kristal yapı</li>
+                          <li>Suda çözündüğünde veya eritildiğinde elektriksel iletkenlik</li>
+                          <li>Polar çözücülerde çözünürlük</li>
                         </ul>
                         
-                        <h4>Covalent Bonding</h4>
-                        <p>Covalent bonding occurs when atoms share electron pairs rather than transferring them. This typically happens between non-metal atoms. The shared electrons orbit around both nuclei, creating a strong bond.</p>
-                        <p>Covalent bonds can be:</p>
+                        <h4>Kovalent Bağlanma</h4>
+                        <p>Kovalent bağlanma, atomların elektronları aktarmak yerine elektron çiftlerini paylaştığında oluşur. Bu genellikle ametal atomlar arasında gerçekleşir. Paylaşılan elektronlar her iki çekirdek etrafında da dolanarak güçlü bir bağ oluşturur.</p>
+                        <p>Kovalent bağlar şu şekilde olabilir:</p>
                         <ul>
-                          <li><strong>Non-polar:</strong> When electrons are shared equally (e.g., H<sub>2</sub>, O<sub>2</sub>)</li>
-                          <li><strong>Polar:</strong> When electrons are unequally shared due to electronegativity differences (e.g., H<sub>2</sub>O)</li>
+                          <li><strong>Apolar:</strong> Elektronlar eşit olarak paylaşıldığında (örn., H<sub>2</sub>, O<sub>2</sub>)</li>
+                          <li><strong>Polar:</strong> Elektronlar elektronegatiflik farklılıkları nedeniyle eşit olmayan şekilde paylaşıldığında (örn., H<sub>2</sub>O)</li>
                         </ul>
-                        <p>Properties of covalent compounds include:</p>
+                        <p>Kovalent bileşiklerin özellikleri şunları içerir:</p>
                         <ul>
-                          <li>Lower melting and boiling points (compared to ionic compounds)</li>
-                          <li>Poor electrical conductivity</li>
-                          <li>Variable solubility depending on polarity</li>
+                          <li>Daha düşük erime ve kaynama noktaları (iyonik bileşiklere kıyasla)</li>
+                          <li>Zayıf elektriksel iletkenlik</li>
+                          <li>Polariteye bağlı olarak değişken çözünürlük</li>
                         </ul>
                       </>
                     ) : simulation.slug === 'state-change' ? (
                       <>
-                        <h4>States of Matter</h4>
-                        <p>Matter can exist in various states, primarily solid, liquid, and gas. Each state has distinct properties based on the arrangement and movement of particles:</p>
+                        <h4>Maddenin Halleri</h4>
+                        <p>Madde çeşitli hallerde bulunabilir, başlıca katı, sıvı ve gaz hallerinde. Her hal, parçacıkların düzeni ve hareketine dayalı olarak belirgin özelliklere sahiptir:</p>
                         <ul>
-                          <li><strong>Solid:</strong> Particles are tightly packed in a regular pattern with strong intermolecular forces, giving solids a fixed shape and volume.</li>
-                          <li><strong>Liquid:</strong> Particles are close together but can move past each other, allowing liquids to flow and take the shape of their container while maintaining a fixed volume.</li>
-                          <li><strong>Gas:</strong> Particles are widely separated with minimal intermolecular forces, allowing gases to expand to fill their container.</li>
+                          <li><strong>Katı:</strong> Parçacıklar güçlü moleküller arası kuvvetlerle düzenli bir şekilde sıkıca paketlenmiştir, bu da katılara sabit bir şekil ve hacim kazandırır.</li>
+                          <li><strong>Sıvı:</strong> Parçacıklar yakın durumdadır ancak birbirlerinin üzerinden geçebilirler, bu da sıvıların akarken sabit bir hacmi koruyarak kaplarının şeklini almalarını sağlar.</li>
+                          <li><strong>Gaz:</strong> Parçacıklar minimal moleküller arası kuvvetlerle geniş bir şekilde ayrılmıştır, bu da gazların genişleyerek kaplarını doldurmasını sağlar.</li>
                         </ul>
                         
-                        <h4>Phase Transitions</h4>
-                        <p>When substances change from one state to another, they undergo phase transitions. The major phase transitions are:</p>
+                        <h4>Faz Geçişleri</h4>
+                        <p>Maddeler bir halden diğerine geçtiğinde, faz geçişleri yaşarlar. Başlıca faz geçişleri şunlardır:</p>
                         <ul>
-                          <li><strong>Melting (fusion):</strong> Solid → Liquid</li>
-                          <li><strong>Freezing:</strong> Liquid → Solid</li>
-                          <li><strong>Vaporization (boiling):</strong> Liquid → Gas</li>
-                          <li><strong>Condensation:</strong> Gas → Liquid</li>
-                          <li><strong>Sublimation:</strong> Solid → Gas</li>
-                          <li><strong>Deposition:</strong> Gas → Solid</li>
+                          <li><strong>Erime (füzyon):</strong> Katı → Sıvı</li>
+                          <li><strong>Donma:</strong> Sıvı → Katı</li>
+                          <li><strong>Buharlaşma (kaynama):</strong> Sıvı → Gaz</li>
+                          <li><strong>Yoğuşma:</strong> Gaz → Sıvı</li>
+                          <li><strong>Süblimleşme:</strong> Katı → Gaz</li>
+                          <li><strong>Kırağılaşma:</strong> Gaz → Katı</li>
                         </ul>
                         
-                        <h4>Heat and Temperature</h4>
-                        <p>Temperature is a measure of the average kinetic energy of particles in a substance. Heat is the total energy that flows between substances due to temperature differences.</p>
-                        <p>When heat is added to or removed from a substance, one of two things happens:</p>
+                        <h4>Isı ve Sıcaklık</h4>
+                        <p>Sıcaklık, bir maddedeki parçacıkların ortalama kinetik enerjisinin bir ölçüsüdür. Isı, sıcaklık farklılıkları nedeniyle maddeler arasında akan toplam enerjidir.</p>
+                        <p>Bir maddeye ısı eklendiğinde veya çıkarıldığında, iki şeyden biri gerçekleşir:</p>
                         <ol>
-                          <li>The temperature changes if the substance remains in the same phase</li>
-                          <li>A phase change occurs at constant temperature if the substance is at its melting or boiling point</li>
+                          <li>Madde aynı fazda kalırsa sıcaklık değişir</li>
+                          <li>Madde erime veya kaynama noktasındaysa sabit sıcaklıkta bir faz değişimi gerçekleşir</li>
                         </ol>
                         
-                        <h4>Heat Capacity</h4>
-                        <p>Heat capacity (c) is the amount of heat needed to raise the temperature of a substance by one degree. It varies between phases of the same substance:</p>
-                        <p>The energy required to change the temperature is calculated using: Q = mc∆T where:</p>
+                        <h4>Isı Kapasitesi</h4>
+                        <p>Isı kapasitesi (c), bir maddenin sıcaklığını bir derece yükseltmek için gereken ısı miktarıdır. Aynı maddenin farklı fazları arasında değişir:</p>
+                        <p>Sıcaklığı değiştirmek için gereken enerji şu şekilde hesaplanır: Q = mc∆T, burada:</p>
                         <ul>
-                          <li>Q = energy (heat) in joules</li>
-                          <li>m = mass in grams</li>
-                          <li>c = specific heat capacity in J/g·°C</li>
-                          <li>∆T = temperature change in °C</li>
+                          <li>Q = enerji (ısı) jul cinsinden</li>
+                          <li>m = kütle gram cinsinden</li>
+                          <li>c = özgül ısı kapasitesi J/g·°C cinsinden</li>
+                          <li>∆T = sıcaklık değişimi °C cinsinden</li>
                         </ul>
                         
-                        <h4>Latent Heat</h4>
-                        <p>Latent heat is the energy required to change the phase of a substance without changing its temperature:</p>
+                        <h4>Gizli Isı</h4>
+                        <p>Gizli ısı, bir maddenin sıcaklığını değiştirmeden fazını değiştirmek için gereken enerjidir:</p>
                         <ul>
-                          <li><strong>Latent heat of fusion:</strong> Energy required to convert a solid to a liquid at its melting point</li>
-                          <li><strong>Latent heat of vaporization:</strong> Energy required to convert a liquid to a gas at its boiling point</li>
+                          <li><strong>Erime gizli ısısı:</strong> Bir katıyı erime noktasında sıvıya dönüştürmek için gereken enerji</li>
+                          <li><strong>Buharlaşma gizli ısısı:</strong> Bir sıvıyı kaynama noktasında gaza dönüştürmek için gereken enerji</li>
                         </ul>
-                        <p>The energy required for a phase change is calculated using: Q = mL where:</p>
+                        <p>Bir faz değişimi için gereken enerji şu şekilde hesaplanır: Q = mL, burada:</p>
                         <ul>
-                          <li>Q = energy (heat) in joules</li>
-                          <li>m = mass in grams</li>
-                          <li>L = latent heat in J/g</li>
+                          <li>Q = enerji (ısı) jul cinsinden</li>
+                          <li>m = kütle gram cinsinden</li>
+                          <li>L = gizli ısı J/g cinsinden</li>
                         </ul>
                       </>
                     ) : simulation.slug === 'gas-laws' ? (
                       <>
-                        <h4>Properties of Gases</h4>
-                        <p>Gases have several unique properties that distinguish them from solids and liquids:</p>
+                        <h4>Gazların Özellikleri</h4>
+                        <p>Gazların, onları katı ve sıvılardan ayıran birkaç benzersiz özellikleri vardır:</p>
                         <ul>
-                          <li>They have no definite shape or volume and expand to fill their container</li>
-                          <li>They are easily compressible compared to liquids and solids</li>
-                          <li>They have lower density than liquids and solids</li>
-                          <li>Gas particles move randomly with high kinetic energy</li>
-                          <li>Gas particles have negligible interactions except during collisions</li>
+                          <li>Belirli bir şekil veya hacimleri yoktur ve kaplarını dolduracak şekilde genişlerler</li>
+                          <li>Sıvı ve katılara göre kolayca sıkıştırılabilirler</li>
+                          <li>Sıvı ve katılara göre daha düşük yoğunluğa sahiptirler</li>
+                          <li>Gaz parçacıkları yüksek kinetik enerjiyle rastgele hareket ederler</li>
+                          <li>Gaz parçacıkları çarpışmalar dışında ihmal edilebilir etkileşimlere sahiptir</li>
                         </ul>
                         
-                        <h4>Ideal Gas Law</h4>
-                        <p>The Ideal Gas Law is a fundamental equation that relates the four macroscopic properties of gases:</p>
+                        <h4>İdeal Gaz Yasası</h4>
+                        <p>İdeal Gaz Yasası, gazların dört makroskopik özelliğini ilişkilendiren temel bir denklemdir:</p>
                         <p className="text-center font-medium my-2">PV = nRT</p>
-                        <p>Where:</p>
+                        <p>Burada:</p>
                         <ul>
-                          <li><strong>P</strong> = pressure (atm, Pa, or other pressure units)</li>
-                          <li><strong>V</strong> = volume (L, m³, or other volume units)</li>
-                          <li><strong>n</strong> = number of moles of gas</li>
-                          <li><strong>R</strong> = gas constant (0.08206 L·atm/mol·K)</li>
-                          <li><strong>T</strong> = absolute temperature (K)</li>
+                          <li><strong>P</strong> = basınç (atm, Pa veya diğer basınç birimleri)</li>
+                          <li><strong>V</strong> = hacim (L, m³ veya diğer hacim birimleri)</li>
+                          <li><strong>n</strong> = gaz mol sayısı</li>
+                          <li><strong>R</strong> = gaz sabiti (0.08206 L·atm/mol·K)</li>
+                          <li><strong>T</strong> = mutlak sıcaklık (K)</li>
                         </ul>
-                        <p>This equation is derived from the combination of Boyle's Law (P ∝ 1/V), Charles's Law (V ∝ T), and Avogadro's Law (V ∝ n).</p>
+                        <p>Bu denklem, Boyle Yasası (P ∝ 1/V), Charles Yasası (V ∝ T) ve Avogadro Yasası'nın (V ∝ n) birleşiminden türetilmiştir.</p>
                         
-                        <h4>Kinetic Theory of Gases</h4>
-                        <p>The Kinetic Molecular Theory explains the behavior of gases at the molecular level:</p>
+                        <h4>Gazların Kinetik Teorisi</h4>
+                        <p>Kinetik Moleküler Teori, gazların moleküler düzeydeki davranışını açıklar:</p>
                         <ul>
-                          <li>Gas particles are in constant, random motion</li>
-                          <li>Collisions between gas particles and with container walls are perfectly elastic</li>
-                          <li>The average kinetic energy of gas particles is proportional to absolute temperature</li>
-                          <li>Gas particles have negligible volume compared to the container</li>
-                          <li>There are no attractive or repulsive forces between particles</li>
+                          <li>Gaz parçacıkları sürekli ve rastgele hareket halindedir</li>
+                          <li>Gaz parçacıkları arasındaki ve kap duvarlarıyla olan çarpışmalar tamamen elastiktir</li>
+                          <li>Gaz parçacıklarının ortalama kinetik enerjisi mutlak sıcaklıkla orantılıdır</li>
+                          <li>Gaz parçacıklarının hacmi kaba göre ihmal edilebilir düzeydedir</li>
+                          <li>Parçacıklar arasında çekici veya itici kuvvetler yoktur</li>
                         </ul>
                         
-                        <h4>Maxwell-Boltzmann Distribution</h4>
-                        <p>This distribution describes the range of molecular speeds in a gas at a given temperature:</p>
+                        <h4>Maxwell-Boltzmann Dağılımı</h4>
+                        <p>Bu dağılım, belirli bir sıcaklıkta bir gazdaki moleküler hızların aralığını tanımlar:</p>
                         <ul>
-                          <li><strong>Most probable speed (v<sub>mp</sub>):</strong> The speed at which most molecules are moving</li>
-                          <li><strong>Average speed (v<sub>avg</sub>):</strong> The arithmetic mean of all molecular speeds</li>
-                          <li><strong>Root mean square speed (v<sub>rms</sub>):</strong> √(3RT/M) where M is molar mass in kg/mol</li>
+                          <li><strong>En olası hız (v<sub>mp</sub>):</strong> Çoğu molekülün hareket ettiği hız</li>
+                          <li><strong>Ortalama hız (v<sub>avg</sub>):</strong> Tüm moleküler hızların aritmetik ortalaması</li>
+                          <li><strong>Karekök ortalama hız (v<sub>rms</sub>):</strong> √(3RT/M) (M, kg/mol cinsinden molar kütle)</li>
                         </ul>
-                        <p>At higher temperatures, the distribution shifts toward higher speeds, and lighter gases have higher average speeds at the same temperature.</p>
+                        <p>Daha yüksek sıcaklıklarda, dağılım daha yüksek hızlara doğru kayar ve aynı sıcaklıkta hafif gazlar daha yüksek ortalama hızlara sahiptir.</p>
                         
-                        <h4>Gas Mixtures and Dalton's Law</h4>
-                        <p>Dalton's Law of Partial Pressures states that in a mixture of non-reacting gases, the total pressure is the sum of the partial pressures of each individual gas:</p>
-                        <p className="text-center font-medium my-2">P<sub>total</sub> = P<sub>1</sub> + P<sub>2</sub> + ... + P<sub>n</sub></p>
-                        <p>The partial pressure of each gas is proportional to its mole fraction in the mixture:</p>
-                        <p className="text-center font-medium my-2">P<sub>i</sub> = x<sub>i</sub> × P<sub>total</sub></p>
-                        <p>where x<sub>i</sub> is the mole fraction (n<sub>i</sub>/n<sub>total</sub>).</p>
+                        <h4>Gaz Karışımları ve Dalton Yasası</h4>
+                        <p>Dalton'un Kısmi Basınçlar Yasası, tepkimeye girmeyen gazların bir karışımında, toplam basıncın her bir gazın kısmi basınçlarının toplamı olduğunu belirtir:</p>
+                        <p className="text-center font-medium my-2">P<sub>toplam</sub> = P<sub>1</sub> + P<sub>2</sub> + ... + P<sub>n</sub></p>
+                        <p>Her gazın kısmi basıncı, karışımdaki mol kesri ile orantılıdır:</p>
+                        <p className="text-center font-medium my-2">P<sub>i</sub> = x<sub>i</sub> × P<sub>toplam</sub></p>
+                        <p>burada x<sub>i</sub> mol kesridir (n<sub>i</sub>/n<sub>toplam</sub>).</p>
                         
-                        <h4>Real Gases and Van der Waals Equation</h4>
-                        <p>Real gases deviate from ideal behavior, especially at high pressures and low temperatures. The Van der Waals equation accounts for:</p>
+                        <h4>Gerçek Gazlar ve Van der Waals Denklemi</h4>
+                        <p>Gerçek gazlar, özellikle yüksek basınçlarda ve düşük sıcaklıklarda ideal davranıştan sapma gösterirler. Van der Waals denklemi şunları dikkate alır:</p>
                         <ul>
-                          <li>The actual volume of gas molecules (b term)</li>
-                          <li>Attractive forces between molecules (a term)</li>
+                          <li>Gaz moleküllerinin gerçek hacmi (b terimi)</li>
+                          <li>Moleküller arasındaki çekici kuvvetler (a terimi)</li>
                         </ul>
                         <p className="text-center font-medium my-2">(P + a(n/V)²)(V - nb) = nRT</p>
-                        <p>Where a and b are gas-specific constants:</p>
+                        <p>Burada a ve b gaza özgü sabitlerdir:</p>
                         <ul>
-                          <li>a accounts for attractive forces between molecules</li>
-                          <li>b accounts for the finite volume of gas molecules</li>
+                          <li>a, moleküller arasındaki çekici kuvvetleri hesaba katar</li>
+                          <li>b, gaz moleküllerinin sonlu hacmini hesaba katar</li>
                         </ul>
-                        <p>At low pressures and high temperatures, the Van der Waals equation approaches the ideal gas law.</p>
+                        <p>Düşük basınçlarda ve yüksek sıcaklıklarda, Van der Waals denklemi ideal gaz yasasına yaklaşır.</p>
                       </>
                     ) : (
-                      <p>Theoretical background for this simulation will be available soon.</p>
+                      <p>Bu simülasyon için teorik arka plan yakında eklenecektir.</p>
                     )}
                   </div>
                 </div>
@@ -530,48 +530,48 @@ const SimulationPage = () => {
                     {simulation.slug === 'acid-base-titration' ? (
                       <>
                         <ol>
-                          <li>If you have 50 mL of 0.1 M HCl, how many mL of 0.1 M NaOH would you need to reach the equivalence point?</li>
-                          <li>What is the pH at the equivalence point of a strong acid-strong base titration?</li>
-                          <li>How does the pH change when you're titrating a weak acid with a strong base compared to a strong acid with a strong base?</li>
-                          <li>Why does the pH change slowly at first and then rapidly near the equivalence point?</li>
-                          <li>If you double the concentration of both the analyte and titrant, how would this affect the volume needed to reach the equivalence point?</li>
-                          <li>What is the purpose of using an indicator in a titration?</li>
-                          <li>How would you select an appropriate indicator for an acid-base titration?</li>
-                          <li>Calculate the pH when 24.5 mL of 0.1 M NaOH has been added to 50 mL of 0.1 M HCl.</li>
+                          <li>50 mL 0.1 M HCl çözeltiniz varsa, eşdeğerlik noktasına ulaşmak için kaç mL 0.1 M NaOH'ye ihtiyacınız olur?</li>
+                          <li>Güçlü asit-güçlü baz titrasyonunda eşdeğerlik noktasındaki pH nedir?</li>
+                          <li>Zayıf asidi güçlü bazla titre ettiğinizde pH nasıl değişir, bunu güçlü asidi güçlü bazla titre etmekle karşılaştırın?</li>
+                          <li>Neden pH başlangıçta yavaşça, eşdeğerlik noktasına yaklaştıkça ise hızla değişir?</li>
+                          <li>Analit ve titrantın konsantrasyonlarını iki katına çıkarırsanız, bu durum eşdeğerlik noktasına ulaşmak için gereken hacmi nasıl etkiler?</li>
+                          <li>Titrasyonda indikatör kullanmanın amacı nedir?</li>
+                          <li>Asit-baz titrasyonu için uygun bir indikatörü nasıl seçersiniz?</li>
+                          <li>50 mL 0.1 M HCl'ye 24.5 mL 0.1 M NaOH eklendiğinde pH'ı hesaplayın.</li>
                         </ol>
                       </>
                     ) : simulation.slug === 'state-change' ? (
                       <>
                         <ol>
-                          <li>How much energy is required to convert 100g of ice at -10°C to water at 20°C? (Use water's heat capacity for solid = 2.108 J/g°C, latent heat of fusion = 333.55 J/g, heat capacity for liquid = 4.18 J/g°C)</li>
-                          <li>Explain why the temperature remains constant during the melting and boiling processes, even though heat is continuously being added to the system.</li>
-                          <li>Why does water have a higher specific heat capacity in its liquid state compared to its solid state?</li>
-                          <li>Compare the melting and boiling points of water, iron, and nitrogen. Explain the differences in terms of intermolecular forces.</li>
-                          <li>Calculate the total energy needed to convert 50g of water at 25°C to steam at 110°C.</li>
-                          <li>If 500 J of heat is added to 20g of ice at 0°C, how much ice will melt? Will all of it melt?</li>
-                          <li>Why does the density of most substances decrease as they transition from solid to liquid to gas? Why is water unusual in this regard?</li>
-                          <li>How would increasing the mass of the substance affect the time needed to complete a phase change at a constant heating rate?</li>
+                          <li>-10°C'deki 100g buzu 20°C'deki suya dönüştürmek için ne kadar enerji gereklidir? (Suyun katı hal için ısı kapasitesi = 2.108 J/g°C, erime gizli ısısı = 333.55 J/g, sıvı hal için ısı kapasitesi = 4.18 J/g°C)</li>
+                          <li>Sisteme sürekli ısı eklenmesine rağmen, erime ve kaynama süreçlerinde sıcaklığın neden sabit kaldığını açıklayın.</li>
+                          <li>Suyun neden sıvı halinde katı haline göre daha yüksek özgül ısı kapasitesi vardır?</li>
+                          <li>Su, demir ve azotun erime ve kaynama noktalarını karşılaştırın. Moleküller arası kuvvetler açısından farklılıkları açıklayın.</li>
+                          <li>25°C'deki 50g suyu 110°C'deki buhara dönüştürmek için gereken toplam enerjiyi hesaplayın.</li>
+                          <li>0°C'deki 20g buza 500 J ısı eklenirse, ne kadar buz eriyecektir? Hepsi eriyecek midir?</li>
+                          <li>Çoğu maddenin yoğunluğu katıdan sıvıya ve gaza geçerken neden azalır? Su bu açıdan neden sıra dışıdır?</li>
+                          <li>Maddenin kütlesini artırmak, sabit bir ısıtma hızında faz değişimini tamamlamak için gereken süreyi nasıl etkiler?</li>
                         </ol>
                       </>
                     ) : simulation.slug === 'gas-laws' ? (
                       <>
                         <ol>
-                          <li>A gas occupies 2.5 L at 1.2 atm and 298 K. What will be its volume at 0.8 atm and 320 K?</li>
-                          <li>If 1.5 moles of an ideal gas occupies 36.0 L at 300 K, what is the pressure in atmospheres?</li>
-                          <li>What is the root mean square speed of oxygen (O<sub>2</sub>) molecules at 25°C? (Molar mass of O<sub>2</sub> = 32.0 g/mol)</li>
-                          <li>Explain why gases deviate from ideal behavior at high pressures and low temperatures.</li>
-                          <li>A gas mixture contains 0.25 mol of oxygen, 0.50 mol of nitrogen, and 0.15 mol of carbon dioxide. If the total pressure is 1.5 atm, what is the partial pressure of nitrogen?</li>
-                          <li>Using the Van der Waals equation, calculate the volume of 1.0 mol of methane at 300 K and 5.0 atm. (For methane, a = 2.283 L²·atm/mol², b = 0.04278 L/mol)</li>
-                          <li>Why do lighter gases diffuse faster than heavier gases at the same temperature?</li>
-                          <li>Compare the molecular speeds of helium and nitrogen at 300 K. Which has the higher average kinetic energy?</li>
-                          <li>If the temperature of a gas doubles (in Kelvin), how does it affect:
+                          <li>Bir gaz 1.2 atm ve 298 K'de 2.5 L hacim kaplar. 0.8 atm ve 320 K'de hacmi ne olur?</li>
+                          <li>300 K'de 36.0 L hacim kaplayan 1.5 mol ideal gazın basıncı atmosfer cinsinden nedir?</li>
+                          <li>25°C'de oksijen (O<sub>2</sub>) moleküllerinin karekök ortalama hızı nedir? (O<sub>2</sub>'nin molar kütlesi = 32.0 g/mol)</li>
+                          <li>Gazların yüksek basınçlarda ve düşük sıcaklıklarda neden ideal davranıştan saptığını açıklayın.</li>
+                          <li>Bir gaz karışımı 0.25 mol oksijen, 0.50 mol azot ve 0.15 mol karbon dioksit içerir. Toplam basınç 1.5 atm ise, azotun kısmi basıncı nedir?</li>
+                          <li>Van der Waals denklemini kullanarak, 300 K ve 5.0 atm'de 1.0 mol metanın hacmini hesaplayın. (Metan için, a = 2.283 L²·atm/mol², b = 0.04278 L/mol)</li>
+                          <li>Neden hafif gazlar, aynı sıcaklıkta ağır gazlardan daha hızlı difüzyon yapar?</li>
+                          <li>300 K'de helyum ve azotun moleküler hızlarını karşılaştırın. Hangisinin ortalama kinetik enerjisi daha yüksektir?</li>
+                          <li>Bir gazın sıcaklığı (Kelvin cinsinden) iki katına çıkarsa, bu durum aşağıdakileri nasıl etkiler:
                             <ol type="a">
-                              <li>The average kinetic energy of the molecules</li>
-                              <li>The average speed of the molecules</li>
-                              <li>The pressure (if volume is constant)</li>
+                              <li>Moleküllerin ortalama kinetik enerjisi</li>
+                              <li>Moleküllerin ortalama hızı</li>
+                              <li>Basınç (hacim sabit ise)</li>
                             </ol>
                           </li>
-                          <li>Calculate the pressure exerted by 2.5 g of oxygen gas in a 1.5 L container at 25°C using both the ideal gas law and Van der Waals equation. Compare the results.</li>
+                          <li>25°C'de 1.5 L kaptaki 2.5 g oksijen gazının uyguladığı basıncı hem ideal gaz yasasını hem de Van der Waals denklemini kullanarak hesaplayın. Sonuçları karşılaştırın.</li>
                         </ol>
                       </>
                     ) : (
