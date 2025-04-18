@@ -69,7 +69,6 @@ const Home = () => {
               simulations={recentSimulations} 
             />
           </>
-          </>
         )}
         
         {analyticalSimulations.length > 0 && (
