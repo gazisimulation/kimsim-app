@@ -758,18 +758,18 @@ export default function GasLawsSimulator() {
     ctx.fillRect(containerX, containerY + containerHeight + 15, 15, 15);
     ctx.fillStyle = '#333';
     ctx.fillText(`${gas1Name}: ${(gas1Fraction * 100).toFixed(0)}%`, containerX + 25, containerY + containerHeight + 27);
-    ctx.fillText(`Partial Pressure: ${gas1PartialPressure.toFixed(2)} atm`, containerX + 25, containerY + containerHeight + 47);
+    ctx.fillText(`Kısmi Basınç: ${gas1PartialPressure.toFixed(2)} atm`, containerX + 25, containerY + containerHeight + 47);
     
     // Gas 2 info
     ctx.fillStyle = gas2.color;
     ctx.fillRect(containerX + 200, containerY + containerHeight + 15, 15, 15);
     ctx.fillStyle = '#333';
     ctx.fillText(`${gas2Name}: ${((1 - gas1Fraction) * 100).toFixed(0)}%`, containerX + 225, containerY + containerHeight + 27);
-    ctx.fillText(`Partial Pressure: ${gas2PartialPressure.toFixed(2)} atm`, containerX + 225, containerY + containerHeight + 47);
+    ctx.fillText(`Kısmi Basınç: ${gas2PartialPressure.toFixed(2)} atm`, containerX + 225, containerY + containerHeight + 47);
     
     // Total info
-    ctx.fillText(`Temperature: ${temperature} K`, containerX + 430, containerY + containerHeight + 27);
-    ctx.fillText(`Total Pressure: ${totalPressure.toFixed(2)} atm`, containerX + 430, containerY + containerHeight + 47);
+    ctx.fillText(`Sıcaklık: ${temperature} K`, containerX + 430, containerY + containerHeight + 27);
+    ctx.fillText(`Toplam Basınç: ${totalPressure.toFixed(2)} atm`, containerX + 430, containerY + containerHeight + 47);
   }
   
   // Dynamic particle simulation for kinetic theory visualization
@@ -946,7 +946,7 @@ export default function GasLawsSimulator() {
     ctx.font = '10px Arial';
     ctx.fillText('0', histX, histY + histHeight + 12);
     ctx.fillText(maxSpeed.toFixed(1), histX + histWidth - 20, histY + histHeight + 12);
-    ctx.fillText('Speed Distribution', histX + histWidth / 2 - 40, histY + histHeight + 20);
+    ctx.fillText('Hız Dağılımı', histX + histWidth / 2 - 40, histY + histHeight + 20);
   }
   
   function startParticleSimulation() {
