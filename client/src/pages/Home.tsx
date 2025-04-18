@@ -56,43 +56,39 @@ const Home = () => {
       {featuredSimulation && <SimulationHero simulation={featuredSimulation} />}
       
       {/* Category Sections */}
-      <div id="simulations" className="space-y-8">
+      <div id="simulations">
         {recentSimulations.length > 0 && (
-          <>
-            <div className="inline-flex items-center mb-4 bg-primary-500/20 px-3 py-1 rounded-full">
-              <Clock className="mr-1 h-4 w-4 text-primary-500" />
-              <span className="text-sm font-medium text-primary-500">Recently Added</span>
-            </div>
-            <CategoryRow 
-              title="Recently Added" 
-              icon={<Clock className="h-5 w-5" />} 
-              simulations={recentSimulations} 
-            />
-          </>
+          <div className="inline-flex items-center mb-4 bg-primary-500/20 px-3 py-1 rounded-full">
+            <Clock className="mr-1 h-4 w-4 text-primary-500" />
+            <span className="text-sm font-medium text-primary-500">Recently Added</span>
+          </div>
+          <CategoryRow 
+            title="Recently Added" 
+            icon={<Clock className="h-5 w-5" />} 
+            simulations={recentSimulations} 
+          />
         )}
         
         {analyticalSimulations.length > 0 && (
-          <>
-            <div className="inline-flex items-center mb-4 bg-primary-500/20 px-3 py-1 rounded-full">
-              <TestTube className="mr-1 h-4 w-4 text-primary-500" />
-              <span className="text-sm font-medium text-primary-500">Analytical Chemistry</span>
-            </div>
-            <CategoryRow 
-              title="Analytical Chemistry" 
-              icon={<TestTube className="h-5 w-5" />} 
+          <div className="inline-flex items-center mb-4 bg-primary-500/20 px-3 py-1 rounded-full">
+            <TestTube className="mr-1 h-4 w-4 text-primary-500" />
+            <span className="text-sm font-medium text-primary-500">Analytical Chemistry</span>
+          </div>
+          <CategoryRow 
+            title="Analytical Chemistry" 
+            icon={<TestTube className="h-5 w-5" />} 
             simulations={analyticalSimulations} 
           />
         )}
         
         {physicalSimulations.length > 0 && (
-          <>
-            <div className="inline-flex items-center mb-4 bg-primary-500/20 px-3 py-1 rounded-full">
-              <Droplets className="mr-1 h-4 w-4 text-primary-500" />
-              <span className="text-sm font-medium text-primary-500">Physical Chemistry</span>
-            </div>
-            <CategoryRow 
-              title="Physical Chemistry" 
-              icon={<Droplets className="h-5 w-5" />} 
+          <div className="inline-flex items-center mb-4 bg-primary-500/20 px-3 py-1 rounded-full">
+            <Droplets className="mr-1 h-4 w-4 text-primary-500" />
+            <span className="text-sm font-medium text-primary-500">Physical Chemistry</span>
+          </div>
+          <CategoryRow 
+            title="Physical Chemistry" 
+            icon={<Droplets className="h-5 w-5" />} 
             simulations={physicalSimulations} 
           />
         )}

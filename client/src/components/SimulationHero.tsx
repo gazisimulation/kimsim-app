@@ -41,13 +41,7 @@ const SimulationHero: React.FC<SimulationHeroProps> = ({ simulation }) => {
                 </a>
               </Link>
             </Button>
-            <Button 
-              variant="outline" 
-              size="lg"
-              className="bg-gray-800/60 hover:bg-gray-800 border border-gray-700 text-white rounded-md font-medium transition flex items-center"
-            >
-              <Info className="mr-2 h-5 w-5" /> More Info
-            </Button>
+            
           </div>
         </div>
       </div>
