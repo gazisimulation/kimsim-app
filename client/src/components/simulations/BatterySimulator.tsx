@@ -13,10 +13,10 @@ import { Battery, BatteryFull, BatteryLow, Lightbulb, Zap, Repeat, PlusCircle, M
 // Battery types and their properties
 const BATTERY_TYPES = {
   'zinc-carbon': {
-    name: 'Zinc-Carbon',
-    anode: 'Zinc',
-    cathode: 'Manganese Dioxide',
-    electrolyte: 'Ammonium Chloride',
+    name: 'Çinko-Karbon',
+    anode: 'Çinko',
+    cathode: 'Manganez Dioksit',
+    electrolyte: 'Amonyum Klorür',
     voltage: 1.5,
     capacity: 1200, // mAh
     internalResistance: 0.8, // Ohms
@@ -29,10 +29,10 @@ const BATTERY_TYPES = {
     }
   },
   'alkaline': {
-    name: 'Alkaline',
-    anode: 'Zinc',
-    cathode: 'Manganese Dioxide',
-    electrolyte: 'Potassium Hydroxide',
+    name: 'Alkalin',
+    anode: 'Çinko',
+    cathode: 'Manganez Dioksit',
+    electrolyte: 'Potasyum Hidroksit',
     voltage: 1.5,
     capacity: 2800, // mAh
     internalResistance: 0.2, // Ohms
@@ -45,10 +45,10 @@ const BATTERY_TYPES = {
     }
   },
   'lithium-ion': {
-    name: 'Lithium-Ion',
-    anode: 'Graphite (C)',
-    cathode: 'Lithium Cobalt Oxide',
-    electrolyte: 'Lithium Salt',
+    name: 'Lityum-İyon',
+    anode: 'Grafit (C)',
+    cathode: 'Lityum Kobalt Oksit',
+    electrolyte: 'Lityum Tuzu',
     voltage: 3.7,
     capacity: 3200, // mAh
     internalResistance: 0.1, // Ohms
@@ -61,10 +61,10 @@ const BATTERY_TYPES = {
     }
   },
   'lead-acid': {
-    name: 'Lead-Acid',
-    anode: 'Lead',
-    cathode: 'Lead Dioxide',
-    electrolyte: 'Sulfuric Acid',
+    name: 'Kurşun-Asit',
+    anode: 'Kurşun',
+    cathode: 'Kurşun Dioksit',
+    electrolyte: 'Sülfürik Asit',
     voltage: 2.1,
     capacity: 7000, // mAh
     internalResistance: 0.004, // Ohms
@@ -77,10 +77,10 @@ const BATTERY_TYPES = {
     }
   },
   'nickel-metal-hydride': {
-    name: 'Nickel-Metal Hydride',
-    anode: 'Metal Hydride Alloy',
-    cathode: 'Nickel Oxyhydroxide',
-    electrolyte: 'Potassium Hydroxide',
+    name: 'Nikel-Metal Hidrür',
+    anode: 'Metal Hidrür Alaşımı',
+    cathode: 'Nikel Oksit Hidroksit',
+    electrolyte: 'Potasyum Hidroksit',
     voltage: 1.2,
     capacity: 2500, // mAh
     internalResistance: 0.15, // Ohms
@@ -97,25 +97,25 @@ const BATTERY_TYPES = {
 // Load types and their properties
 const LOAD_TYPES = {
   'led': {
-    name: 'LED Light',
+    name: 'LED Işık',
     resistance: 250, // Ohms at standard operating voltage
     icon: <Lightbulb className="h-5 w-5" />,
     variableResistance: false
   },
   'motor': {
-    name: 'Small Motor',
+    name: 'Küçük Motor',
     resistance: 50, // Ohms at standard operating conditions
     icon: <Repeat className="h-5 w-5" />,
     variableResistance: true
   },
   'heating': {
-    name: 'Heating Element',
+    name: 'Isıtma Elemanı',
     resistance: 20, // Ohms
     icon: <Zap className="h-5 w-5" />,
     variableResistance: false
   },
   'variable': {
-    name: 'Variable Resistor',
+    name: 'Değişken Direnç',
     resistance: 100, // Ohms (initial)
     icon: <Wrench className="h-5 w-5" />,
     variableResistance: true
@@ -544,13 +544,13 @@ export default function BatterySimulator() {
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
         <TabsList className="grid grid-cols-3 mb-4">
           <TabsTrigger value="battery-operation" className="flex items-center gap-2">
-            <Battery className="h-4 w-4" /> Battery Operation
+            <Battery className="h-4 w-4" /> Pil İşlemi
           </TabsTrigger>
           <TabsTrigger value="battery-types" className="flex items-center gap-2">
-            <BatteryFull className="h-4 w-4" /> Battery Types
+            <BatteryFull className="h-4 w-4" /> Pil Türleri
           </TabsTrigger>
           <TabsTrigger value="electrochemistry" className="flex items-center gap-2">
-            <Zap className="h-4 w-4" /> Electrochemistry
+            <Zap className="h-4 w-4" /> Elektrokimya
           </TabsTrigger>
         </TabsList>
       
@@ -558,22 +558,22 @@ export default function BatterySimulator() {
           <div className="flex flex-col md:flex-row gap-6">
             <Card className="w-full md:w-1/3">
               <CardHeader>
-                <CardTitle>Circuit Controls</CardTitle>
-                <CardDescription>Configure your battery and circuit</CardDescription>
+                <CardTitle>Devre Kontrolleri</CardTitle>
+                <CardDescription>Pilinizi ve devrenizi yapılandırın</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="battery-type">Battery Type</Label>
+                  <Label htmlFor="battery-type">Pil Türü</Label>
                   <Select value={batteryType} onValueChange={(value: BatteryType) => setBatteryType(value)}>
                     <SelectTrigger id="battery-type">
-                      <SelectValue placeholder="Select battery" />
+                      <SelectValue placeholder="Pil seçin" />
                     </SelectTrigger>
                     <SelectContent>
                       {Object.entries(BATTERY_TYPES).map(([key, value]) => (
                         <SelectItem key={key} value={key}>
                           <div className="flex items-center gap-2">
                             <div className="w-3 h-3 rounded-full" style={{ backgroundColor: value.color }}></div>
-                            {value.name} {value.rechargeable && '(Rechargeable)'}
+                            {value.name} {value.rechargeable && '(Şarj Edilebilir)'}
                           </div>
                         </SelectItem>
                       ))}
@@ -582,10 +582,10 @@ export default function BatterySimulator() {
                 </div>
                 
                 <div className="space-y-2">
-                  <Label htmlFor="load-type">Load Type</Label>
+                  <Label htmlFor="load-type">Yük Türü</Label>
                   <Select value={loadType} onValueChange={(value: LoadType) => setLoadType(value)}>
                     <SelectTrigger id="load-type">
-                      <SelectValue placeholder="Select load" />
+                      <SelectValue placeholder="Yük seçin" />
                     </SelectTrigger>
                     <SelectContent>
                       {Object.entries(LOAD_TYPES).map(([key, value]) => (
@@ -602,7 +602,7 @@ export default function BatterySimulator() {
                 
                 {LOAD_TYPES[loadType].variableResistance && (
                   <div className="space-y-2">
-                    <Label>Load Resistance (Ω)</Label>
+                    <Label>Yük Direnci (Ω)</Label>
                     <div className="flex items-center gap-2">
                       <Slider 
                         min={10} 
@@ -617,7 +617,7 @@ export default function BatterySimulator() {
                 )}
                 
                 <div className="space-y-2">
-                  <Label>Batteries in Series</Label>
+                  <Label>Seri Bağlı Piller</Label>
                   <div className="flex items-center gap-2">
                     <Button 
                       variant="outline" 
@@ -641,7 +641,7 @@ export default function BatterySimulator() {
                 
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <Label htmlFor="circuit-switch">Circuit State</Label>
+                    <Label htmlFor="circuit-switch">Devre Durumu</Label>
                     <Switch 
                       id="circuit-switch" 
                       checked={circuitClosed}
@@ -650,13 +650,13 @@ export default function BatterySimulator() {
                     />
                   </div>
                   <div className="text-sm text-gray-500">
-                    {circuitClosed ? 'Circuit closed (current flowing)' : 'Circuit open (no current)'}
+                    {circuitClosed ? 'Devre kapalı (akım geçiyor)' : 'Devre açık (akım yok)'}
                   </div>
                 </div>
                 
                 <div className="pt-4 flex flex-col gap-2">
                   <Button onClick={resetSimulation} variant="outline" className="w-full">
-                    Reset Simulation
+                    Simülasyonu Sıfırla
                   </Button>
                   
                   {battery.rechargeable && (
@@ -666,7 +666,7 @@ export default function BatterySimulator() {
                       className="w-full"
                       disabled={batteryCharge >= 100}
                     >
-                      Recharge Battery
+                      Pili Şarj Et
                     </Button>
                   )}
                 </div>
@@ -675,17 +675,17 @@ export default function BatterySimulator() {
             
             <Card className="w-full md:w-2/3">
               <CardHeader>
-                <CardTitle>Battery Circuit Visualization</CardTitle>
+                <CardTitle>Pil Devre Görselleştirmesi</CardTitle>
                 <CardDescription>
                   <div className="flex items-center gap-2">
-                    Current State: 
+                    Mevcut Durum: 
                     <Badge variant={circuitClosed ? "default" : "outline"}>
-                      {circuitClosed ? "Circuit Closed" : "Circuit Open"}
+                      {circuitClosed ? "Devre Kapalı" : "Devre Açık"}
                     </Badge>
                     <Badge variant={batteryCharge > 0 ? "default" : "destructive"}>
                       {batteryCharge > 0 ? 
-                        `Battery ${batteryCharge.toFixed(1)}%` : 
-                        "Battery Depleted"
+                        `Pil ${batteryCharge.toFixed(1)}%` : 
+                        "Pil Tükendi"
                       }
                     </Badge>
                   </div>
@@ -703,31 +703,31 @@ export default function BatterySimulator() {
                 
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-4">
                   <div className="bg-slate-100 dark:bg-slate-800 rounded-md p-3">
-                    <h3 className="text-sm font-medium">Voltage</h3>
+                    <h3 className="text-sm font-medium">Voltaj</h3>
                     <p className="text-2xl font-bold">
                       {totalVoltage.toFixed(2)}V
                       <span className="text-xs text-gray-500 ml-1">
-                        ({(battery.voltage * seriesCount).toFixed(2)}V max)
+                        ({(battery.voltage * seriesCount).toFixed(2)}V maks)
                       </span>
                     </p>
                   </div>
                   
                   <div className="bg-slate-100 dark:bg-slate-800 rounded-md p-3">
-                    <h3 className="text-sm font-medium">Current</h3>
+                    <h3 className="text-sm font-medium">Akım</h3>
                     <p className="text-2xl font-bold">
                       {(current * 1000).toFixed(2)}mA
                     </p>
                   </div>
                   
                   <div className="bg-slate-100 dark:bg-slate-800 rounded-md p-3">
-                    <h3 className="text-sm font-medium">Power</h3>
+                    <h3 className="text-sm font-medium">Güç</h3>
                     <p className="text-2xl font-bold">
                       {(powerOutput * 1000).toFixed(2)}mW
                     </p>
                   </div>
                   
                   <div className="bg-slate-100 dark:bg-slate-800 rounded-md p-3">
-                    <h3 className="text-sm font-medium">Battery Life</h3>
+                    <h3 className="text-sm font-medium">Pil Ömrü</h3>
                     <p className="text-2xl font-bold">
                       {dischargeRate > 0 
                         ? formatTime(Math.round((batteryCharge / 100) * battery.capacity / dischargeRate * 3600)) 
@@ -736,14 +736,14 @@ export default function BatterySimulator() {
                   </div>
                   
                   <div className="bg-slate-100 dark:bg-slate-800 rounded-md p-3">
-                    <h3 className="text-sm font-medium">Elapsed Time</h3>
+                    <h3 className="text-sm font-medium">Geçen Süre</h3>
                     <p className="text-2xl font-bold">
                       {formatTime(elapsedTime)}
                     </p>
                   </div>
                   
                   <div className="bg-slate-100 dark:bg-slate-800 rounded-md p-3">
-                    <h3 className="text-sm font-medium">Battery Capacity</h3>
+                    <h3 className="text-sm font-medium">Pil Kapasitesi</h3>
                     <p className="text-2xl font-bold">
                       {battery.capacity}mAh
                     </p>
@@ -762,7 +762,7 @@ export default function BatterySimulator() {
                   <CardTitle className="flex items-center justify-between">
                     <span>{value.name}</span>
                     {value.rechargeable && (
-                      <Badge variant="outline" className="ml-2">Rechargeable</Badge>
+                      <Badge variant="outline" className="ml-2">Şarj Edilebilir</Badge>
                     )}
                   </CardTitle>
                   <CardDescription>
@@ -773,113 +773,113 @@ export default function BatterySimulator() {
                   <div className="space-y-4">
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <h4 className="text-sm font-medium mb-1">Components</h4>
+                        <h4 className="text-sm font-medium mb-1">Bileşenler</h4>
                         <ul className="list-disc list-inside text-sm space-y-1">
-                          <li><span className="font-medium">Anode:</span> {value.anode}</li>
-                          <li><span className="font-medium">Cathode:</span> {value.cathode}</li>
-                          <li><span className="font-medium">Electrolyte:</span> {value.electrolyte}</li>
+                          <li><span className="font-medium">Anot:</span> {value.anode}</li>
+                          <li><span className="font-medium">Katot:</span> {value.cathode}</li>
+                          <li><span className="font-medium">Elektrolit:</span> {value.electrolyte}</li>
                         </ul>
                       </div>
                       <div>
-                        <h4 className="text-sm font-medium mb-1">Characteristics</h4>
+                        <h4 className="text-sm font-medium mb-1">Özellikler</h4>
                         <ul className="list-disc list-inside text-sm space-y-1">
-                          <li><span className="font-medium">Voltage:</span> {value.voltage}V</li>
-                          <li><span className="font-medium">Capacity:</span> {value.capacity}mAh</li>
-                          <li><span className="font-medium">Int. Resistance:</span> {value.internalResistance}Ω</li>
+                          <li><span className="font-medium">Voltaj:</span> {value.voltage}V</li>
+                          <li><span className="font-medium">Kapasite:</span> {value.capacity}mAh</li>
+                          <li><span className="font-medium">İç Direnç:</span> {value.internalResistance}Ω</li>
                         </ul>
                       </div>
                     </div>
                     
                     <div>
-                      <h4 className="text-sm font-medium mb-1">Applications</h4>
+                      <h4 className="text-sm font-medium mb-1">Uygulamalar</h4>
                       <p className="text-sm">
-                        {key === 'zinc-carbon' && 'Low-drain devices like remote controls, wall clocks, and basic electronics.'}
-                        {key === 'alkaline' && 'Medium-drain devices like toys, flashlights, portable audio players, and cameras.'}
-                        {key === 'lithium-ion' && 'High-performance devices like smartphones, laptops, electric vehicles, and power tools.'}
-                        {key === 'lead-acid' && 'Automotive starter batteries, uninterruptible power supplies (UPS), and backup power systems.'}
-                        {key === 'nickel-metal-hydride' && 'Hybrid vehicles, digital cameras, wireless electronics, and portable power tools.'}
+                        {key === 'zinc-carbon' && 'Düşük akım tüketen cihazlar, örneğin uzaktan kumandalar, duvar saatleri ve temel elektronik cihazlar.'}
+                        {key === 'alkaline' && 'Orta akım tüketen cihazlar, örneğin oyuncaklar, el fenerleri, taşınabilir ses çalarlar ve kameralar.'}
+                        {key === 'lithium-ion' && 'Yüksek performanslı cihazlar, örneğin akıllı telefonlar, dizüstü bilgisayarlar, elektrikli araçlar ve güç aletleri.'}
+                        {key === 'lead-acid' && 'Otomobil marş pilleri, kesintisiz güç kaynakları (UPS) ve yedek güç sistemleri.'}
+                        {key === 'nickel-metal-hydride' && 'Hibrit araçlar, dijital kameralar, kablosuz elektronik cihazlar ve taşınabilir güç aletleri.'}
                       </p>
                     </div>
                     
                     <div>
-                      <h4 className="text-sm font-medium mb-1">Advantages / Disadvantages</h4>
+                      <h4 className="text-sm font-medium mb-1">Avantajlar / Dezavantajlar</h4>
                       <div className="grid grid-cols-2 gap-2 text-sm">
                         <div>
-                          <p className="font-medium text-green-600 dark:text-green-400">Pros:</p>
+                          <p className="font-medium text-green-600 dark:text-green-400">Artıları:</p>
                           <ul className="list-disc list-inside space-y-1">
                             {key === 'zinc-carbon' && (
                               <>
-                                <li>Inexpensive</li>
-                                <li>Widely available</li>
-                                <li>Leak resistant</li>
+                                <li>Ucuz</li>
+                                <li>Geniş çapta mevcut</li>
+                                <li>Sızıntıya dayanıklı</li>
                               </>
                             )}
                             {key === 'alkaline' && (
                               <>
-                                <li>Higher capacity</li>
-                                <li>Longer shelf life</li>
-                                <li>Better for high-drain use</li>
+                                <li>Daha yüksek kapasite</li>
+                                <li>Daha uzun raf ömrü</li>
+                                <li>Yüksek akım tüketen kullanımlar için daha iyi</li>
                               </>
                             )}
                             {key === 'lithium-ion' && (
                               <>
-                                <li>High energy density</li>
-                                <li>Low self-discharge</li>
-                                <li>No memory effect</li>
+                                <li>Yüksek enerji yoğunluğu</li>
+                                <li>Düşük kendi kendine deşarj</li>
+                                <li>Bellek etkisi yok</li>
                               </>
                             )}
                             {key === 'lead-acid' && (
                               <>
-                                <li>Reliable and durable</li>
-                                <li>Inexpensive</li>
-                                <li>High surge current</li>
+                                <li>Güvenilir ve dayanıklı</li>
+                                <li>Ucuz</li>
+                                <li>Yüksek ani akım</li>
                               </>
                             )}
                             {key === 'nickel-metal-hydride' && (
                               <>
-                                <li>Higher capacity than NiCd</li>
-                                <li>Less prone to memory effect</li>
-                                <li>Environmentally friendly</li>
+                                <li>NiCd'den daha yüksek kapasite</li>
+                                <li>Bellek etkisine daha az yatkın</li>
+                                <li>Çevre dostu</li>
                               </>
                             )}
                           </ul>
                         </div>
                         <div>
-                          <p className="font-medium text-red-600 dark:text-red-400">Cons:</p>
+                          <p className="font-medium text-red-600 dark:text-red-400">Eksileri:</p>
                           <ul className="list-disc list-inside space-y-1">
                             {key === 'zinc-carbon' && (
                               <>
-                                <li>Low capacity</li>
-                                <li>Poor performance in cold</li>
-                                <li>Non-rechargeable</li>
+                                <li>Düşük kapasite</li>
+                                <li>Soğukta kötü performans</li>
+                                <li>Şarj edilemez</li>
                               </>
                             )}
                             {key === 'alkaline' && (
                               <>
-                                <li>Higher cost than zinc-carbon</li>
-                                <li>Non-rechargeable</li>
-                                <li>Environmental concerns</li>
+                                <li>Çinko-karbondan daha pahalı</li>
+                                <li>Şarj edilemez</li>
+                                <li>Çevresel endişeler</li>
                               </>
                             )}
                             {key === 'lithium-ion' && (
                               <>
-                                <li>Degrades over time</li>
-                                <li>Safety concerns (fire risk)</li>
-                                <li>Higher cost</li>
+                                <li>Zamanla bozulur</li>
+                                <li>Güvenlik endişeleri (yangın riski)</li>
+                                <li>Daha yüksek maliyet</li>
                               </>
                             )}
                             {key === 'lead-acid' && (
                               <>
-                                <li>Heavy and bulky</li>
-                                <li>Contains toxic lead</li>
-                                <li>Limited cycle life</li>
+                                <li>Ağır ve hantal</li>
+                                <li>Toksik kurşun içerir</li>
+                                <li>Sınırlı döngü ömrü</li>
                               </>
                             )}
                             {key === 'nickel-metal-hydride' && (
                               <>
-                                <li>High self-discharge rate</li>
-                                <li>Less efficient than Li-ion</li>
-                                <li>Performs poorly in cold</li>
+                                <li>Yüksek kendi kendine deşarj hızı</li>
+                                <li>Li-iyondan daha az verimli</li>
+                                <li>Soğukta kötü performans gösterir</li>
                               </>
                             )}
                           </ul>
@@ -896,19 +896,19 @@ export default function BatterySimulator() {
         <TabsContent value="electrochemistry" className="space-y-4">
           <Card>
             <CardHeader>
-              <CardTitle>Electrochemical Reactions</CardTitle>
+              <CardTitle>Elektrokimyasal Tepkimeler</CardTitle>
               <CardDescription>
-                Choose a battery type to see its chemical reactions
+                Kimyasal tepkimelerini görmek için bir pil türü seçin
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div>
                   <div className="mb-4">
-                    <Label htmlFor="reaction-battery-type">Battery Type</Label>
+                    <Label htmlFor="reaction-battery-type">Pil Türü</Label>
                     <Select value={batteryType} onValueChange={(value: BatteryType) => setBatteryType(value)}>
                       <SelectTrigger id="reaction-battery-type" className="w-full">
-                        <SelectValue placeholder="Select battery" />
+                        <SelectValue placeholder="Pil seçin" />
                       </SelectTrigger>
                       <SelectContent>
                         {Object.entries(BATTERY_TYPES).map(([key, value]) => (
@@ -924,41 +924,41 @@ export default function BatterySimulator() {
                   </div>
                   
                   <div className="p-4 bg-slate-100 dark:bg-slate-800 rounded-md">
-                    <h3 className="text-lg font-medium mb-2">{BATTERY_TYPES[batteryType].name} Battery</h3>
+                    <h3 className="text-lg font-medium mb-2">{BATTERY_TYPES[batteryType].name} Pil</h3>
                     <div className="mb-4 grid grid-cols-2 gap-4">
                       <div>
-                        <h4 className="font-medium">Anode (Negative)</h4>
+                        <h4 className="font-medium">Anot (Negatif)</h4>
                         <p>{BATTERY_TYPES[batteryType].anode}</p>
                       </div>
                       <div>
-                        <h4 className="font-medium">Cathode (Positive)</h4>
+                        <h4 className="font-medium">Katot (Pozitif)</h4>
                         <p>{BATTERY_TYPES[batteryType].cathode}</p>
                       </div>
                       <div>
-                        <h4 className="font-medium">Electrolyte</h4>
+                        <h4 className="font-medium">Elektrolit</h4>
                         <p>{BATTERY_TYPES[batteryType].electrolyte}</p>
                       </div>
                       <div>
-                        <h4 className="font-medium">Standard Voltage</h4>
+                        <h4 className="font-medium">Standart Voltaj</h4>
                         <p>{BATTERY_TYPES[batteryType].voltage}V</p>
                       </div>
                     </div>
                     
                     <div className="space-y-3">
                       <div>
-                        <h4 className="font-medium">Anode Half-Reaction (Oxidation)</h4>
+                        <h4 className="font-medium">Anot Yarı Tepkimesi (Oksidasyon)</h4>
                         <p className="py-1 px-2 bg-white dark:bg-slate-700 rounded">
                           {BATTERY_TYPES[batteryType].reaction.anode}
                         </p>
                       </div>
                       <div>
-                        <h4 className="font-medium">Cathode Half-Reaction (Reduction)</h4>
+                        <h4 className="font-medium">Katot Yarı Tepkimesi (Redüksiyon)</h4>
                         <p className="py-1 px-2 bg-white dark:bg-slate-700 rounded">
                           {BATTERY_TYPES[batteryType].reaction.cathode}
                         </p>
                       </div>
                       <div>
-                        <h4 className="font-medium">Overall Reaction</h4>
+                        <h4 className="font-medium">Toplam Tepkime</h4>
                         <p className="py-1 px-2 bg-white dark:bg-slate-700 rounded font-medium">
                           {BATTERY_TYPES[batteryType].reaction.overall}
                         </p>
@@ -968,32 +968,32 @@ export default function BatterySimulator() {
                 </div>
                 
                 <div className="space-y-4">
-                  <h3 className="text-lg font-medium">How Batteries Work</h3>
+                  <h3 className="text-lg font-medium">Piller Nasıl Çalışır</h3>
                   <div className="prose dark:prose-invert">
-                    <p>A battery is an electrochemical cell (or connected group of cells) that converts stored chemical energy into electrical energy through redox reactions.</p>
+                    <p>Bir pil, depolanmış kimyasal enerjiyi redoks tepkimeleri aracılığıyla elektrik enerjisine dönüştüren elektrokimyasal bir hücredir (veya birbirine bağlı hücre grubudur).</p>
                     
-                    <h4>Key Concepts</h4>
+                    <h4>Temel Kavramlar</h4>
                     <ul>
-                      <li><strong>Electrochemical Cell:</strong> Contains an anode, cathode, and electrolyte.</li>
-                      <li><strong>Anode:</strong> The negative electrode where oxidation occurs (electrons are lost).</li>
-                      <li><strong>Cathode:</strong> The positive electrode where reduction occurs (electrons are gained).</li>
-                      <li><strong>Electrolyte:</strong> Conducts ions between electrodes but blocks electron flow.</li>
-                      <li><strong>External Circuit:</strong> Path for electrons to flow from anode to cathode.</li>
+                      <li><strong>Elektrokimyasal Hücre:</strong> Bir anot, katot ve elektrolit içerir.</li>
+                      <li><strong>Anot:</strong> Oksidasyonun gerçekleştiği negatif elektrot (elektronlar kaybedilir).</li>
+                      <li><strong>Katot:</strong> Redüksiyonun gerçekleştiği pozitif elektrot (elektronlar kazanılır).</li>
+                      <li><strong>Elektrolit:</strong> Elektrotlar arasında iyonları iletir ancak elektron akışını engeller.</li>
+                      <li><strong>Harici Devre:</strong> Elektronların anottan katoda akması için yol.</li>
                     </ul>
                     
-                    <h4>Operating Principles</h4>
+                    <h4>Çalışma Prensipleri</h4>
                     <ol>
-                      <li>When a battery is connected to a circuit, a chemical reaction at the anode releases electrons.</li>
-                      <li>These electrons flow through the external circuit, providing electrical energy.</li>
-                      <li>Electrons are consumed at the cathode in a reduction reaction.</li>
-                      <li>Ions flow through the electrolyte to maintain electrical neutrality.</li>
-                      <li>This flow of electrons creates an electric current.</li>
+                      <li>Bir pil bir devreye bağlandığında, anottaki bir kimyasal tepkime elektronları serbest bırakır.</li>
+                      <li>Bu elektronlar elektrik enerjisi sağlayarak harici devreden akar.</li>
+                      <li>Elektronlar bir redüksiyon tepkimesinde katotta tüketilir.</li>
+                      <li>İyonlar, elektriksel nötrlüğü korumak için elektrolitten akar.</li>
+                      <li>Bu elektron akışı elektrik akımı oluşturur.</li>
                     </ol>
                     
-                    <h4>Primary vs. Secondary Batteries</h4>
+                    <h4>Birincil ve İkincil Piller</h4>
                     <ul>
-                      <li><strong>Primary Batteries:</strong> Non-rechargeable, one-time use (e.g., zinc-carbon, alkaline)</li>
-                      <li><strong>Secondary Batteries:</strong> Rechargeable, chemical reactions can be reversed (e.g., lithium-ion, lead-acid)</li>
+                      <li><strong>Birincil Piller:</strong> Şarj edilemeyen, tek kullanımlık (örneğin, çinko-karbon, alkalin)</li>
+                      <li><strong>İkincil Piller:</strong> Şarj edilebilen, kimyasal tepkimeler tersine çevrilebilir (örneğin, lityum iyon, kurşun asit)</li>
                     </ul>
                   </div>
                 </div>

@@ -225,16 +225,16 @@ export default function ChemicalBondsSimulator() {
       
       // Description text
       const description = `
-        <h3>Metallic Bond</h3>
-        <p>Metallic bonding occurs in metals where the atoms form a lattice structure. The valence electrons become delocalized, forming a "sea of electrons" that moves freely between the positive metal ions.</p>
-        <p>This electron mobility explains many properties of metals:</p>
+        <h3>Metalik Bağ</h3>
+        <p>Metalik bağ, atomların bir kafes yapısı oluşturduğu metallerde meydana gelir. Değerlik elektronları yer değiştirir ve pozitif metal iyonları arasında serbestçe hareket eden bir "elektron denizi" oluşturur.</p>
+        <p>Bu elektron hareketliliği metallerin birçok özelliğini açıklar:</p>
         <ul>
-          <li>High electrical conductivity</li>
-          <li>Thermal conductivity</li>
-          <li>Malleability and ductility</li>
-          <li>Metallic luster</li>
+          <li>Yüksek elektrik iletkenliği</li>
+          <li>Isı iletkenliği</li>
+          <li>Çekme ve dövülebilirlik</li>
+          <li>Metalik parlaklık</li>
         </ul>
-        <p>In this simulation, the silver spheres represent metal atoms arranged in a lattice, while the small blue spheres represent the mobile valence electrons that move freely throughout the structure.</p>
+        <p>Bu simülasyonda, gümüş küreler, hareketli değerlik elektronları yapının içinde serbestçe hareket eden küçük mavi kürelerken, bir kafes içinde düzenlenmiş metal atomlarını temsil eder.</p>
       `;
       
       setDescription(description);
@@ -334,16 +334,16 @@ export default function ChemicalBondsSimulator() {
       
       // Description
       const description = `
-        <h3>Ionic Bond</h3>
-        <p>Ionic bonding occurs between a metal and a non-metal element. The metal atom loses one or more electrons, becoming a positively charged ion (cation). The non-metal atom gains electrons, becoming a negatively charged ion (anion).</p>
-        <p>The strong electrostatic attraction between oppositely charged ions forms the ionic bond. This results in a crystalline lattice structure like sodium chloride (NaCl).</p>
-        <p>In this simulation:</p>
+        <h3>İyonik Bağ</h3>
+        <p>İyonik bağ, bir metal ve bir ametal element arasında meydana gelir. Metal atomu bir veya daha fazla elektron kaybeder ve pozitif yüklü bir iyon (katyon) olur. Ametal atomu elektron kazanır ve negatif yüklü bir iyon (anyon) olur.</p>
+        <p>Zıt yüklü iyonlar arasındaki güçlü elektrostatik çekim, iyonik bağı oluşturur. Bu, sodyum klorür (NaCl) gibi kristal bir kafes yapısı ile sonuçlanır.</p>
+        <p>Bu simülasyonda:</p>
         <ul>
-          <li>Blue spheres: Sodium ions (Na+)</li>
-          <li>Green spheres: Chloride ions (Cl-)</li>
-          <li>Yellow lines: Representation of electrostatic field lines</li>
+          <li>Mavi küreler: Sodyum iyonları (Na+)</li>
+          <li>Yeşil küreler: Klor iyonları (Cl-)</li>
+          <li>Sarı çizgiler: Elektrostatik alan çizgilerinin gösterimi</li>
         </ul>
-        <p>Ionic compounds have high melting points, are typically brittle, and conduct electricity when dissolved in water or melted.</p>
+        <p>İyonik bileşikler yüksek erime noktalarına sahiptir, genellikle kırılganlardır ve suya veya erimiş halde çözündüklerinde elektrik iletkenliği gösterirler.</p>
       `;
       
       setDescription(description);
@@ -522,17 +522,17 @@ export default function ChemicalBondsSimulator() {
       
       // Description
       const description = `
-        <h3>Covalent Bond</h3>
-        <p>Covalent bonding occurs between non-metal atoms. Atoms share electron pairs to achieve a stable electron configuration.</p>
-        <p>This simulation shows a water (H<sub>2</sub>O) molecule, which exhibits polar covalent bonding:</p>
+        <h3>Kovalent Bağ</h3>
+        <p>Kovalent bağ, ametal atomları arasında meydana gelir. Atomlar kararlı bir elektron konfigürasyonuna ulaşmak için elektron çiftlerini paylaşırlar.</p>
+        <p>Bu simülasyon, polar kovalent bağ gösteren bir su (H<sub>2</sub>O) molekülünü göstermektedir:</p>
         <ul>
-          <li>Red sphere: Oxygen atom</li>
-          <li>White spheres: Hydrogen atoms</li>
-          <li>Cyan spheres: Shared electron pairs (bonds)</li>
-          <li>Blue sphere on oxygen: Partial negative charge (δ-)</li>
-          <li>Red spheres on hydrogens: Partial positive charges (δ+)</li>
+          <li>Kırmızı küre: Oksijen atomu</li>
+          <li>Beyaz küreler: Hidrojen atomları</li>
+          <li>Cyan küreler: Paylaşılan elektron çiftleri (bağlar)</li>
+          <li>Oksijen üzerinde mavi küre: Kısmi negatif yük (δ-)</li>
+          <li>Hidrojenler üzerinde kırmızı küreler: Kısmi pozitif yükler (δ+)</li>
         </ul>
-        <p>The electronegativity difference between oxygen and hydrogen creates a polar molecule, which explains water's unique properties like high boiling point and ability to dissolve many substances.</p>
+        <p>Oksijen ve hidrojen arasındaki elektronegatiflik farkı, polar bir molekül oluşturur ve bu da suyun yüksek kaynama noktası ve birçok maddeyi çözebilme özelliği gibi benzersiz özelliklerini açıklar.</p>
       `;
       
       setDescription(description);
@@ -587,20 +587,20 @@ export default function ChemicalBondsSimulator() {
     <div className="flex flex-col lg:flex-row items-start justify-center gap-6">
       <Card className="w-full lg:w-1/3">
         <CardHeader>
-          <CardTitle>Chemical Bonds</CardTitle>
-          <CardDescription>Explore different types of chemical bonds in 3D</CardDescription>
+          <CardTitle>Kimyasal Bağlar</CardTitle>
+          <CardDescription>3B'de farklı kimyasal bağ türlerini keşfedin</CardDescription>
         </CardHeader>
         <CardContent>
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
             <TabsList className="grid grid-cols-3 mb-4">
               <TabsTrigger value="metallic" className="flex items-center justify-center">
-                <AtomIcon className="mr-2 h-4 w-4" /> Metallic
+                <AtomIcon className="mr-2 h-4 w-4" /> Metalik
               </TabsTrigger>
               <TabsTrigger value="ionic" className="flex items-center justify-center">
-                <ZapIcon className="mr-2 h-4 w-4" /> Ionic
+                <ZapIcon className="mr-2 h-4 w-4" /> İyonik
               </TabsTrigger>
               <TabsTrigger value="covalent" className="flex items-center justify-center">
-                <Link2 className="mr-2 h-4 w-4" /> Covalent
+                <Link2 className="mr-2 h-4 w-4" /> Kovalent
               </TabsTrigger>
             </TabsList>
           </Tabs>
@@ -614,7 +614,7 @@ export default function ChemicalBondsSimulator() {
       <div className="w-full lg:w-2/3">
         <Card>
           <CardHeader>
-            <CardTitle>3D Visualization</CardTitle>
+            <CardTitle>3B Görselleştirme</CardTitle>
           </CardHeader>
           <CardContent>
             <div ref={containerRef} className="w-full h-[400px] relative bg-gray-900 rounded-md overflow-hidden">
@@ -628,7 +628,7 @@ export default function ChemicalBondsSimulator() {
                 className="w-full h-full"
               />
               <div className="absolute bottom-4 left-4 text-white text-sm bg-black/50 px-3 py-1 rounded-full">
-                Drag to rotate | Scroll to zoom
+                Döndürmek için sürükleyin | Yakınlaştırmak için kaydırın
               </div>
             </div>
           </CardContent>

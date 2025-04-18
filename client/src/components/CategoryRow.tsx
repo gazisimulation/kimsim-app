@@ -39,7 +39,7 @@ const CategoryRow: React.FC<CategoryRowProps> = ({ title, icon, simulations }) =
   return (
     <section className="py-8 px-4">
       <div className="container mx-auto">
-        <h2 className="text-2xl font-heading font-bold mb-4 flex items-center">
+        <h2 className="text-2xl font-heading font-bold mb-4 flex items-center max-w-2xl backdrop-blur-sm bg-black/40 p-6 rounded-xl shadow-2xl border border-white/10">
           <span className="mr-2 text-primary-500">{icon}</span> {title}
         </h2>
         <div className="relative group">

@@ -171,24 +171,24 @@ export default function AcidBaseTitrationSimulator() {
     <div className="flex flex-col lg:flex-row items-start justify-center gap-6">
       <Card className="w-full lg:w-1/3">
         <CardHeader>
-          <CardTitle>Titration Setup</CardTitle>
-          <CardDescription>Configure the initial conditions for the titration.</CardDescription>
+          <CardTitle>Titrasyon Kurulumu</CardTitle>
+          <CardDescription>Titrasyon için başlangıç koşullarını yapılandırın.</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="analyte-type">Analyte (in Flask)</Label>
+            <Label htmlFor="analyte-type">Analit (Beherde)</Label>
             <Select value={analyteType} onValueChange={(value: SolutionType) => setAnalyteType(value)}>
               <SelectTrigger id="analyte-type">
-                <SelectValue placeholder="Select analyte type" />
+                <SelectValue placeholder="Analit türünü seçin" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="acid">Strong Acid</SelectItem>
-                <SelectItem value="base">Strong Base</SelectItem>
+                <SelectItem value="acid">Güçlü Asit</SelectItem>
+                <SelectItem value="base">Güçlü Baz</SelectItem>
               </SelectContent>
             </Select>
           </div>
           <div className="space-y-2">
-            <Label htmlFor="analyte-volume">Analyte Volume (mL)</Label>
+            <Label htmlFor="analyte-volume">Analit Hacmi (mL)</Label>
             <Input
               id="analyte-volume"
               type="number"
@@ -199,7 +199,7 @@ export default function AcidBaseTitrationSimulator() {
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="analyte-concentration">Analyte Concentration (M)</Label>
+            <Label htmlFor="analyte-concentration">Analit Konsantrasyonu (M)</Label>
             <Input
               id="analyte-concentration"
               type="number"
@@ -210,11 +210,11 @@ export default function AcidBaseTitrationSimulator() {
             />
           </div>
           <div className="space-y-2">
-            <Label>Titrant (in Burette)</Label>
-            <Input value={titrantType === 'acid' ? 'Strong Acid' : 'Strong Base'} readOnly className="bg-gray-100 dark:bg-gray-800" />
+            <Label>Titrant (Bürette)</Label>
+            <Input value={titrantType === 'acid' ? 'Güçlü Asit' : 'Güçlü Baz'} readOnly className="bg-gray-100 dark:bg-gray-800" />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="titrant-concentration">Titrant Concentration (M)</Label>
+            <Label htmlFor="titrant-concentration">Titrant Konsantrasyonu (M)</Label>
             <Input
               id="titrant-concentration"
               type="number"
@@ -227,7 +227,7 @@ export default function AcidBaseTitrationSimulator() {
         </CardContent>
          <CardFooter>
             <Button onClick={handleReset} variant="outline" className="w-full">
-              <RefreshCwIcon className="mr-2 h-4 w-4" /> Reset Simulation
+              <RefreshCwIcon className="mr-2 h-4 w-4" /> Simülasyonu Sıfırla
             </Button>
           </CardFooter>
       </Card>
@@ -235,15 +235,15 @@ export default function AcidBaseTitrationSimulator() {
       <div className="flex flex-col w-full lg:w-2/3 gap-6">
         <Card>
           <CardHeader>
-            <CardTitle>Simulation</CardTitle>
-            <CardDescription>Add titrant using the slider and observe the changes.</CardDescription>
+            <CardTitle>Simülasyon</CardTitle>
+            <CardDescription>Kaydırıcıyı kullanarak titrant ekleyin ve değişiklikleri gözlemleyin.</CardDescription>
           </CardHeader>
           <CardContent className="flex flex-col sm:flex-row items-center justify-around gap-6">
             {/* Visualization */}
             <div className="flex items-end justify-center gap-4 w-full sm:w-auto">
               {/* Burette */}
               <div className="flex flex-col items-center">
-                <Label className="mb-1 text-xs text-gray-600">Burette ({titrantType})</Label>
+                <Label className="mb-1 text-xs text-gray-600">Bürette ({titrantType})</Label>
                 <div className="relative w-8 h-64 bg-gray-200 border border-gray-400 rounded-t-md">
                   <div
                     className="absolute bottom-0 left-0 right-0 bg-blue-400 transition-all duration-100"
@@ -256,7 +256,7 @@ export default function AcidBaseTitrationSimulator() {
               </div>
               {/* Flask */}
               <div className="flex flex-col items-center">
-                 <Label className="mb-1 text-xs text-gray-600">Flask ({analyteType})</Label>
+                 <Label className="mb-1 text-xs text-gray-600">Beher ({analyteType})</Label>
                 <div className={`relative w-24 h-32 border-2 border-gray-500 rounded-b-full rounded-t-lg flex items-end justify-center overflow-hidden`}>
                     <div className={`absolute bottom-0 left-0 right-0 h-1/2 ${indicatorColor} transition-colors duration-300`}></div>
                     <BeakerIcon className="w-full h-full text-gray-500 opacity-10 absolute top-0 left-0" />
@@ -267,7 +267,7 @@ export default function AcidBaseTitrationSimulator() {
             {/* Controls & Readouts */}
             <div className="w-full sm:w-1/2 space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="volume-slider">Volume of Titrant Added: {addedVolume.toFixed(1)} mL</Label>
+                <Label htmlFor="volume-slider">Titrant Eklenen Hacim: {addedVolume.toFixed(1)} mL</Label>
                 <Slider
                   id="volume-slider"
                   min={0}
@@ -278,11 +278,11 @@ export default function AcidBaseTitrationSimulator() {
                 />
               </div>
               <div className="text-center p-4 border rounded-md bg-gray-50 dark:bg-gray-800">
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Current pH</p>
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Güncel pH</p>
                 <p className="text-2xl font-bold text-indigo-600">{currentPH.toFixed(2)}</p>
               </div>
                <div className="text-center p-2 border rounded-md bg-yellow-50 border-yellow-200 dark:bg-yellow-900/20 dark:border-yellow-800">
-                <p className="text-sm font-medium text-yellow-800 dark:text-yellow-400">Equivalence Point (calculated)</p>
+                <p className="text-sm font-medium text-yellow-800 dark:text-yellow-400">Eşdeğerlik Noktası (hesaplandı)</p>
                 <p className="text-lg font-semibold text-yellow-900 dark:text-yellow-300">
                   {equivalencePointVolume === Infinity ? 'N/A' : `${equivalencePointVolume.toFixed(1)} mL`}
                 </p>
@@ -293,7 +293,7 @@ export default function AcidBaseTitrationSimulator() {
 
         <Card>
           <CardHeader>
-            <CardTitle>Titration Curve</CardTitle>
+            <CardTitle>Titrasyon Eğrisi</CardTitle>
           </CardHeader>
           <CardContent className="h-80">
             <ResponsiveContainer width="100%" height="100%">
@@ -304,7 +304,7 @@ export default function AcidBaseTitrationSimulator() {
                 <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
                 <XAxis 
                   dataKey="volume" 
-                  label={{ value: 'Titrant Volume (mL)', position: 'insideBottomRight', offset: -10 }} 
+                  label={{ value: 'Titrant Hacmi (mL)', position: 'insideBottomRight', offset: -10 }} 
                 />
                 <YAxis 
                   domain={[0, 14]} 
@@ -312,7 +312,7 @@ export default function AcidBaseTitrationSimulator() {
                 />
                 <Tooltip 
                   formatter={(value) => [Number(value).toFixed(2), 'pH']}
-                  labelFormatter={(value) => `Volume: ${value} mL`}
+                  labelFormatter={(value) => `Hacim: ${value} mL`}
                 />
                 <Legend />
                 <Line 
