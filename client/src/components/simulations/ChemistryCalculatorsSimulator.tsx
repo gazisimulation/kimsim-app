@@ -806,7 +806,7 @@ function MolarityCalculator() {
           setResult2(dResult.toFixed(3));
           break;
         case "Find Molar Mass":
-          const maResult = d.times(percent).times(10).div((m);
+          const maResult = d.times(percent).times(10).div(m);
           setResult2(maResult.toFixed(3));
           break;
       }
@@ -1156,91 +1156,3 @@ function QuantumNumbersCalculator() {
   );
 }
 
-function RaoultsLawCalculator() {
-  const [a1, setA1] = useState<number | string>(1);
-  const [y1, setY1] = useState<number | string>(1);
-  const [a2, setA2] = useState<number | string>(1);
-  const [y2, setY2] = useState<number | string>(1);
-  const [result, setResult] = useState<string>("");
-
-  useEffect(() => {
-    calculate();
-  }, [a1, y1, a2, y2]);
-
-  function calculate() {
-    try {
-      const a1Value = new Big(a1 || 0);
-      const y1Value = new Big(y1 || 0);
-      const a2Value = new Big(a2 || 0);
-      const y2Value = new Big(y2 || 0);
-
-      const result = a1Value.times(y1Value).plus(a2Value.times(y2Value));
-      setResult(result.toFixed(4));
-    } catch (err) {
-      setResult("Error in calculation");
-    }
-  }
-
-  return (
-    <div className="space-y-4">
-      <div className="grid grid-cols-2 gap-6">
-        <div className="space-y-4 border-r pr-6">
-          <Label className="text-center block">First Component</Label>
-          <div>
-            <Label htmlFor="p0-1">P₀ (Vapor Pressure)</Label>
-            <Input 
-              id="p0-1" 
-              type="number" 
-              value={a1} 
-              onChange={(e) => setA1(e.target.value)}
-              min={0}
-            />
-          </div>
-          <div>
-            <Label htmlFor="x1">X (Mole Fraction)</Label>
-            <Input 
-              id="x1" 
-              type="number" 
-              value={y1} 
-              onChange={(e) => setY1(e.target.value)}
-              min={0}
-              max={1}
-              step={0.1}
-            />
-          </div>
-        </div>
-
-        <div className="space-y-4">
-          <Label className="text-center block">Second Component</Label>
-          <div>
-            <Label htmlFor="p0-2">P₀ (Vapor Pressure)</Label>
-            <Input 
-              id="p0-2" 
-              type="number" 
-              value={a2} 
-              onChange={(e) => setA2(e.target.value)}
-              min={0}
-            />
-          </div>
-          <div>
-            <Label htmlFor="x2">X (Mole Fraction)</Label>
-            <Input 
-              id="x2" 
-              type="number" 
-              value={y2} 
-              onChange={(e) => setY2(e.target.value)}
-              min={0}
-              max={1}
-              step={0.1}
-            />
-          </div>
-        </div>
-      </div>
-
-      <div className="p-4 bg-slate-100 dark:bg-slate-800 rounded-md">
-        <div className="text-sm font-medium mb-2">Total Vapor Pressure = P₁° × X₁ + P₂° × X₂</div>
-        <div className="text-2xl font-bold">{result}</div>
-      </div>
-    </div>
-  );
-}
