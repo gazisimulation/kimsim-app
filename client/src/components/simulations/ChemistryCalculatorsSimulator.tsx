@@ -119,7 +119,7 @@ function RaoultsLawCalculator() {
       const result = a1Value.times(y1Value).plus(a2Value.times(y2Value));
       setResult(result.toFixed(4));
     } catch (err) {
-      setResult("Error in calculation");
+      setResult("Hesaplamada hata oluştu");
     }
   }
 
@@ -227,7 +227,7 @@ function IdealGasLawCalculator() {
           break;
       }
     } catch (err) {
-      setResult("Error in calculation");
+      setResult("Hesaplamada hata oluştu");
     }
   }
 
@@ -366,7 +366,7 @@ function AverageAtomicMassCalculator() {
       const result = weightedSum.div(100);
       setResult(result.toFixed(4));
     } catch (err) {
-      setResult("Error in calculation");
+      setResult("Hesaplamada hata oluştu");
     }
   }
 
@@ -471,7 +471,7 @@ function AvogadroCalculator() {
         setResult(result.toExponential(4));
       }
     } catch (err) {
-      setResult("Error in calculation");
+      setResult("Hesaplamada hata oluştu");
     }
   }
 
@@ -781,7 +781,7 @@ function MolarityCalculator() {
           break;
       }
     } catch (err) {
-      setResult("Error in calculation");
+      setResult("Hesaplamada hata oluştu");
     }
   }
 
