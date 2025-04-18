@@ -811,7 +811,7 @@ function MolarityCalculator() {
           break;
       }
     } catch (err) {
-      setResult2("Error in calculation");
+      setResult2("Hesaplamada hata oluştu");
     }
   }
 
@@ -1047,7 +1047,7 @@ function QuantumNumbersCalculator() {
           break;
       }
     } catch (err) {
-      setResult("Error in calculation");
+      setResult("Hesaplamada hata oluştu");
     }
   }
 
