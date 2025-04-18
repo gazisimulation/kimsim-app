@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'wouter';
 import { FlaskRound } from 'lucide-react';
+import { ThemeToggle } from './ui/theme-toggle';
 
 const Header = () => {
   return (
