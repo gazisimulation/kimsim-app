@@ -9,33 +9,33 @@ import { Thermometer, Droplets, Snowflake, Wind } from 'lucide-react';
 
 // Constants for Water (default), Iron, Nitrogen
 const substancesData = {
-  Su: {
+  Water: {
     meltingPoint: 0, // C
     boilingPoint: 100, // C
-    heatCapacitySolid: 2.108, // J/gC (buz)
-    heatCapacityLiquid: 4.18, // J/gC (su)
-    heatCapacityGas: 2.0, // J/gC (buhar yaklaşık)
+    heatCapacitySolid: 2.108, // J/gC (ice)
+    heatCapacityLiquid: 4.18, // J/gC (water)
+    heatCapacityGas: 2.0, // J/gC (steam approx)
     latentHeatFusion: 333.55, // J/g
     latentHeatVaporization: 2257, // J/g
     molarMass: 18.01528, // g/mol
     densitySolid: 0.9167, // g/cm3
     densityLiquid: 1.0, // g/cm3
-    densityGas: 0.0006, // g/cm3 100C'de yaklaşık
+    densityGas: 0.0006, // g/cm3 approx at 100C
   },
-  Demir: {
+  Iron: {
     meltingPoint: 1538,
     boilingPoint: 2862,
     heatCapacitySolid: 0.449, // J/gC
     heatCapacityLiquid: 0.82, // J/gC
-    heatCapacityGas: 0.9, // J/gC yaklaşık
+    heatCapacityGas: 0.9, // J/gC approx
     latentHeatFusion: 247, // J/g
     latentHeatVaporization: 6090, // J/g
     molarMass: 55.845,
     densitySolid: 7.874,
     densityLiquid: 6.98,
-    densityGas: 0.005, // yaklaşık
+    densityGas: 0.005, // approx
   },
-  Azot: {
+  Nitrogen: {
     meltingPoint: -210,
     boilingPoint: -196,
     heatCapacitySolid: 1.04, // J/gC
@@ -55,7 +55,7 @@ const DEFAULT_INTERVAL_MS = 50;
 
 export default function StateChangeSimulator() {
   // User configurable parameters
-  const [substance, setSubstance] = useState('Su');
+  const [substance, setSubstance] = useState('Water');
   const [mass, setMass] = useState(100); // grams
   const [heatingRate, setHeatingRate] = useState(500); // J/s
   const [intervalMs, setIntervalMs] = useState(DEFAULT_INTERVAL_MS);
@@ -274,9 +274,9 @@ export default function StateChangeSimulator() {
                   <SelectValue placeholder="Madde seçin" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="Su">Su (H₂O)</SelectItem>
-                  <SelectItem value="Demir">Demir (Fe)</SelectItem>
-                  <SelectItem value="Azot">Azot (N₂)</SelectItem>
+                  <SelectItem value="Water">Su (H₂O)</SelectItem>
+                  <SelectItem value="Iron">Demir (Fe)</SelectItem>
+                  <SelectItem value="Nitrogen">Azot (N₂)</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -375,8 +375,8 @@ export default function StateChangeSimulator() {
                 <div className="absolute inset-0 bg-blue-100 dark:bg-blue-900 flex flex-col justify-center items-center text-blue-700 dark:text-blue-300 text-xl font-bold">
                   <div className="flex items-center space-x-2">
                     <Snowflake className="h-6 w-6" />
-                    <span>{state === 'solid' ? 'Katı' : 'Erime'} ({substance === 'Su' ? 'Buz' : 
-                           substance === 'Demir' ? 'Demir' : 'Azot'})</span>
+                    <span>{state === 'solid' ? 'Katı' : 'Erime'} ({substance === 'Water' ? 'Buz' : 
+                           substance === 'Iron' ? 'Demir' : 'Azot'})</span>
                   </div>
                   {state === 'melting' && <div className="text-sm mt-1">Faz değişimi sürüyor...</div>}
                   <div className="absolute inset-0 bg-blue-200 dark:bg-blue-800 opacity-30 animate-pulse"></div>
