@@ -1,0 +1,1 @@
+Bunun için bir değişiklik talebi varsa, güvenlik açıkları derhal düzeltilmelidir. Katılımcıların sorunu çözmek için bir ay süresi vardır. Bir aydan sonra, çözülmemiş sorunlara öncelik verilmeyecektir.
