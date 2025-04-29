@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3D Fullerene Sphere</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background-color: #0f172a; /* slate-900 */
+      color: #f1f5f9; /* slate-100 */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      overflow: hidden;
+      padding: 1rem;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: bold;
+      background: linear-gradient(to right, #38bdf8, #34d399, #f59e0b);
+      -webkit-background-clip: text;
+      color: transparent;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      color: #94a3b8; /* slate-400 */
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .scene {
+      width: 20rem;
+      height: 20rem;
+      perspective: 1200px;
+      cursor: pointer;
+    }
+
+    .sphere {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      animation: spin-complex 20s linear infinite;
+    }
+
+    .ring {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 2px solid;
+      box-sizing: border-box;
+      opacity: 0.7;
+    }
+
+    .ring-sky {
+      border-color: #38bdf8;
+      box-shadow: 0 0 8px #38bdf8, inset 0 0 5px #38bdf840;
+    }
+
+    .ring-emerald {
+      border-color: #34d399;
+      box-shadow: 0 0 8px #34d399, inset 0 0 5px #34d39940;
+    }
+
+    .ring-amber {
+      border-color: #f59e0b;
+      box-shadow: 0 0 8px #f59e0b, inset 0 0 5px #f59e0b40;
+    }
+
+    .central-sphere {
+      position: absolute;
+      width: 25%;
+      height: 25%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #475569, #1e293b);
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+
+    @keyframes spin-complex {
+      0% { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
+      100% { transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg); }
+    }
+
+    .controls {
+      margin-top: 1.5rem;
+      display: flex;
+      gap: 1rem;
+    }
+
+    button {
+      padding: 0.5rem 1rem;
+      background-color: #334155; /* slate-700 */
+      color: #e2e8f0;
+      border: none;
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #475569; /* slate-600 */
+    }
+
+    .footer-note {
+      font-size: 0.75rem;
+      color: #64748b; /* slate-500 */
+      margin-top: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <header style="text-align:center;">
+    <h1>Fullerene 3D Explorer</h1>
+    <p>An interactive, stylized 3D model inspired by fullerene structures.</p>
+  </header>
+
+  <div class="scene" onclick="toggleRotation()" title="Click to pause or resume">
+    <div class="sphere" id="sphere">
+      <!-- Central glowing sphere -->
+      <div class="central-sphere"></div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button onclick="toggleRotation()">Play/Pause</button>
+    <button onclick="restartAnimation()">Restart</button>
+  </div>
+  <div class="footer-note">Click the model or use buttons to control animation.</div>
+
+  <script>
+    const sphere = document.getElementById('sphere');
+    let isRotating = true;
+
+    function generateRings() {
+      const colors = ['sky', 'emerald', 'amber'];
+      const axes = ['X', 'Y', 'Z'];
+      const numRings = 7;
+
+      axes.forEach((axis, axisIndex) => {
+        for (let i = 0; i < numRings; i++) {
+          const ring = document.createElement('div');
+          ring.className = `ring ring-${colors[axisIndex % colors.length]}`;
+          const angle = (i / numRings) * 180;
+          ring.style.transform = `rotate${axis}(${angle}deg)`;
+          sphere.appendChild(ring);
+        }
+      });
+    }
+
+    function toggleRotation() {
+      isRotating = !isRotating;
+      sphere.style.animationPlayState = isRotating ? 'running' : 'paused';
+    }
+
+    function restartAnimation() {
+      sphere.style.animation = 'none';
+      setTimeout(() => {
+        sphere.style.animation = 'spin-complex 20s linear infinite';
+        sphere.style.animationPlayState = 'running';
+        isRotating = true;
+      }, 50);
+    }
+
+    generateRings();
+  </script>
+</body>
+</html>
