@@ -18,6 +18,7 @@ import StateChangeSimulator from '@/components/simulations/StateChangeSimulator'
 import GasLawsSimulator from '@/components/simulations/GasLawsSimulator';
 import BatterySimulator from '@/components/simulations/BatterySimulator';
 import ChemistryCalculatorsSimulator from '@/components/simulations/ChemistryCalculatorsSimulator';
+import 1 from '@/components/simulations/1';
 import type { Simulation } from '@/types';
 
 const SimulationPage = () => {
