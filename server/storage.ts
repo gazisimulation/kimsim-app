@@ -205,6 +205,20 @@ export class MemStorage implements IStorage {
       isPopular: true,
       path: "/simulations/chemistry-calculators"
     };
+
+    const onesim: InsertSimulation = {
+      title: "Karbon Allotrop",
+      description: "Karbon ve Allotroplar",
+      slug: "onesim",
+      category: "analytical",
+      imageUrl: "https://images.unsplash.com/photo-1603126857599-f6e157fa2fe6?q=80&w=2070&auto=format&fit=crop",
+      duration: "15 dk",
+      difficulty: "Başlangıç",
+      isFeatured: true,
+      isNew: true,
+      isPopular: true,
+      path: "/simulations/onesim"
+    };
     
     this.createSimulation(acidBaseTitration);
     this.createSimulation(quantumAtomModel);
@@ -214,6 +228,7 @@ export class MemStorage implements IStorage {
     this.createSimulation(gasLaws);
     this.createSimulation(batterySimulator);
     this.createSimulation(chemistryCalculators);
+    this.createSimulation(onesim);
   }
 
   async getUser(id: number): Promise<User | undefined> {
