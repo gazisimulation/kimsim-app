@@ -30,4 +30,18 @@ export default defineConfig({
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
   },
+  server: {
+    middlewareMode: true,
+    setupMiddlewares: (middlewares) => {
+      middlewares.use((req, res, next) => {
+        if (req.url === '/simulations/onesim') {
+          res.writeHead(301, { Location: 'https://gazisimulation.github.io/onesim.html' });
+          res.end();
+        } else {
+          next();
+        }
+      });
+      return middlewares;
+    },
+  },
 });
