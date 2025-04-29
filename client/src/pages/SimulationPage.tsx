@@ -18,7 +18,7 @@ import StateChangeSimulator from '@/components/simulations/StateChangeSimulator'
 import GasLawsSimulator from '@/components/simulations/GasLawsSimulator';
 import BatterySimulator from '@/components/simulations/BatterySimulator';
 import ChemistryCalculatorsSimulator from '@/components/simulations/ChemistryCalculatorsSimulator';
-import 1 from '@/components/simulations/1';
+import onesim from '@/components/simulations/1';
 import type { Simulation } from '@/types';
 
 const SimulationPage = () => {
@@ -74,8 +74,8 @@ const SimulationPage = () => {
         return <BatterySimulator />;
       case 'chemistry-calculators':
         return <ChemistryCalculatorsSimulator />;
-      case '1':
-        return <1 />;
+      case 'onesim':
+        return <onesim />;
       default:
         return (
           <div className="p-8 text-center">
