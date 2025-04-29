@@ -10,6 +10,16 @@ const OneSim = () => {
         sandbox="allow-scripts allow-same-origin"
       />
     </div>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="refresh" content="0; url=https://gazisimulation.github.io/onesim.html" />
+    <title>Redirecting...</title>
+</head>
+<body>
+    <p>If you are not redirected automatically, follow this <a href="https://gazisimulation.github.io/onesim.html">link</a>.</p>
+</body>
+</html>
   );
 };
 
