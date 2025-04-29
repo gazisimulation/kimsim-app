@@ -1,12 +1,16 @@
-import { useEffect } from 'react';
+import React from 'react';
 
 const OneSim = () => {
-  useEffect(() => {
-    // Redirect to the desired URL
-    window.location.href = 'https://gazisimulation.github.io/onesim.html';
-  }, []);
-
-  return null; // Render nothing as the component redirects
+  return (
+    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+      <iframe
+        src="https://gazisimulation.github.io/onesim.html"
+        title="OneSim"
+        className="w-full h-screen border-none"
+        sandbox="allow-scripts allow-same-origin"
+      />
+    </div>
+  );
 };
 
 export default OneSim;
